@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Técnica & Testemunho · Congresso de Harmonização Facial · BH, 14/11/2026</title>
-<meta name="description" content="Dra. Aline Filgueiras, Dr. Gabriel Magalhães, Dra. Natalie Rodrigues e Dra. Pamela Soares fazem suas técnicas de harmonização facial ao vivo no Hotel Ouro Minas, em Belo Horizonte.">
-<meta property="og:title" content="Técnica & Testemunho · Congresso de Harmonização Facial">
+<title>Técnica & Testemunho · Congresso de Harmonização · BH, 14/11/2026</title>
+<meta name="description" content="Dra. Aline Filgueiras, Dr. Gabriel Magalhães, Dra. Natalie Rodrigues e Dra. Pamela Soares fazem suas técnicas de harmonização ao vivo no Hotel Ouro Minas, em Belo Horizonte.">
+<meta property="og:title" content="Técnica & Testemunho · Congresso de Harmonização">
 <meta property="og:description" content="As maiores referências da harmonização demonstrando suas técnicas ao vivo no mesmo palco. 14/11/2026, Hotel Ouro Minas, BH.">
 <meta property="og:image" content="assets/key-visual.webp">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
@@ -101,10 +101,12 @@
   .passos p { margin: 0; color: var(--texto-suave); }
   .fonte { font: italic 500 21px/1.3 var(--titulo); color: var(--texto); margin-bottom: 26px; }
   .vozes { margin: 0 0 30px; padding: 22px 0 2px; border-top: 1px solid rgba(201, 164, 106, .3); }
-  .vozes-titulo { margin: 0 0 16px; font-size: 14px; color: var(--texto-suave); }
   .vozes blockquote { margin: 0 0 18px; padding-left: 16px; border-left: 2px solid var(--ouro); }
   .vozes blockquote p { margin: 0; font: italic 500 18px/1.4 var(--titulo); color: var(--texto); font-variant-numeric: lining-nums; }
   .vozes cite { display: block; margin-top: 6px; font: 500 12px/1.4 var(--corpo); font-style: normal; letter-spacing: .08em; text-transform: uppercase; color: var(--ouro); }
+  .como { display: grid; grid-template-areas: "topo" "video" "corpo"; row-gap: 28px; }
+  .como-topo { grid-area: topo; } .como-corpo { grid-area: corpo; } .como .midia-ao-vivo { grid-area: video; }
+  .como .passos { margin-top: 0; }
   .midia-ao-vivo { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--cacau-2); border-radius: 6px; }
 
   /* Palestrantes */
@@ -230,6 +232,8 @@
   .parcela, .total, .garantia .sete, .agenda time, .selos b, .card .frase, .fonte, .assinatura, .plano h3 { font-variant-numeric: lining-nums; }
 
   @media (min-width: 760px) {
+    .como { grid-template-columns: 1fr 1fr; grid-template-areas: "topo video" "corpo video"; column-gap: 64px; row-gap: 28px; align-items: start; }
+    .como .midia-ao-vivo { align-self: center; }
     .duas { grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
     .duas.centro-v { align-items: center; }
     .cards { grid-template-columns: 1fr 1fr; }
@@ -267,10 +271,9 @@
     </div>
   </div>
   <div class="wrap hero-texto">
-    <p style="margin:0 0 14px"><span class="falta">CONFIRMAR: nome sob cada rosto (ordem do key visual)</span></p>
     <p class="marca">TÉCNICA &amp; TESTEMUNHO</p>
     <h1>As maiores referências da harmonização demonstrando suas técnicas ao vivo no mesmo palco.</h1>
-    <p class="sub">Quatro referências fazem ao vivo a técnica que as tornou reconhecidas e contam, no mesmo palco, o que nenhum post mostra: os começos difíceis e a fé que as sustentou.</p>
+    <p class="sub">Quatro referências fazem ao vivo a técnica que as tornou reconhecidas e contam, em seguida, o que nenhum post mostra: os começos difíceis e a fé que as sustentou.</p>
     <p class="assinatura">Onde a fé inspira e a técnica transforma.</p>
     <a class="btn" href="#ingressos">Garantir meu ingresso</a>
     <p class="contador-hero"><span data-contador-rotulo>O valor sobe em</span> <b data-contador>25/10</b></p>
@@ -297,20 +300,21 @@
 
 <!-- 3. Como funciona -->
 <section>
-  <div class="wrap duas centro-v">
-    <div>
+  <div class="wrap como">
+    <div class="como-topo">
       <p class="rotulo">Como funciona cada palestra</p>
       <h2>O que eles fazem em seus consultórios, você vê no palco.</h2>
+    </div>
+    <div class="como-corpo">
       <ol class="passos">
-        <li><b>A técnica, ao vivo</b><p>Cada palestrante tem uma técnica e <span class="falta">CONFIRMAR: um paciente modelo</span> para demonstração.</p></li>
+        <li><b>A técnica, ao vivo</b><p>Cada palestrante tem uma técnica e um paciente modelo para demonstração.</p></li>
         <li><b>O raciocínio em voz alta</b><p>Você entende o raciocínio clínico por trás de cada decisão e acompanha os ajustes em tempo real.</p></li>
-        <li><b>O testemunho</b><p>O Dr. Gabriel ora para que cada paciente receba a bênção de Deus através do que ele faz. A Dra. Aline aprendeu que é debaixo de pressão que se ganha força para sustentar o que se pede em oração. No palco, cada um conta essa história inteira e o lugar de Deus nela.</p></li>
+        <li><b>O testemunho</b><p>Quem acabou de mostrar a técnica conta, em seguida, a história por trás dela: como começou, o que pesou no caminho e por que fala de Deus com tanta naturalidade.</p></li>
       </ol>
       <div class="vozes">
-        <p class="vozes-titulo">O que profissionais da harmonização escreveram para a Dra. Aline depois do Propósito, o desafio de 30 dias dela.</p>
         <blockquote><p>“Sobre a parte profissional, minha irmã e eu em breve iremos estudar na sua escola, pois sentimos Deus operar na sua vida.”</p><cite>Biomédica</cite></blockquote>
         <blockquote><p>“Aprendi muito com você e quero muito presenciar tudo isso pessoalmente.”</p><cite>Profissional da saúde estética</cite></blockquote>
-        <blockquote><p>“Eu fui destravada! Em 30 dias pude colocar em prática o que lemos na Bíblia.”</p><cite>Profissional da harmonização facial</cite></blockquote>
+        <blockquote><p>“Eu fui destravada! Em 30 dias pude colocar em prática o que lemos na Bíblia.”</p><cite>Profissional da harmonização</cite></blockquote>
       </div>
       <p class="fonte">Tudo direto da fonte.</p>
       <a class="btn" href="#ingressos">Quero ver ao vivo</a>
@@ -323,8 +327,8 @@
 <section class="claro" id="palestrantes">
   <div class="wrap">
     <p class="rotulo">Palestrantes</p>
-    <h2>As referências da harmonização facial reunidas no mesmo palco.</h2>
-    <p style="margin-top:14px;font-size:18px">Quatro trajetórias diferentes, um mesmo palco.</p>
+    <h2>Quem sobe ao palco no dia 14.</h2>
+    <p style="margin-top:14px;font-size:18px">Quatro trajetórias diferentes na harmonização.</p>
     <div class="cards">
       <article class="card">
         <p class="palco-tag">No palco: full face ao vivo</p>
@@ -334,21 +338,21 @@
         <p class="frase">“Muitas vezes é debaixo de pressão que você desenvolve a força necessária para sustentar aquilo que tanto pede em oração.”</p>
       </article>
       <article class="card">
-        <p class="palco-tag">No palco: <span class="falta">FALTA: área ou técnica do Gabriel</span></p>
+        <p class="palco-tag">No palco: harmonização facial e corporal</p>
         <div class="topo-card"><img class="rosto" src="assets/gabriel.jpg" alt="Dr. Gabriel Magalhães" width="72" height="72" loading="lazy"><div><h3>Dr. Gabriel Magalhães</h3></div></div>
         <div class="selos"><div><b>15</b><span>anos de carreira</span></div><div><b>5.000+</b><span>alunos na TopFit Academy</span></div><div><b>CEO</b><span>do TopFit Group</span></div></div>
         <p>Doutor em Ciências Biomédicas, palestrante em Harvard, pastor e formado em Teologia pelo RHEMA. Construiu o TopFit Group, com atuação em BH e SP.</p>
         <p class="frase">“Oro para que cada pessoa que chegar até mim receba a bênção de Deus através daquilo que faço.”</p>
       </article>
       <article class="card">
-        <p class="palco-tag">No palco: nariz <span class="falta">CONFIRMAR</span></p>
+        <p class="palco-tag">No palco: nariz</p>
         <div class="topo-card"><img class="rosto" src="assets/natalie.jpg" alt="Dra. Natalie Rodrigues" width="72" height="72" loading="lazy"><div><h3>Dra. Natalie Rodrigues</h3></div></div>
         <div class="selos"><div><b>2021</b><span>artigo científico do Nariz Perfeito</span></div><div><b>3</b><span>cidades: BH, SP e Boston</span></div><div><b>Orlando</b><span>American College, curso de dissecção</span></div></div>
         <p>Criou a técnica Nariz Perfeito e coordena em Orlando o American College, curso de dissecção em cadáver fresco com certificação do American College of Surgeons.</p>
         <p class="frase">“Descubra seu propósito e trilhe o caminho para a felicidade. Não é somente sobre o que fazemos, mas também o porquê fazemos.”</p>
       </article>
       <article class="card">
-        <p class="palco-tag">No palco: Posicionamento Facial® <span class="falta">CONFIRMAR</span></p>
+        <p class="palco-tag">No palco: Posicionamento Facial®</p>
         <div class="topo-card"><img class="rosto" src="assets/pamela.jpg" alt="Dra. Pamela Soares" width="72" height="72" loading="lazy"><div><h3>Dra. Pamela Soares</h3></div></div>
         <div class="selos"><div><b>3</b><span>clínicas em São Paulo</span></div><div><b>30+</b><span>colaboradores</span></div><div><b>Autora</b><span>de Provoque seus Milagres</span></div></div>
         <p>Fundou a IPS Clinic, com unidades na Faria Lima, em Alphaville e no Tatuapé. Criou o método Posicionamento Facial® e tem especialização em Harvard.</p>
@@ -361,8 +365,8 @@
 <!-- 5. Vídeos dos palestrantes -->
 <section>
   <div class="wrap">
-    <p class="rotulo">Antes do palco</p>
-    <h2>Veja cada um deles ensinando.</h2>
+    <p class="rotulo">Em vídeo</p>
+    <h2>Veja cada um deles no palco.</h2>
     <div class="depos">
       <figure class="depo"><div class="player"><video muted loop playsinline autoplay preload="metadata" poster="assets/videos/aline.jpg"><source src="assets/videos/aline.mp4" type="video/mp4"></video><div class="ctrl"><div class="c-topo"><img src="assets/aline.jpg" alt="" width="28" height="28" loading="lazy"><b>Dra. Aline Filgueiras</b><button class="c-som" type="button" aria-label="Ativar o som"><svg class="mudo" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.6 3 2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4L16.6 12z"/></svg><svg class="ligado" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg></button></div><button class="c-play" type="button" aria-label="Pausar"><svg class="icone-pausa" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg><svg class="icone-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button><div class="c-base"><span class="c-tempo">0:00</span><button class="c-tela" type="button" aria-label="Tela cheia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button><input class="c-barra" type="range" min="0" max="1000" value="0" step="1" aria-label="Posição do vídeo"></div></div></div><figcaption>Dra. Aline Filgueiras</figcaption></figure>
       <figure class="depo"><div class="player"><video muted loop playsinline autoplay preload="metadata" poster="assets/videos/gabriel.jpg"><source src="assets/videos/gabriel.mp4" type="video/mp4"></video><div class="ctrl"><div class="c-topo"><img src="assets/gabriel.jpg" alt="" width="28" height="28" loading="lazy"><b>Dr. Gabriel Magalhães</b><button class="c-som" type="button" aria-label="Ativar o som"><svg class="mudo" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.6 3 2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4L16.6 12z"/></svg><svg class="ligado" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg></button></div><button class="c-play" type="button" aria-label="Pausar"><svg class="icone-pausa" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg><svg class="icone-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button><div class="c-base"><span class="c-tempo">0:00</span><button class="c-tela" type="button" aria-label="Tela cheia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button><input class="c-barra" type="range" min="0" max="1000" value="0" step="1" aria-label="Posição do vídeo"></div></div></div><figcaption>Dr. Gabriel Magalhães</figcaption></figure>
@@ -384,7 +388,7 @@
       <li><span>Dra. Natalie Rodrigues</span><span>Curso de rinomodelação</span></li>
       <li><span>Dra. Pamela Soares</span><span>Curso de preenchimento</span></li>
     </ul>
-    <p style="max-width:600px;margin:0 auto 28px;font-size:18px">No Técnica &amp; Testemunho, você aprende com os quatro em um único dia, no ambiente certo, com as pessoas certas.</p>
+    <p style="max-width:600px;margin:0 auto 28px;font-size:18px">No Técnica &amp; Testemunho, você aprende com os quatro em um único dia, no ambiente certo, com as pessoas certas. No ingresso Profissional, por 12x de R$ <span data-parcela="profissional">51,40</span>.</p>
     <a class="btn" href="#ingressos">Ver ingressos</a>
   </div>
 </section>
@@ -412,15 +416,15 @@
           <li>Certificado de participação</li>
           <li>Primeiras fileiras</li>
           <li>Credenciamento separado</li>
-          <li>Almoço em área reservada <span class="falta">CONFIRMAR</span></li>
-          <li>Encontro exclusivo com os palestrantes <span class="falta">CONFIRMAR</span></li>
+          <li>Almoço em área reservada</li>
+          <li>Encontro exclusivo com a Dra. Aline e os palestrantes</li>
         </ul>
       </article>
 
       <article class="plano">
         <span class="selo lote"><span data-lote-nome>1º lote</span> termina em <span data-contador>25/10</span></span>
         <h3>Profissional</h3>
-        <p class="desc">Acesso completo ao dia para profissionais habilitados em harmonização facial.</p>
+        <p class="desc">Acesso completo ao dia para profissionais habilitados em harmonização.</p>
         <p class="por">Por 12x de</p>
         <p class="parcela"><span class="rs">R$</span><span data-parcela="profissional"></span></p>
         <p class="avista">R$ <span data-preco="profissional">497</span>,00 à vista</p>
@@ -473,7 +477,7 @@
     <ol class="agenda">
       <li><time>8h30</time><span>Credenciamento<small>VIP com entrada separada. Leve documento com foto.</small></span></li>
       <li><time>9h</time><span>Abertura com a Dra. Aline Filgueiras</span></li>
-      <li><time>Manhã</time><span>Duas palestras: técnica ao vivo e testemunho<small><span class="falta">A DEFINIR: ordem dos palestrantes</span></small></span></li>
+      <li><time>Manhã</time><span>Duas palestras: técnica ao vivo e testemunho</span></li>
       <li><time>13h</time><span>Almoço<small>Até 14h30. Não incluso no Profissional e no Estudante.</small></span></li>
       <li><time>Tarde</time><span>Duas palestras: técnica ao vivo e testemunho</span></li>
       <li><time>18h30</time><span>Encerramento</span></li>
@@ -506,16 +510,16 @@
       <details><summary>Posso pagar com dois cartões?</summary><p>Sim. No checkout, você pode dividir o valor em dois cartões, em até 12x, ou pagar no Pix.</p></details>
       <details><summary>Qual é o horário?</summary><p>Credenciamento a partir das 8h30, início às 9h e encerramento às 18h30. Horários estimados, sujeitos a ajuste.</p></details>
       <details><summary>Os lugares são marcados?</summary><p>O VIP tem as primeiras fileiras reservadas. No Profissional e no Estudante, os lugares são livres, por ordem de chegada.</p></details>
-      <details><summary>Preciso ser cristão para participar?</summary><p>Não. O congresso é de harmonização e aberto a todos os profissionais. Os palestrantes falam de Deus porque essa é a história real de cada um. <span class="falta">CONFIRMAR: haverá oração ou louvor na programação?</span></p></details>
+      <details><summary>Preciso ser cristão para participar?</summary><p>Não. O congresso é de harmonização e aberto a todos os profissionais. Os palestrantes falam de Deus porque essa é a história real de cada um.</p></details>
       <details><summary>Vai ter networking?</summary><p>Sim. Os coffee breaks são o momento de conhecer outros profissionais. O contato direto com os palestrantes fica no Encontro VIP.</p></details>
       <details><summary>Posso passar meu ingresso para outra pessoa?</summary><p>Não. O ingresso é nominal, e o credenciamento confere nome e documento.</p></details>
-      <details><summary>Onde fica o evento?</summary><p>No Hotel Ouro Minas, Av. Cristiano Machado, 4001, Ipiranga, Belo Horizonte. <span class="falta">CONFIRMAR: endereço</span></p></details>
+      <details><summary>Onde fica o evento?</summary><p>No Hotel Ouro Minas, Av. Cristiano Machado, 4001, Ipiranga, Belo Horizonte.</p></details>
       <details><summary>Vou de fora de BH. Vocês me ajudam?</summary><p>Ajudamos. <a href="#" data-whatsapp>Chame a nossa equipe no WhatsApp</a> para indicações de hotel e de como chegar ao Ouro Minas. Para marcar a viagem, conte com o credenciamento às 8h30 e o encerramento às 18h30.</p></details>
       <details><summary>Qual é o aeroporto mais próximo?</summary><p>O Aeroporto Internacional de Confins. O Hotel Ouro Minas fica na Av. Cristiano Machado, caminho de quem vem de Confins pela Linha Verde, a cerca de 30 minutos de carro.</p></details>
       <details><summary>Qual a rodoviária mais próxima?</summary><p>O Terminal Rodoviário de Belo Horizonte, no centro. De lá, você chega ao hotel de táxi ou aplicativo.</p></details>
-      <details><summary>Qual é o hotel mais próximo?</summary><p>O próprio Hotel Ouro Minas recebe o evento. <span class="falta">FALTA: tarifa ou condição para participantes, se houver</span></p></details>
-      <details><summary>Tem estacionamento?</summary><p><span class="falta">FALTA: estacionamento do Ouro Minas, valor e se tem valet</span></p></details>
-      <details><summary>Tem local para comer?</summary><p>O evento tem coffee breaks. O almoço é das 13h às 14h30, e o hotel e a região têm opções de restaurante. <span class="falta">CONFIRMAR</span></p></details>
+      <details><summary>Qual é o hotel mais próximo?</summary><p>O próprio Hotel Ouro Minas recebe o evento. Para indicações de hospedagem, <a href="#" data-whatsapp>chame a nossa equipe no WhatsApp</a>.</p></details>
+      <details><summary>Tem estacionamento?</summary><p>Sim. O Hotel Ouro Minas tem estacionamento no local, pago à parte, direto com o hotel.</p></details>
+      <details><summary>Tem local para comer?</summary><p>O evento tem coffee breaks. O almoço é das 13h às 14h30, e o hotel e a região têm opções de restaurante.</p></details>
     </div>
   </div>
 </section>
