@@ -560,15 +560,15 @@ const CONFIG = {
     el.textContent = vagas + (prox ? ` · depois, R$ ${fmt(prox[tipo].preco)}` : "");
   });
 
-  // Countdown até o fim do lote vigente (d/h/min). Ao zerar, recarrega já no lote seguinte.
+  // Countdown até o fim do lote vigente (d/h/min/s). Ao zerar, recarrega já no lote seguinte.
   const fim = new Date(lote.fim);
   const contadores = document.querySelectorAll("[data-contador]");
   if (!prox) document.querySelectorAll("[data-contador-rotulo]").forEach(el => el.textContent = "As vendas encerram em");
   const dois = n => String(n).padStart(2, "0");
   const formata = ms => {
-    const min = Math.floor(ms / 60000);
-    const d = Math.floor(min / 1440), h = Math.floor(min / 60) % 24, m = min % 60;
-    return (d ? `${d}d ` : "") + `${dois(h)}h ${dois(m)}m`;
+    const seg = Math.floor(ms / 1000);
+    const d = Math.floor(seg / 86400), h = Math.floor(seg / 3600) % 24, m = Math.floor(seg / 60) % 60, s = seg % 60;
+    return (d ? `${d}d ` : "") + `${dois(h)}h ${dois(m)}m ${dois(s)}s`;
   };
   let relogio;
   const tick = () => {
@@ -583,7 +583,7 @@ const CONFIG = {
     contadores.forEach(el => el.textContent = formata(falta));
   };
   tick();
-  relogio = setInterval(tick, 30000);
+  relogio = setInterval(tick, 1000);
 
   // Pixel do Meta. Compra e checkout são enviados pela Ticto (Pixel + API de Conversões).
   if (CONFIG.pixelId) {
