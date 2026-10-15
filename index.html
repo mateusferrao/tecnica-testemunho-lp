@@ -11,7 +11,7 @@
 <meta property="og:image" content="assets/key-visual.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --cacau: #1c120c;
@@ -28,10 +28,12 @@
     --texto: #efe3d3;
     --texto-suave: #c4b19c;
     --linha: rgba(201, 164, 106, .28);
-    --display: "Cinzel", "Trajan Pro", Georgia, serif;
+    --display: "Playfair Display", Georgia, serif;
+    --logo: "Cinzel", "Trajan Pro", Georgia, serif;
     --italico: "Cormorant Garamond", Georgia, serif;
     --corpo: "Jost", "Helvetica Neue", sans-serif;
     --max: 1120px;
+    --ruido: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
   }
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -45,25 +47,25 @@
   img { max-width: 100%; height: auto; display: block; }
   a { color: inherit; }
   .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+  .estreito { max-width: 820px; }
   .eyebrow {
     font: 500 12px/1.4 var(--corpo);
     letter-spacing: .32em; text-transform: uppercase;
     color: var(--ouro);
   }
-  h1, h2, h3 { font-family: var(--display); font-weight: 500; margin: 0; letter-spacing: .01em; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 500; margin: 0; letter-spacing: -.005em; }
   h2 { font-size: clamp(28px, 4.6vw, 46px); line-height: 1.14; }
   h3 { font-size: 20px; line-height: 1.25; }
   p { margin: 0 0 1em; }
-  .fe {
-    font-family: var(--italico); font-style: italic; font-weight: 500;
-    color: var(--ouro-claro);
-  }
+  .grande { font-size: clamp(18px, 2.2vw, 21px); }
+  .fe { font-family: var(--italico); font-style: italic; font-weight: 500; color: var(--ouro-claro); }
   .regua {
     width: 64px; height: 1px; border: 0; margin: 22px 0;
     background: linear-gradient(90deg, var(--ouro), transparent);
   }
   .centro { text-align: center; }
   .centro .regua { margin-left: auto; margin-right: auto; background: linear-gradient(90deg, transparent, var(--ouro), transparent); }
+  .seta { display: block; font-size: 22px; color: var(--ouro); margin-top: 6px; }
 
   /* Placeholders para aprovação */
   .falta {
@@ -74,21 +76,12 @@
     background: repeating-linear-gradient(-45deg, #f3c56b, #f3c56b 6px, #f7d68e 6px, #f7d68e 12px);
     padding: .1em .45em;
     border-radius: 3px;
-    white-space: normal;
   }
-  .previa {
-    position: fixed; right: 10px; top: 46px; z-index: 60; opacity: .92;
-    font: 500 11px/1.3 var(--corpo); letter-spacing: .08em; text-transform: uppercase;
-    background: #f3c56b; color: #3b2400;
-    padding: 8px 12px; border-radius: 999px;
-    box-shadow: 0 6px 20px rgba(0,0,0,.35);
-  }
-
   /* Botões */
   .btn {
     display: inline-block;
-    padding: 19px 30px;
-    font: 600 14px/1.2 var(--corpo); letter-spacing: .14em; text-transform: uppercase;
+    padding: 19px 34px;
+    font: 600 14px/1.25 var(--corpo); letter-spacing: .14em; text-transform: uppercase;
     text-decoration: none; text-align: center;
     color: var(--cacau);
     background: linear-gradient(135deg, #f1d9a6 0%, #c9a46a 45%, #a47c43 100%);
@@ -98,16 +91,10 @@
   }
   .btn:hover { transform: translateY(-2px); filter: brightness(1.06); box-shadow: 0 16px 36px -12px rgba(201,164,106,.7), inset 0 1px 0 rgba(255,255,255,.5); }
   .btn:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--ouro-claro); outline-offset: 3px; }
-  .btn-linha {
-    color: var(--ouro-claro);
-    background: transparent;
-    border: 1px solid var(--ouro);
-    box-shadow: none;
-  }
-  .btn-linha:hover { background: rgba(201,164,106,.1); box-shadow: none; }
+  .cta { margin-top: 36px; }
   .micro { font-size: 13px; color: var(--texto-suave); margin-top: 14px; letter-spacing: .02em; }
 
-  /* 0. Faixa */
+  /* Faixas rolantes */
   .faixa {
     background: linear-gradient(90deg, #a47c43, #e6c78c, #a47c43);
     color: var(--cacau);
@@ -117,88 +104,59 @@
   }
   .faixa-trilho { display: inline-flex; animation: rolar 38s linear infinite; }
   .faixa-trilho span { padding-right: 3em; }
+  .faixa-assinatura {
+    background: var(--cacau-2);
+    color: var(--ouro-claro);
+    border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha);
+    font: italic 500 clamp(22px, 3vw, 30px)/1.2 var(--italico); letter-spacing: .01em;
+    padding: 20px 0;
+  }
+  .faixa-assinatura .faixa-trilho { animation-duration: 60s; }
+  .faixa-assinatura span { padding-right: 1.6em; }
+  .faixa-assinatura span::after { content: "✦"; font-style: normal; font-size: .5em; color: var(--ouro); padding-left: 1.6em; vertical-align: middle; }
   @keyframes rolar { to { transform: translateX(-50%); } }
   .publico {
     text-align: center;
     font: 400 13px/1.5 var(--corpo); letter-spacing: .06em;
     color: var(--texto-suave);
-    padding: 12px 20px;
+    padding: 12px 20px; margin: 0;
     border-bottom: 1px solid var(--linha);
   }
   .publico strong { color: var(--ouro-claro); font-weight: 500; }
 
-  /* 1. Hero */
-  .hero, .fecho { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E"); background-size: 160px; }
-  .hero { position: relative; padding-bottom: 72px; isolation: isolate; }
+  /* Hero */
+  .hero { position: relative; padding-bottom: 80px; isolation: isolate; background-image: var(--ruido); background-size: 160px; }
   .hero::before {
     content: ""; position: absolute; inset: 0; z-index: -1;
     background:
       radial-gradient(80% 60% at 50% 0%, rgba(201,164,106,.22), transparent 70%),
       radial-gradient(60% 40% at 50% 100%, rgba(107,74,50,.5), transparent 70%);
   }
-  .palco {
-    position: relative;
-    max-width: 980px; margin: 0 auto;
-    aspect-ratio: 1080 / 560;
-    overflow: hidden;
-  }
-  .palco img {
-    width: 100%;
-    margin-top: -28.4%;
-    animation: surgir 1.4s cubic-bezier(.2,.7,.2,1) both;
-  }
+  .palco { position: relative; max-width: 980px; margin: 0 auto; aspect-ratio: 1080 / 560; overflow: hidden; }
+  .palco img { width: 100%; margin-top: -28.4%; animation: surgir 1.4s cubic-bezier(.2,.7,.2,1) both; }
   .palco::after {
     content: ""; position: absolute; inset: 0;
     background:
       linear-gradient(180deg, var(--cacau) 0%, transparent 16%, transparent 58%, var(--cacau) 100%),
-      linear-gradient(90deg, var(--cacau) 0%, transparent 10%, transparent 90%, var(--cacau) 100%);
+      linear-gradient(90deg, var(--cacau) 0%, transparent 12%, transparent 88%, var(--cacau) 100%);
   }
   .nomes {
     position: absolute; left: 0; right: 0; bottom: 6%; z-index: 2;
     display: grid; grid-template-columns: repeat(4, 1fr);
     text-align: center; padding: 0 2%;
   }
-  .nomes div { animation: subir .9s ease both; }
-  .nomes div:nth-child(2) { animation-delay: .1s; }
-  .nomes div:nth-child(3) { animation-delay: .2s; }
-  .nomes div:nth-child(4) { animation-delay: .3s; }
-  .nomes b {
-    display: block;
-    font: 500 clamp(11px, 1.9vw, 17px)/1.15 var(--display);
-    color: var(--creme);
-    text-shadow: 0 2px 12px rgba(0,0,0,.8);
-  }
-  .nomes small {
-    display: block; margin-top: 4px;
-    font: 400 clamp(9px, 1.3vw, 12px)/1.2 var(--corpo); letter-spacing: .12em; text-transform: uppercase;
-    color: var(--ouro-claro);
-    text-shadow: 0 2px 10px rgba(0,0,0,.9);
-  }
+  .nomes b { display: block; font: 500 clamp(11px, 1.9vw, 17px)/1.15 var(--display); color: var(--creme); text-shadow: 0 2px 12px rgba(0,0,0,.8); }
+  .nomes small { display: block; margin-top: 4px; font: 400 clamp(9px, 1.3vw, 12px)/1.2 var(--corpo); letter-spacing: .12em; text-transform: uppercase; color: var(--ouro-claro); text-shadow: 0 2px 10px rgba(0,0,0,.9); }
   .hero-texto { text-align: center; max-width: 860px; margin: 8px auto 0; }
-  .marca {
-    font: 500 13px/1.3 var(--display); letter-spacing: .34em; color: var(--ouro);
-    margin-bottom: 20px;
-  }
+  .marca { font: 500 13px/1.3 var(--logo); letter-spacing: .34em; color: var(--ouro); margin-bottom: 20px; }
   .hero h1 {
-    font-size: clamp(30px, 5.6vw, 58px);
-    line-height: 1.1;
+    font-size: clamp(30px, 5.6vw, 58px); line-height: 1.1;
     background: linear-gradient(180deg, #fbf1de 0%, #ecd3a2 55%, #c9a46a 100%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
     animation: subir 1s .15s ease both;
   }
-  .hero .sub {
-    max-width: 680px; margin: 26px auto 0;
-    font-size: clamp(16px, 2.1vw, 19px);
-    color: var(--texto);
-    animation: subir 1s .3s ease both;
-  }
-  .assinatura {
-    font-family: var(--italico); font-style: italic;
-    font-size: clamp(22px, 3vw, 28px); line-height: 1.3;
-    color: var(--ouro-claro);
-    margin: 26px 0 30px;
-    animation: subir 1s .45s ease both;
-  }
+  .hero .sub { max-width: 680px; margin: 26px auto 0; font-size: clamp(16px, 2.1vw, 19px); animation: subir 1s .3s ease both; }
+  .assinatura { font-family: var(--italico); font-style: italic; font-size: clamp(22px, 3vw, 28px); line-height: 1.3; color: var(--ouro-claro); margin: 22px 0 30px; animation: subir 1s .45s ease both; }
   .hero .btn { animation: subir 1s .6s ease both; }
   @keyframes subir { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
   @keyframes surgir { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
@@ -208,214 +166,140 @@
   .claro { background: var(--creme); color: var(--tinta); }
   .claro .eyebrow { color: var(--ouro-fundo); }
   .claro .regua { background: linear-gradient(90deg, var(--ouro-fundo), transparent); }
+  .claro.centro .regua { background: linear-gradient(90deg, transparent, var(--ouro-fundo), transparent); }
   .claro .fe { color: var(--bronze); }
   .claro .micro { color: var(--tinta-suave); }
+  .claro p { color: var(--tinta-suave); }
+  .escuro-2 { background: linear-gradient(180deg, var(--cacau) 0%, #24170f 100%); }
 
-  /* 2. Desconforto */
-  .dor .wrap { display: grid; gap: 40px; }
-  .dor h2 { max-width: 820px; }
-  .dor .colunas { display: grid; gap: 28px; font-size: 18px; color: var(--tinta-suave); }
-  .dor .colunas p:first-child::first-letter {
-    float: left; font: 500 64px/.8 var(--display); color: var(--ouro-fundo);
-    padding: 6px 10px 0 0;
-  }
+  /* Chega de palestra teórica */
+  .dor h2 { max-width: 820px; margin: 0 auto; }
+  .dor p.grande { max-width: 680px; margin: 26px auto 0; }
 
-  /* 3. Como funciona */
-  .como h2 { max-width: 760px; }
-  .passos { list-style: none; padding: 0; margin: 48px 0 44px; display: grid; gap: 2px; counter-reset: p; }
-  .passos li {
-    counter-increment: p;
-    position: relative;
-    padding: 32px 28px 30px 92px;
-    background: linear-gradient(135deg, var(--cacau-2), var(--cacau-3));
-    border: 1px solid var(--linha);
-  }
-  .passos li::before {
-    content: counter(p, upper-roman);
-    position: absolute; left: 28px; top: 26px;
-    font: 500 34px/1 var(--display); color: var(--ouro);
-  }
-  .passos h3 { color: var(--creme); margin-bottom: 8px; }
-  .passos p { margin: 0; color: var(--texto-suave); }
-  .passos li.testemunho { background: linear-gradient(135deg, #3a2619, #4b321f); }
-  .passos li.testemunho h3 { font-family: var(--italico); font-style: italic; font-size: 26px; color: var(--ouro-claro); letter-spacing: 0; }
-  .nota { margin-top: 14px; }
+  /* Como funciona */
+  .como .texto { display: grid; gap: 4px; max-width: 760px; }
+  .como .texto p { color: var(--texto-suave); }
+  .direto { font: italic 500 clamp(26px, 3.4vw, 34px)/1.2 var(--italico); color: var(--ouro-claro); margin: 18px 0 6px; }
 
-  /* 4. Palestrantes */
-  .palestrantes { background: linear-gradient(180deg, var(--cacau) 0%, #24170f 100%); }
-  .anfitria {
-    display: grid; gap: 0;
-    border: 1px solid var(--linha);
-    margin: 44px 0 20px;
-    background: var(--cacau-2);
-  }
-  .anfitria .foto { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
-  .anfitria .foto { background: url(assets/key-visual.webp) 70% 29% / 220% auto no-repeat; }
-  .anfitria .info { padding: 32px 28px; }
-  .papel { font: 500 11px/1 var(--corpo); letter-spacing: .3em; text-transform: uppercase; color: var(--ouro); }
-  .card h3, .anfitria h3 { font-size: 26px; color: var(--creme); margin: 10px 0 4px; }
-  .prof { font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--ouro-claro); margin-bottom: 16px; }
-  .no-palco {
-    margin: 18px 0 0; padding: 14px 16px;
-    border-left: 2px solid var(--ouro);
-    background: rgba(201,164,106,.07);
-    font-size: 15px;
-  }
-  .no-palco b { font-weight: 600; letter-spacing: .12em; text-transform: uppercase; font-size: 11px; color: var(--ouro); display: block; margin-bottom: 4px; }
-  .frase { margin: 18px 0 0; font-family: var(--italico); font-style: italic; font-size: 21px; line-height: 1.35; color: var(--ouro-claro); }
-  .cards { display: grid; gap: 20px; }
+  /* Palestrantes */
+  .cards { display: grid; gap: 20px; margin-top: 44px; text-align: left; }
   .card {
-    position: relative;
-    padding: 30px 26px 28px;
-    border: 1px solid var(--linha);
-    background: var(--cacau-2);
-    color: var(--texto-suave);
-    font-size: 16px;
+    position: relative; padding: 30px 26px 28px;
+    border: 1px solid var(--linha); background: var(--cacau-2);
+    color: var(--texto-suave); font-size: 16px;
     transition: border-color .3s ease, transform .3s ease;
   }
   .card:hover { border-color: rgba(201,164,106,.6); transform: translateY(-3px); }
-  .card .rosto {
-    width: 72px; height: 72px; border-radius: 50%;
-    overflow: hidden; position: relative;
-    border: 1px solid var(--ouro);
-    margin-bottom: 14px;
-  }
-  .card .rosto { background: url(assets/key-visual.webp) no-repeat; background-size: 640% auto; }
+  .card.anfitria-card { border-color: rgba(201,164,106,.6); background: linear-gradient(160deg, #3a2619, var(--cacau-2)); }
+  .topo-card { display: flex; gap: 16px; align-items: center; margin-bottom: 16px; }
+  .rosto { flex: 0 0 76px; width: 76px; height: 76px; border-radius: 50%; border: 1px solid var(--ouro); background: url(assets/key-visual.webp) no-repeat; background-size: 640% auto; }
+  .rosto.aline { background-position: 63% 33%; }
   .rosto.gabriel { background-position: 39% 33%; }
   .rosto.natalie { background-position: 9% 32%; }
   .rosto.pamela { background-position: 93% 34%; }
+  .papel { font: 500 11px/1 var(--corpo); letter-spacing: .3em; text-transform: uppercase; color: var(--ouro); margin: 0 0 6px; }
+  .card h3 { font-size: 23px; color: var(--creme); }
+  .prof { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--ouro-claro); margin: 4px 0 0; }
   .card p { margin-bottom: 0; }
+  .no-palco { margin: 18px 0 0; padding: 14px 16px; border-left: 2px solid var(--ouro); background: rgba(201,164,106,.07); font-size: 15px; color: var(--texto); }
+  .no-palco b { font-weight: 600; letter-spacing: .12em; text-transform: uppercase; font-size: 11px; color: var(--ouro); display: block; margin-bottom: 4px; }
+  .frase { margin: 18px 0 0; font-family: var(--italico); font-style: italic; font-size: 21px; line-height: 1.35; color: var(--ouro-claro); }
 
-  /* 5. Programação */
-  .agenda { list-style: none; margin: 44px 0 0; padding: 0; border-top: 1px solid rgba(138,106,62,.35); }
-  .agenda li {
-    display: grid; grid-template-columns: 120px 1fr; gap: 18px;
-    padding: 18px 0;
-    border-bottom: 1px solid rgba(138,106,62,.35);
-  }
-  .agenda time { font: 500 17px/1.4 var(--display); color: var(--ouro-fundo); }
-  .agenda .vip-linha { background: linear-gradient(90deg, rgba(201,164,106,.18), transparent); padding-left: 12px; margin-left: -12px; }
-
-  /* 6. Âncora */
+  /* Âncora */
   .ancora { background: linear-gradient(180deg, #24170f, var(--cacau)); }
-  .ancora .total {
-    font: 500 clamp(44px, 9vw, 92px)/1 var(--display);
-    margin: 30px 0 6px;
+  .total {
+    font: 500 clamp(44px, 9vw, 92px)/1 var(--display); margin: 30px 0 6px;
     background: linear-gradient(180deg, #fbf1de, #c9a46a);
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .lista-cursos { list-style: none; padding: 0; margin: 36px auto 30px; max-width: 640px; text-align: left; }
-  .lista-cursos li {
-    display: flex; justify-content: space-between; align-items: baseline; gap: 14px;
-    padding: 14px 0; border-bottom: 1px dashed var(--linha);
-    font-size: 16px;
-  }
-  .lista-cursos li span:last-child { font-family: var(--display); color: var(--ouro-claro); white-space: nowrap; }
+  .lista-cursos li { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 14px 0; border-bottom: 1px dashed var(--linha); font-size: 16px; }
+  .lista-cursos li > span:last-child { font-family: var(--display); color: var(--ouro-claro); white-space: nowrap; }
   .lista-cursos small { display: block; color: var(--texto-suave); font-size: 13px; }
 
-  /* 7. Ingressos */
-  .ingressos { background: var(--cacau); padding-top: 104px; }
-  .regra { max-width: 640px; margin: 18px auto 0; color: var(--texto-suave); }
-  .planos { display: grid; gap: 22px; margin-top: 52px; align-items: stretch; }
-  .plano {
-    position: relative; display: flex; flex-direction: column;
-    padding: 34px 26px 28px;
-    border: 1px solid var(--linha);
-    background: var(--cacau-2);
+  /* Para quem é */
+  .perfis { display: grid; gap: 2px; margin: 40px 0 0; text-align: left; }
+  .perfis div { padding: 26px 26px; background: var(--creme-2); border: 1px solid rgba(138,106,62,.3); }
+  .perfis b { display: block; font: 500 18px/1.3 var(--display); color: var(--tinta); margin-bottom: 6px; }
+  .perfis p { margin: 0; font-size: 16px; }
+
+  /* Depoimentos */
+  .depoimentos-grade { display: grid; gap: 18px; margin-top: 40px; }
+  .depoimento {
+    aspect-ratio: 9 / 12; border: 1px dashed var(--ouro); background: var(--cacau-2);
+    display: grid; place-items: center; padding: 20px; text-align: center;
   }
+
+  /* Ingressos */
+  .ingressos { background: var(--cacau); background-image: var(--ruido); background-size: 160px; padding-top: 104px; }
+  .ingressos h2 span { display: block; }
+  .regra { max-width: 640px; margin: 18px auto 0; color: var(--texto-suave); }
+  .planos { display: grid; gap: 26px; margin-top: 56px; align-items: start; }
+  .plano { position: relative; display: flex; flex-direction: column; padding: 38px 26px 30px; border: 1px solid var(--linha); background: var(--cacau-2); }
   .plano.vip {
     border: 1px solid var(--ouro);
-    background:
-      radial-gradient(120% 70% at 50% 0%, rgba(201,164,106,.22), transparent 60%),
-      linear-gradient(180deg, #33221a, #24170f);
+    background: radial-gradient(120% 70% at 50% 0%, rgba(201,164,106,.22), transparent 60%), linear-gradient(180deg, #33221a, #24170f);
     box-shadow: 0 30px 60px -30px rgba(201,164,106,.45);
   }
-  .selo {
-    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-    font: 600 11px/1 var(--corpo); letter-spacing: .24em; text-transform: uppercase;
-    color: var(--cacau); background: var(--ouro);
-    padding: 7px 14px; white-space: nowrap;
-  }
-  .plano h3 { font-size: 30px; color: var(--creme); }
-  .plano .desc { font-size: 15px; color: var(--texto-suave); margin: 10px 0 22px; min-height: 3.2em; }
-  .parcela { font-size: 14px; color: var(--texto-suave); }
-  .parcela strong { display: block; font: 500 34px/1.1 var(--display); color: var(--ouro-claro); margin-top: 4px; }
-  .avista { font-size: 15px; color: var(--texto); margin: 6px 0 4px; }
-  .lote { font-size: 13px; color: var(--ouro); letter-spacing: .04em; margin-bottom: 20px; }
-  .inclui { list-style: none; padding: 0; margin: 0 0 26px; font-size: 15px; text-align: left; }
-  .inclui li { padding: 7px 0 7px 26px; position: relative; border-top: 1px solid rgba(201,164,106,.12); }
-  .inclui li::before { content: ""; position: absolute; left: 4px; top: 15px; width: 9px; height: 9px; transform: rotate(45deg); border: 1px solid var(--ouro); }
-  .plano .btn { margin-top: auto; width: 100%; }
-  .plano .aviso { font-size: 12.5px; color: var(--texto-suave); margin: 14px 0 0; text-align: center; }
+  .selo { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); font: 600 11px/1 var(--corpo); letter-spacing: .24em; text-transform: uppercase; color: var(--cacau); background: var(--ouro); padding: 7px 14px; white-space: nowrap; }
+  .estrelas { color: var(--ouro); letter-spacing: .3em; font-size: 12px; margin-bottom: 8px; }
+  .plano .tipo { font: 500 12px/1 var(--corpo); letter-spacing: .3em; text-transform: uppercase; color: var(--texto-suave); margin: 0; }
+  .plano h3 { font-size: 34px; color: var(--creme); margin: 6px 0 0; }
+  .plano .desc { font-size: 15px; color: var(--texto-suave); margin: 14px 0 22px; }
+  .por { font-size: 15px; color: var(--texto-suave); margin: 0; }
+  .parcela { display: flex; justify-content: center; align-items: flex-start; gap: 6px; margin: 2px 0 4px; color: var(--ouro-claro); }
+  .parcela .rs { font: 500 18px/1.6 var(--display); }
+  .parcela .valor { font: 500 54px/1 var(--display); }
+  .avista { font-size: 15px; color: var(--texto); margin: 4px 0 4px; }
+  .lote { font-size: 13px; color: var(--ouro); letter-spacing: .04em; margin: 4px 0 22px; }
+  .plano .btn { width: 100%; }
+  .inclui { list-style: none; padding: 0; margin: 26px 0 0; font-size: 15px; text-align: left; }
+  .inclui li { padding: 9px 0 9px 28px; position: relative; border-top: 1px solid rgba(201,164,106,.12); }
+  .inclui li::before { content: ""; position: absolute; left: 4px; top: 17px; width: 9px; height: 9px; transform: rotate(45deg); border: 1px solid var(--ouro); background: var(--ouro); }
+  .inclui li.nao { color: rgba(196,177,156,.45); text-decoration: line-through; }
+  .inclui li.nao::before { background: transparent; border-color: rgba(201,164,106,.35); }
+  .plano .aviso { font-size: 12.5px; color: var(--texto-suave); margin: 16px 0 0; text-align: center; }
 
-  .tabela-wrap { margin-top: 64px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px; }
-  th, td { padding: 14px 12px; border-bottom: 1px solid var(--linha); text-align: center; }
-  th:first-child, td:first-child { text-align: left; color: var(--texto); }
-  thead th { font: 500 13px/1.2 var(--display); letter-spacing: .14em; color: var(--ouro); }
-  td { color: var(--texto-suave); }
-  td.sim::before { content: "◆"; color: var(--ouro); font-size: 11px; }
-  .pos-tabela { margin-top: 20px; font-size: 14px; color: var(--texto-suave); text-align: center; }
+  /* Conheça a Aline */
+  .conheca .grade { display: grid; gap: 36px; align-items: center; }
+  .conheca .foto { aspect-ratio: 4 / 5; background: url(assets/key-visual.webp) 70% 29% / 230% auto no-repeat; border: 1px solid rgba(138,106,62,.4); }
+  .conheca h2 { margin-bottom: 4px; }
+  .conheca .abre { font: italic 500 clamp(24px, 3vw, 30px)/1.25 var(--italico); color: var(--bronze); margin: 18px 0 18px; }
 
-  /* 8. Garantia */
-  .garantia .caixa {
-    display: grid; gap: 28px; align-items: center;
-    padding: 40px 30px;
-    border: 1px solid rgba(138,106,62,.45);
-    background: var(--creme-2);
-  }
-  .garantia .sete {
-    font: 500 110px/1 var(--display); color: var(--ouro-fundo); text-align: center;
-  }
+  /* Garantia */
+  .garantia .caixa { display: grid; gap: 28px; align-items: center; padding: 40px 30px; border: 1px solid var(--linha); background: var(--cacau-2); }
+  .garantia .sete { font: 500 110px/1 var(--display); color: var(--ouro); text-align: center; }
   .garantia .sete small { display: block; font: 500 13px/1 var(--corpo); letter-spacing: .3em; text-transform: uppercase; margin-top: 4px; }
+  .garantia p { color: var(--texto-suave); }
 
-  /* 9. Fechamento */
-  .fecho { text-align: center; overflow: hidden; }
-  .fecho::before {
-    content: ""; position: absolute; inset: 0; z-index: -1;
-    background: radial-gradient(60% 70% at 50% 50%, rgba(201,164,106,.18), transparent 70%);
-  }
-  .fecho { isolation: isolate; }
-  .fecho p { max-width: 640px; margin: 22px auto 0; color: var(--texto-suave); font-size: 18px; }
-
-  /* 10. FAQ */
+  /* FAQ */
   .faq { background: var(--creme); color: var(--tinta); }
-  .perguntas { margin-top: 40px; border-top: 1px solid rgba(138,106,62,.35); }
-  details { border-bottom: 1px solid rgba(138,106,62,.35); }
-  summary {
-    cursor: pointer; list-style: none;
-    padding: 22px 44px 22px 0; position: relative;
-    font: 500 18px/1.4 var(--corpo); color: var(--tinta);
-  }
+  .perguntas { margin-top: 40px; border-top: 1px solid rgba(138,106,62,.35); counter-reset: q; }
+  details { border-bottom: 1px solid rgba(138,106,62,.35); counter-increment: q; }
+  summary { cursor: pointer; list-style: none; padding: 22px 44px 22px 0; position: relative; font: 500 18px/1.4 var(--corpo); color: var(--tinta); }
+  summary::before { content: counter(q) ". "; color: var(--ouro-fundo); font-family: var(--display); }
   summary::-webkit-details-marker { display: none; }
-  summary::after {
-    content: "+"; position: absolute; right: 6px; top: 16px;
-    font: 400 28px/1 var(--display); color: var(--ouro-fundo);
-    transition: transform .25s ease;
-  }
+  summary::after { content: "+"; position: absolute; right: 6px; top: 16px; font: 400 28px/1 var(--display); color: var(--ouro-fundo); transition: transform .25s ease; }
   details[open] summary::after { transform: rotate(45deg); }
   details p { padding: 0 0 22px; margin: 0; color: var(--tinta-suave); max-width: 760px; }
 
-  /* 11. Rodapé */
-  footer { padding: 48px 0 90px; font-size: 13px; color: var(--texto-suave); text-align: center; border-top: 1px solid var(--linha); }
+  footer { padding: 48px 0 60px; font-size: 13px; color: var(--texto-suave); text-align: center; border-top: 1px solid var(--linha); }
   footer .marca { margin-bottom: 14px; }
   footer p { margin: 6px 0; }
 
-  /* Revelação ao rolar */
   .revelar { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s ease; }
   .revelar.visto { opacity: 1; transform: none; }
 
   @media (min-width: 760px) {
-    .dor .colunas { grid-template-columns: 1fr 1fr; gap: 48px; }
-    .passos { grid-template-columns: 1fr 1fr 1fr; }
-    .passos li { padding: 92px 28px 32px; }
-    .passos li::before { top: 32px; }
-    .anfitria { grid-template-columns: 1fr 1.15fr; }
-    .anfitria .foto { aspect-ratio: auto; min-height: 100%; background-size: 240% auto; background-position: 69% 27%; }
-    .anfitria .info { padding: 44px 44px; }
-    .cards { grid-template-columns: repeat(3, 1fr); }
-    .planos { grid-template-columns: 1.08fr 1fr 1fr; }
+    .cards { grid-template-columns: 1fr 1fr; }
+    .cards.tres { grid-template-columns: repeat(3, 1fr); }
+    .videos { grid-template-columns: 1fr 1fr; }
+    .perde { grid-template-columns: 1fr 1fr; }
+    .perfis { grid-template-columns: 1fr 1fr; }
+    .depoimentos-grade { grid-template-columns: repeat(3, 1fr); }
+    .planos { grid-template-columns: 1.06fr 1fr 1fr; }
     .plano.vip { transform: translateY(-14px); }
+    .conheca .grade { grid-template-columns: .9fr 1.1fr; gap: 56px; }
     .garantia .caixa { grid-template-columns: 220px 1fr; padding: 48px 56px; }
     .agenda li { grid-template-columns: 180px 1fr; }
   }
@@ -423,28 +307,52 @@
     body { font-size: 16px; }
     section { padding: 72px 0; }
     .nomes small { letter-spacing: .04em; }
-    .passos li { padding: 28px 22px 26px 74px; }
-    .passos li::before { left: 22px; font-size: 28px; }
+    .parcela .valor { font-size: 46px; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .revelar { opacity: 1; transform: none; }
     html { scroll-behavior: auto; }
   }
+
+  /* Vídeos dos palestrantes */
+  .videos { display: grid; gap: 16px; margin-top: 40px; }
+  .video { aspect-ratio: 16 / 9; border: 1px dashed var(--ouro); background: var(--cacau-2); display: grid; place-items: center; padding: 16px; text-align: center; }
+  .video b { display: block; font: 500 16px/1.3 var(--display); color: var(--ouro-claro); margin-bottom: 8px; }
+
+  /* Abas dos palestrantes */
+  .abas { display: inline-flex; gap: 8px; margin-top: 30px; flex-wrap: wrap; justify-content: center; }
+  .aba { font: 600 13px/1 var(--corpo); letter-spacing: .14em; text-transform: uppercase; padding: 14px 22px; border: 1px solid var(--ouro); background: transparent; color: var(--ouro-claro); cursor: pointer; border-radius: 2px; }
+  .aba[aria-selected="true"] { background: var(--ouro); color: var(--cacau); }
+  .painel[hidden] { display: none; }
+  .painel .cards { margin-top: 30px; }
+  .cards.um { max-width: 640px; margin-left: auto; margin-right: auto; grid-template-columns: 1fr !important; }
+
+  /* Dress code e Encontro VIP */
+  .dress { text-align: center; }
+  .dress .cores { display: flex; justify-content: center; gap: 14px; margin: 26px 0 8px; }
+  .dress .cores i { width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(138,106,62,.5); }
+  .encontro .temas { list-style: none; padding: 0; margin: 26px auto 30px; max-width: 520px; text-align: left; }
+  .encontro .temas li { padding: 12px 0 12px 28px; position: relative; border-bottom: 1px solid var(--linha); color: var(--texto); }
+  .encontro .temas li::before { content: ""; position: absolute; left: 4px; top: 21px; width: 9px; height: 9px; transform: rotate(45deg); background: var(--ouro); }
+  .encontro .escassez { color: var(--ouro-claro); font-family: var(--italico); font-style: italic; font-size: 22px; }
+
+  /* O que você perde */
+  .perde { display: grid; gap: 18px; margin-top: 40px; text-align: left; }
+  .perde div { padding: 26px; background: var(--creme-2); border-left: 2px solid var(--ouro-fundo); }
+  .perde b { display: block; font: 500 19px/1.3 var(--display); color: var(--tinta); margin-bottom: 6px; }
+  .perde p { margin: 0; }
 </style>
 </head>
 <body>
 
-<div class="previa" aria-hidden="true">Prévia para aprovação</div>
-
-<!-- 0. Faixa -->
-<div class="faixa" aria-label="14 de novembro de 2026, Hotel Ouro Minas, Belo Horizonte">
+<!-- Faixa de data -->
+<div class="faixa" aria-label="14 de novembro no Hotel Ouro Minas, Belo Horizonte">
   <div class="faixa-trilho" aria-hidden="true">
-    <span>14 DE NOVEMBRO · HOTEL OURO MINAS · BELO HORIZONTE</span><span>14 DE NOVEMBRO · HOTEL OURO MINAS · BELO HORIZONTE</span><span>14 DE NOVEMBRO · HOTEL OURO MINAS · BELO HORIZONTE</span>
-    <span>14 DE NOVEMBRO · HOTEL OURO MINAS · BELO HORIZONTE</span><span>14 DE NOVEMBRO · HOTEL OURO MINAS · BELO HORIZONTE</span><span>14 DE NOVEMBRO · HOTEL OURO MINAS · BELO HORIZONTE</span>
+    <span>14 DE NOVEMBRO NO HOTEL OURO MINAS · BH</span><span>14 DE NOVEMBRO NO HOTEL OURO MINAS · BH</span><span>14 DE NOVEMBRO NO HOTEL OURO MINAS · BH</span><span>14 DE NOVEMBRO NO HOTEL OURO MINAS · BH</span>
+    <span>14 DE NOVEMBRO NO HOTEL OURO MINAS · BH</span><span>14 DE NOVEMBRO NO HOTEL OURO MINAS · BH</span><span>14 DE NOVEMBRO NO HOTEL OURO MINAS · BH</span><span>14 DE NOVEMBRO NO HOTEL OURO MINAS · BH</span>
   </div>
 </div>
-<p class="publico">Para <strong>biomédicos, cirurgiões-dentistas, médicos</strong> e <strong>estudantes de graduação</strong> da área</p>
 
 <!-- 1. Hero -->
 <header class="hero">
@@ -459,126 +367,106 @@
   </div>
   <div class="wrap hero-texto">
     <p class="micro" style="margin:0 0 18px"><span class="falta">CONFIRMAR: nome sob cada rosto (ordem do key visual)</span></p>
-    <p class="marca">TÉCNICA &amp; TESTEMUNHO</p>
-    <h1>Quatro referências da harmonização facial fazendo suas técnicas ao vivo, no mesmo palco.</h1>
-    <p class="sub">Aline Filgueiras faz um full face ao vivo. Gabriel Magalhães, Natalie Rodrigues e Pamela Soares mostram no palco o que fazem no consultório. Depois de cada técnica, quem acabou de aplicar conta como Deus sustentou a própria carreira.</p>
+    <h1>Quatro referências da harmonização facial demonstrando suas técnicas ao vivo no palco do Técnica &amp; Testemunho.</h1>
+    <p class="sub">Um congresso com palestras 100% demonstrativas, que mostra ao vivo as técnicas de quem é referência na harmonização facial e, depois de cada uma, o testemunho de quem acabou de aplicá-la <span class="seta">↓</span></p>
     <p class="assinatura">Onde a fé inspira e a técnica transforma.</p>
-    <a class="btn" href="#ingressos" data-cta="hero">Garantir meu ingresso do <span data-lote-nome>1º lote</span></a>
-    <p class="micro">Profissional a partir de R$ <span data-preco="profissional">497</span> ou 12x de <span class="falta">FALTA: parcela Ticto</span> · <span data-lote-nome>1º lote</span> até <span data-lote-fim>25/10</span> ou enquanto houver lugares</p>
+    <a class="btn" href="#ingressos">Garantir ingresso</a>
   </div>
 </header>
 
-<!-- 2. Desconforto -->
-<section class="claro dor">
-  <div class="wrap">
-    <div class="revelar">
-      <p class="eyebrow">Por que um congresso assim</p>
-      <hr class="regua">
-      <h2>Quantas vezes você viu uma técnica inteira, do planejamento à última aplicação, feita por quem é referência nela?</h2>
-    </div>
-    <div class="colunas revelar">
-      <p>Palestra curta e teórica passa por muitos temas e não mostra nenhum do começo ao fim. Você volta com anotações e, na hora de aplicar, a mesma dúvida de antes. O curso que mostra a técnica de perto custa R$ 2 mil ou mais, e é um de cada vez.</p>
-      <p><span class="fe" style="font-size:1.2em">E tem a parte que ninguém vê.</span> As decisões de cada atendimento costumam pesar sobre uma pessoa só, e muita gente na harmonização carrega isso sem ter com quem falar.<br><br><span class="falta">FALTA: voz do cliente (frases reais das alunas da Aline)</span></p>
-    </div>
+<!-- 2. Chega de palestras teóricas -->
+<section class="claro dor centro">
+  <div class="wrap revelar">
+    <h2>Chega de palestras teóricas e curtas, em que você vê pouco de muita coisa.</h2>
+    <hr class="regua">
+    <p class="grande">No Técnica &amp; Testemunho, cada palestra é uma aula prática e completa, para você aprender de perto com quem é referência no que faz.</p>
   </div>
 </section>
 
-<!-- 3. Como funciona -->
+<!-- 3. O que fazem no consultório, você vê no palco -->
 <section class="como">
   <div class="wrap">
     <div class="revelar">
-      <p class="eyebrow">Como funciona cada palestra</p>
+      <h2>O que eles fazem em seus consultórios, você vê no palco.</h2>
       <hr class="regua">
-      <h2>O que eles fazem no consultório, você vê feito no palco.</h2>
-      <p class="micro" style="font-size:16px;margin-top:18px">Cada palestrante tem um bloco seu, em duas partes.</p>
     </div>
-    <ol class="passos revelar">
-      <li>
-        <h3>A técnica, ao vivo</h3>
-        <p>O palestrante planeja e aplica a própria técnica no palco. O telão mostra de perto o que a primeira fileira vê.</p>
-        <p class="nota"><span class="falta">CONFIRMAR: paciente modelo e responsável técnico (pendência 7)</span></p>
-      </li>
-      <li>
-        <h3>O raciocínio em voz alta</h3>
-        <p>Você ouve por que ele escolheu aquele ponto, aquele plano e aquela quantidade, e acompanha os ajustes em tempo real.</p>
-      </li>
-      <li class="testemunho">
-        <h3>Depois, o testemunho</h3>
-        <p>O mesmo palestrante conta o que viveu até chegar ao palco e como a fé o sustentou na carreira.</p>
-      </li>
-    </ol>
-    <a class="btn" href="#ingressos" data-cta="como">Garantir meu ingresso</a>
+    <div class="texto revelar">
+      <p class="grande" style="color:var(--texto)">Cada palestrante tem uma técnica e <span class="falta">CONFIRMAR: um paciente modelo</span> para demonstração.</p>
+      <p>Você entende o raciocínio clínico por trás de cada decisão, acompanha os ajustes em tempo real e vê como quatro referências da harmonização facial executam suas técnicas na prática clínica.</p>
+      <p>Quando a técnica termina, o mesmo palestrante conta o que viveu até chegar ali e como a fé o sustentou na carreira.</p>
+      <p class="direto">Tudo direto da fonte.</p>
+      <p>E quem são os palestrantes desta edição? <span class="seta" style="display:inline">↓</span></p>
+    </div>
+    <a class="btn cta" href="#ingressos">Quero ver ao vivo</a>
   </div>
 </section>
 
-<!-- 4. Palestrantes -->
-<section class="palestrantes" id="palestrantes">
+<!-- 4. Veja com seus próprios olhos (no lugar de "BGEx é penta") -->
+<section class="escuro-2 centro">
   <div class="wrap">
     <div class="revelar">
-      <p class="eyebrow">Palestrantes</p>
+      <h2>Primeira edição. Quatro palestrantes que você já pode ver em ação.</h2>
       <hr class="regua">
-      <h2>Quem sobe ao palco</h2>
+      <p class="grande" style="color:var(--texto-suave);max-width:680px;margin:0 auto">E, mais do que te contar como cada um ensina, quero que você veja com seus próprios olhos:</p>
     </div>
+    <div class="videos revelar">
+      <div class="video"><div><b>Aline Filgueiras</b><span class="falta">FALTA: vídeo dando aula ou no palco</span></div></div>
+      <div class="video"><div><b>Gabriel Magalhães</b><span class="falta">FALTA: vídeo dando aula ou no palco</span></div></div>
+      <div class="video"><div><b>Natalie Rodrigues</b><span class="falta">FALTA: vídeo dando aula ou no palco</span></div></div>
+      <div class="video"><div><b>Pamela Soares</b><span class="falta">FALTA: vídeo dando aula ou no palco</span></div></div>
+    </div>
+    <a class="btn cta" href="#ingressos">Quero garantir meu lugar</a>
+  </div>
+</section>
 
-    <article class="anfitria revelar">
-      <div class="foto" role="img" aria-label="Aline Filgueiras"></div>
-      <div class="info">
-        <p class="papel">Anfitriã</p>
-        <h3>Aline Filgueiras</h3>
-        <p class="prof">Biomédica</p>
-        <p>Ensina harmonização facial há <span class="falta">CONFIRMAR: mais de 11 anos</span> e já formou <span class="falta">FALTA: nº de alunos</span> profissionais. Estudou anatomia em dissecção fresh frozen nos Estados Unidos e em cursos na Europa. Idealizou o Técnica &amp; Testemunho. <span class="falta">FALTA: frase da Aline sobre por que criou o evento</span></p>
-        <p class="no-palco"><b>No palco</b>Full face ao vivo</p>
-        <p class="frase"><span class="falta">FALTA: linha de testemunho da Aline</span></p>
+<!-- 5. Tema + palestrantes -->
+<section class="centro" id="palestrantes">
+  <div class="wrap">
+    <div class="revelar">
+      <p class="grande" style="color:var(--texto-suave);max-width:700px;margin:0 auto">Toda edição do Técnica &amp; Testemunho vai ter um tema. A primeira começa pelo que dá nome ao congresso: a técnica que você vê no palco e o testemunho de quem a executa <span class="seta" style="display:inline">↓</span></p>
+      <hr class="regua">
+      <h2>As referências da harmonização facial reunidas no mesmo palco.</h2>
+      <p class="grande" style="color:var(--texto-suave);margin-top:18px">Uma anfitriã e três convidados, cada um com uma técnica ao vivo e uma história para contar.</p>
+      <p class="micro">Clique nos botões para conhecer cada um.</p>
+      <div class="abas" role="tablist">
+        <button class="aba" role="tab" aria-selected="true" aria-controls="p-anfitria" id="t-anfitria">A anfitriã</button>
+        <button class="aba" role="tab" aria-selected="false" aria-controls="p-convidados" id="t-convidados">Os convidados</button>
       </div>
-    </article>
-
-    <div class="cards">
-      <article class="card revelar">
-        <div class="rosto gabriel"></div>
-        <h3>Gabriel Magalhães</h3>
-        <p class="prof">Biomédico</p>
-        <p>Há 15 anos na harmonização facial e corporal. CEO do TopFit Group e fundador da TopFit Academy, que diz ter <span class="falta">CONFIRMAR: mais de 5.000 alunos</span>.</p>
-        <p class="no-palco"><b>No palco</b><span class="falta">FALTA: área ou técnica do Gabriel</span></p>
-        <p class="frase">“Nunca foi sorte, sempre foi Deus.” <span class="falta">FALTA: ok</span></p>
-      </article>
-      <article class="card revelar">
-        <div class="rosto natalie"></div>
-        <h3>Natalie Rodrigues</h3>
-        <p class="prof">Cirurgiã-dentista e médica</p>
-        <p>Criou a técnica Nariz Perfeito, publicada em artigo científico em 2021 (DOI 10.24077/2021276067). Atende em Belo Horizonte, São Paulo e Boston.</p>
-        <p class="no-palco"><b>No palco</b>Nariz <span class="falta">CONFIRMAR</span></p>
-        <p class="frase"><span class="falta">FALTA: linha de testemunho da Natalie</span></p>
-      </article>
-      <article class="card revelar">
-        <div class="rosto pamela"></div>
-        <h3>Pamela Soares</h3>
-        <p class="prof">Biomédica</p>
-        <p>Biomédica desde 2015 e fundadora da IPS Clinic, que tem três unidades em São Paulo. Criou o Posicionamento Facial®.</p>
-        <p class="no-palco"><b>No palco</b>Posicionamento Facial® <span class="falta">CONFIRMAR</span></p>
-        <p class="frase">“Comecei com uma maca e R$ 7 mil de dívida.” <span class="falta">FALTA: ok</span></p>
-      </article>
     </div>
-  </div>
-</section>
 
-<!-- 5. Programação -->
-<section class="claro" id="programacao">
-  <div class="wrap">
-    <div class="revelar">
-      <p class="eyebrow">Sábado, 14 de novembro</p>
-      <hr class="regua">
-      <h2>Como é o dia</h2>
+    <div class="painel" id="p-anfitria" role="tabpanel" aria-labelledby="t-anfitria">
+      <div class="cards um">
+        <article class="card anfitria-card">
+          <div class="topo-card"><div class="rosto aline" role="img" aria-label="Aline Filgueiras"></div><div><p class="papel">Anfitriã</p><h3>Aline Filgueiras</h3><p class="prof">Biomédica</p></div></div>
+          <p>Ensina harmonização facial com foco em anatomia. Estudou em dissecção fresh frozen nos Estados Unidos e em cursos de anatomia na Europa.</p>
+          <p class="no-palco"><b>No palco</b>Full face ao vivo</p>
+          <p class="frase"><span class="falta">FALTA: linha de testemunho da Aline</span></p>
+        </article>
+      </div>
     </div>
-    <ol class="agenda revelar">
-      <li><time>8h30</time><span>Credenciamento (VIP com entrada separada)</span></li>
-      <li><time>9h</time><span>Abertura com Aline Filgueiras</span></li>
-      <li><time>Manhã</time><span>Duas palestras: técnica ao vivo e testemunho <span class="falta">A DEFINIR: ordem</span></span></li>
-      <li><time>13h às 14h30</time><span>Almoço</span></li>
-      <li><time>Tarde</time><span>Duas palestras: técnica ao vivo e testemunho</span></li>
-      <li><time>18h30</time><span>Encerramento</span></li>
-      <li class="vip-linha"><time>18h45 às 19h45</time><span>Encontro VIP com Aline e palestrantes</span></li>
-    </ol>
-    <p class="micro">Horários estimados, sujeitos a ajuste. Você recebe a programação final por e-mail e WhatsApp.</p>
+
+    <div class="painel" id="p-convidados" role="tabpanel" aria-labelledby="t-convidados" hidden>
+      <div class="cards tres">
+        <article class="card">
+          <div class="topo-card"><div class="rosto gabriel" role="img" aria-label="Gabriel Magalhães"></div><div><p class="papel">Convidado</p><h3>Gabriel Magalhães</h3><p class="prof">Biomédico</p></div></div>
+          <p>Há 15 anos na harmonização facial e corporal. CEO do TopFit Group e fundador da TopFit Academy, que diz ter <span class="falta">CONFIRMAR: mais de 5.000 alunos</span>.</p>
+          <p class="no-palco"><b>No palco</b><span class="falta">FALTA: área ou técnica do Gabriel</span></p>
+          <p class="frase">“Nunca foi sorte, sempre foi Deus.” <span class="falta">FALTA: ok</span></p>
+        </article>
+        <article class="card">
+          <div class="topo-card"><div class="rosto natalie" role="img" aria-label="Natalie Rodrigues"></div><div><p class="papel">Convidada</p><h3>Natalie Rodrigues</h3><p class="prof">Cirurgiã-dentista e médica</p></div></div>
+          <p>Criou a técnica Nariz Perfeito, publicada em artigo científico em 2021 (DOI 10.24077/2021276067). Atende em Belo Horizonte, São Paulo e Boston.</p>
+          <p class="no-palco"><b>No palco</b>Nariz <span class="falta">CONFIRMAR</span></p>
+          <p class="frase"><span class="falta">FALTA: linha de testemunho da Natalie</span></p>
+        </article>
+        <article class="card">
+          <div class="topo-card"><div class="rosto pamela" role="img" aria-label="Pamela Soares"></div><div><p class="papel">Convidada</p><h3>Pamela Soares</h3><p class="prof">Biomédica</p></div></div>
+          <p>Biomédica desde 2015 e fundadora da IPS Clinic, que tem três unidades em São Paulo. Criou o Posicionamento Facial®.</p>
+          <p class="no-palco"><b>No palco</b>Posicionamento Facial® <span class="falta">CONFIRMAR</span></p>
+          <p class="frase">“Comecei com uma maca e R$ 7 mil de dívida.” <span class="falta">FALTA: ok</span></p>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -586,9 +474,7 @@
 <section class="ancora centro">
   <div class="wrap">
     <div class="revelar">
-      <p class="eyebrow">Faça a conta</p>
-      <hr class="regua">
-      <h2>Quanto custaria fazer o curso de cada um separadamente?</h2>
+      <h2>Quanto custaria fazer o curso de cada um desses profissionais, separadamente?</h2>
       <p class="total">+ R$ 20 mil</p>
       <p style="color:var(--texto-suave)">somando um curso de cada palestrante</p>
     </div>
@@ -599,165 +485,260 @@
       <li><span>Pamela Soares<small>Na Prática 2.0</small></span><span>R$ 2.997</span></li>
       <li><span><span class="falta">FALTA: demais itens até fechar R$ 20 mil</span></span><span></span></li>
     </ul>
-    <p class="revelar" style="max-width:600px;margin:0 auto 34px">No Técnica &amp; Testemunho, você vê os quatro aplicarem suas técnicas ao vivo, em um dia, a partir de R$ <span data-preco="profissional">497</span>.</p>
-    <a class="btn btn-linha" href="#ingressos" data-cta="ancora">Ver ingressos</a>
+    <p class="grande revelar" style="max-width:640px;margin:0 auto">No Técnica &amp; Testemunho, você aprende com os quatro em um único dia, no ambiente certo, com as pessoas certas.</p>
+    <a class="btn cta" href="#ingressos">Quero estar no ambiente certo</a>
   </div>
 </section>
 
-<!-- 7. Ingressos -->
+<!-- 7. Dress code -->
+<section class="claro dress">
+  <div class="wrap estreito revelar">
+    <p class="eyebrow">Dress code</p>
+    <hr class="regua" style="margin-left:auto;margin-right:auto">
+    <div class="cores" aria-hidden="true"><i style="background:#fbf7f0"></i><i style="background:#ecd3a2"></i><i style="background:#c9a46a"></i></div>
+    <h2 style="font-size:clamp(24px,3.4vw,34px)"><span class="falta">A DEFINIR: dress code (sugestão: branco, off-white e dourado, como no key visual)</span></h2>
+    <p class="grande" style="margin-top:18px"><span class="falta">A DEFINIR: frase do dress code</span></p>
+  </div>
+</section>
+
+<!-- 8. Não importa o momento da carreira -->
+<section class="centro">
+  <div class="wrap estreito revelar">
+    <h2>Não importa em que momento da carreira você esteja.</h2>
+    <hr class="regua">
+    <p class="grande">O Técnica &amp; Testemunho foi criado para quem quer evoluir na harmonização facial com segurança e consistência, sem perder de vista o que sustenta a carreira.</p>
+    <p class="grande" style="color:var(--texto-suave)">Para ganhar segurança técnica, refinar o planejamento ou ampliar a visão clínica, você fica diante de profissionais que ensinam e atendem todos os dias, e ouve de cada um como a fé o sustentou na profissão.</p>
+    <a class="btn cta" href="#ingressos">Quero o meu lugar</a>
+  </div>
+</section>
+
+<!-- 9. Depoimentos -->
+<section class="escuro-2 centro">
+  <div class="wrap">
+    <div class="revelar">
+      <h2>Vou deixar que eles falem por mim:</h2>
+      <p class="micro" style="font-size:15px">Aline Filgueiras</p>
+    </div>
+    <div class="depoimentos-grade revelar">
+      <div class="depoimento"><span class="falta">FALTA: depoimento em vídeo de aluno (sem resultado em paciente)</span></div>
+      <div class="depoimento"><span class="falta">FALTA: depoimento em vídeo de aluno</span></div>
+      <div class="depoimento"><span class="falta">FALTA: depoimento em vídeo de aluno</span></div>
+    </div>
+    <p class="grande revelar" style="margin-top:36px">O seu próximo passo é simples:</p>
+    <a class="btn" href="#ingressos">Quero aprender com eles</a>
+  </div>
+</section>
+
+<!-- 10. Encontro VIP (no lugar da Sala dos Maridos) -->
+<section class="encontro centro">
+  <div class="wrap estreito revelar">
+    <p class="eyebrow">Encontro VIP</p>
+    <hr class="regua">
+    <h2>O encerramento também faz parte do Técnica &amp; Testemunho.</h2>
+    <p class="grande" style="margin-top:22px;color:var(--texto-suave)">Depois da última palestra, quem tem o ingresso VIP segue para uma hora de conversa com Aline e palestrantes. <span class="falta">CONFIRMAR: Encontro VIP e coquetel</span></p>
+    <ul class="temas">
+      <li>Perguntas direto para quem acabou de demonstrar</li>
+      <li>Foto oficial</li>
+      <li>Coquetel leve <span class="falta">CONFIRMAR</span></li>
+    </ul>
+    <p class="escassez">São 40 lugares no VIP, e eles não reabrem.</p>
+    <a class="btn cta" href="#ingressos" style="margin-top:20px">Quero o ingresso VIP</a>
+  </div>
+</section>
+
+<!-- 11. Ingressos -->
 <section class="ingressos centro" id="ingressos">
   <div class="wrap">
     <div class="revelar">
-      <p class="eyebrow">Ingressos</p>
-      <hr class="regua">
-      <h2>Escolha seu ingresso</h2>
+      <p class="marca">TÉCNICA &amp; TESTEMUNHO</p>
+      <h2>Escolha o seu lugar<span>no auditório:</span></h2>
       <p class="regra">O lote vira na data, às 23h59, ou quando os lugares acabarem, o que vier primeiro.</p>
     </div>
 
     <div class="planos">
       <article class="plano vip revelar">
         <span class="selo">Mais completo</span>
+        <p class="estrelas">★★★★★★</p>
+        <p class="tipo">Ingresso</p>
         <h3>VIP</h3>
-        <p class="desc">Para quem quer viver o dia mais perto do palco e encerrar com uma hora de conversa com Aline e palestrantes.</p>
-        <p class="parcela">12x de <strong><span class="falta">FALTA</span></strong></p>
-        <p class="avista">R$ 1.297 à vista</p>
-        <p class="lote">40 lugares · preço único, sem lote · não reabre</p>
+        <p class="desc">A experiência mais próxima do palco, com primeiras fileiras e um momento exclusivo com Aline e palestrantes. <span class="falta">CONFIRMAR</span></p>
+        <p class="por">Por 12x de</p>
+        <p class="parcela"><span class="rs">R$</span><span class="valor" data-parcela="vip"></span></p>
+        <p class="avista">R$ 1.297,00 à vista</p>
+        <p class="lote">40 lugares · preço único</p>
+        <a class="btn" href="#" data-checkout="vip">Garantir meu lugar</a>
         <ul class="inclui">
-          <li>Tudo do ingresso Profissional</li>
-          <li>Almoço em área reservada</li>
+          <li>As 4 técnicas ao vivo com testemunhos</li>
+          <li>Coffee breaks</li>
+          <li>Certificado de participação</li>
           <li>Primeiras fileiras</li>
           <li>Credenciamento separado</li>
-          <li>Encontro VIP (18h45 às 19h45): conversa, perguntas, foto oficial e coquetel leve</li>
+          <li>Almoço em área reservada <span class="falta">CONFIRMAR</span></li>
+          <li>Encontro VIP com Aline e palestrantes <span class="falta">CONFIRMAR</span></li>
         </ul>
-        <a class="btn" href="#" data-checkout="vip">Garantir meu VIP</a>
       </article>
 
       <article class="plano revelar">
-        <h3>Profissional</h3>
-        <p class="desc">Para profissionais habilitados em harmonização facial.</p>
-        <p class="parcela">12x de <strong><span class="falta">FALTA</span></strong></p>
-        <p class="avista">R$ <span data-preco="profissional">497</span> à vista</p>
-        <p class="lote" data-lote-texto="profissional">1º lote até 25/10 ou 100 lugares · depois, R$ 597</p>
-        <ul class="inclui">
-          <li>As 4 técnicas ao vivo com testemunhos</li>
-          <li>Coffee breaks</li>
-          <li>Certificado digital (~8 h)</li>
-          <li>Almoço como adicional no checkout</li>
-        </ul>
-        <a class="btn" href="#" data-checkout="profissional">Garantir meu ingresso do <span data-lote-nome>1º lote</span></a>
-      </article>
-
-      <article class="plano revelar">
+        <p class="estrelas">★★★★★★</p>
+        <p class="tipo">Ingresso</p>
         <h3>Estudante</h3>
-        <p class="desc">Só para graduação, com matrícula ativa. Quem faz pós-graduação compra o Profissional.</p>
-        <p class="parcela">12x de <strong><span class="falta">FALTA</span></strong></p>
-        <p class="avista">R$ <span data-preco="estudante">397</span> à vista</p>
-        <p class="lote">40 lugares no total</p>
+        <p class="desc">Exclusivo para graduação. É necessário estar matriculado na faculdade na data do evento. Não válido para pós-graduação.</p>
+        <p class="por">Por 12x de</p>
+        <p class="parcela"><span class="rs">R$</span><span class="valor" data-parcela="estudante"></span></p>
+        <p class="avista">R$ <span data-preco="estudante">397</span>,00 à vista</p>
+        <p class="lote" data-lote-texto="estudante"></p>
+        <a class="btn" href="#" data-checkout="estudante">Garantir meu lugar</a>
         <ul class="inclui">
           <li>As 4 técnicas ao vivo com testemunhos</li>
           <li>Coffee breaks</li>
-          <li>Certificado digital (~8 h)</li>
-          <li>Almoço como adicional no checkout</li>
+          <li>Certificado de participação</li>
+          <li class="nao">Primeiras fileiras</li>
+          <li class="nao">Credenciamento separado</li>
+          <li class="nao">Almoço em área reservada</li>
+          <li class="nao">Encontro VIP com Aline e palestrantes</li>
         </ul>
-        <a class="btn" href="#" data-checkout="estudante">Garantir meu ingresso de estudante</a>
-        <p class="aviso">O comprovante de matrícula é validado pelo WhatsApp na compra e conferido na entrada.</p>
+      </article>
+
+      <article class="plano revelar">
+        <p class="estrelas">★★★★★★</p>
+        <p class="tipo">Ingresso</p>
+        <h3>Profissional</h3>
+        <p class="desc">Acesso completo ao conteúdo do evento para quem quer viver o dia inteiro e acompanhar todas as palestras.</p>
+        <p class="por">Por 12x de</p>
+        <p class="parcela"><span class="rs">R$</span><span class="valor" data-parcela="profissional"></span></p>
+        <p class="avista">R$ <span data-preco="profissional">497</span>,00 à vista</p>
+        <p class="lote" data-lote-texto="profissional"></p>
+        <a class="btn" href="#" data-checkout="profissional">Garantir meu lugar</a>
+        <ul class="inclui">
+          <li>As 4 técnicas ao vivo com testemunhos</li>
+          <li>Coffee breaks</li>
+          <li>Certificado de participação</li>
+          <li class="nao">Primeiras fileiras</li>
+          <li class="nao">Credenciamento separado</li>
+          <li class="nao">Almoço em área reservada</li>
+          <li class="nao">Encontro VIP com Aline e palestrantes</li>
+        </ul>
       </article>
     </div>
-
-    <div class="tabela-wrap revelar">
-      <table>
-        <caption class="eyebrow" style="padding-bottom:16px">Compare</caption>
-        <thead><tr><th scope="col"></th><th scope="col">VIP</th><th scope="col">Profissional</th><th scope="col">Estudante</th></tr></thead>
-        <tbody>
-          <tr><td>4 técnicas ao vivo com testemunhos</td><td class="sim" aria-label="sim"></td><td class="sim" aria-label="sim"></td><td class="sim" aria-label="sim"></td></tr>
-          <tr><td>Coffee breaks</td><td class="sim" aria-label="sim"></td><td class="sim" aria-label="sim"></td><td class="sim" aria-label="sim"></td></tr>
-          <tr><td>Certificado digital (~8 h)</td><td class="sim" aria-label="sim"></td><td class="sim" aria-label="sim"></td><td class="sim" aria-label="sim"></td></tr>
-          <tr><td>Almoço</td><td>área reservada</td><td>adicional</td><td>adicional</td></tr>
-          <tr><td>Primeiras fileiras e credenciamento separado</td><td class="sim" aria-label="sim"></td><td></td><td></td></tr>
-          <tr><td>Encontro VIP com Aline e palestrantes</td><td class="sim" aria-label="sim"></td><td></td><td></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="pos-tabela">O almoço pode ser incluído no checkout por <span class="falta">FALTA: preço</span>. Pagamento em Pix ou em até 12x no cartão.</p>
+    <p class="micro" style="margin-top:28px">O comprovante de matrícula do ingresso Estudante é validado pelo WhatsApp na compra e conferido na entrada.</p>
   </div>
 </section>
 
-<!-- 8. Garantia -->
-<section class="claro garantia">
+<!-- 12. O que você perde ao ficar de fora -->
+<section class="claro centro">
   <div class="wrap">
-    <div class="caixa revelar">
-      <div class="sete">7<small>dias</small></div>
-      <div>
-        <h2 style="font-size:clamp(26px,3.6vw,38px)">Você tem 7 dias para mudar de ideia</h2>
-        <hr class="regua">
-        <p style="color:var(--tinta-suave);margin:0">Se desistir em até 7 dias depois da compra, devolvemos 100% do valor. É só pedir pelo WhatsApp, até 48 horas antes do evento.</p>
+    <div class="revelar">
+      <h2>O que você perde ao ficar de fora do Técnica &amp; Testemunho?</h2>
+      <hr class="regua">
+      <p class="grande" style="max-width:680px;margin:0 auto">Além de tudo o que você viu até aqui, tem coisas que só acontecem para quem está no auditório.</p>
+    </div>
+    <div class="perde revelar">
+      <div><b>Ver quatro técnicas do começo ao fim</b><p>O planejamento, a aplicação e os ajustes, feitos ao vivo e explicados por quem os executa.</p></div>
+      <div><b>Ouvir quatro testemunhos</b><p>Histórias contadas no palco, por quem as viveu, logo depois da técnica.</p></div>
+      <div><b>Estar com profissionais que pensam como você</b><p>Um dia inteiro com colegas da harmonização facial de Minas, São Paulo e outros estados.</p></div>
+      <div><b><span class="falta">FALTA: condição exclusiva para participantes (se houver)</span></b><p><span class="falta">Ex.: valores especiais em cursos dos palestrantes, só para quem estiver no evento</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13. Conheça Aline -->
+<section class="claro conheca" style="padding-top:0">
+  <div class="wrap">
+    <div class="grade">
+      <div class="foto revelar" role="img" aria-label="Aline Filgueiras"></div>
+      <div class="revelar">
+        <h2>Conheça Aline Filgueiras:</h2>
+        <p class="abre"><span class="falta">FALTA: frase de abertura da história da Aline</span></p>
+        <p>Biomédica, Aline fez da anatomia o centro do que ensina em harmonização facial. Estudou em dissecção fresh frozen nos Estados Unidos e em cursos de anatomia na Europa.</p>
+        <p>Hoje forma profissionais na Filgueiras Academy, com mais de 70 horas de aulas de harmonização facial, e já formou <span class="falta">FALTA: nº de alunos</span>. São <span class="falta">CONFIRMAR: mais de 11 anos</span> de profissão.</p>
+        <p><span class="falta">FALTA: por que ela criou o Técnica &amp; Testemunho e o que a fé representa na carreira dela</span></p>
+        <p>E no palco do Técnica &amp; Testemunho, ela faz um full face ao vivo.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 9. Fechamento -->
-<section class="fecho">
-  <div class="wrap revelar">
-    <p class="eyebrow">14 de novembro · Hotel Ouro Minas</p>
-    <hr class="regua" style="margin-left:auto;margin-right:auto;background:linear-gradient(90deg,transparent,var(--ouro),transparent)">
-    <h2>Em 14 de novembro, quatro técnicas acontecem na sua frente.</h2>
-    <p>Você sai do Ouro Minas com o raciocínio de quatro especialistas visto de perto e com quatro histórias de como a fé sustentou a carreira de quem estava no palco.</p>
-    <p class="assinatura">Onde a fé inspira e a técnica transforma.</p>
-    <a class="btn" href="#ingressos" data-cta="fecho">Garantir meu ingresso do <span data-lote-nome>1º lote</span></a>
-  </div>
-</section>
-
-<!-- 10. FAQ -->
-<section class="faq" id="duvidas">
+<!-- 14. Garantia -->
+<section class="garantia">
   <div class="wrap">
-    <p class="eyebrow">Dúvidas</p>
-    <hr class="regua">
-    <h2>Antes de garantir seu lugar</h2>
-    <div class="perguntas">
-      <details><summary>Onde é o evento?</summary><p>No Hotel Ouro Minas, Av. Cristiano Machado, 4001, Ipiranga, Belo Horizonte. <span class="falta">CONFIRMAR: endereço</span></p></details>
-      <details><summary>Qual é o aeroporto mais próximo?</summary><p>O Aeroporto Internacional de Confins. O Ouro Minas fica na Av. Cristiano Machado, caminho natural de quem vem de Confins pela Linha Verde. <span class="falta">CONFIRMAR: tempo de deslocamento</span></p></details>
-      <details><summary>E a rodoviária?</summary><p>O Terminal Rodoviário de Belo Horizonte fica no centro. De lá, o hotel fica a uma corrida de táxi ou aplicativo.</p></details>
-      <details><summary>Tem estacionamento?</summary><p><span class="falta">FALTA: estacionamento do Ouro Minas, valor e se tem valet</span></p></details>
-      <details><summary>O almoço está incluído?</summary><p>No VIP, sim, em área reservada. No Profissional e no Estudante, o almoço pode ser incluído no checkout por <span class="falta">FALTA: preço</span>.</p></details>
-      <details><summary>Quem pode comprar o ingresso de estudante?</summary><p>Só estudantes de graduação com matrícula ativa. O comprovante é validado pelo WhatsApp na compra e conferido na entrada. Quem faz pós-graduação compra o Profissional.</p></details>
-      <details><summary>Recebo certificado?</summary><p>Sim, um certificado digital de participação de cerca de 8 horas.</p></details>
-      <details><summary>Posso cancelar?</summary><p>Sim. Em até 7 dias depois da compra, com reembolso integral, desde que o pedido chegue até 48 horas antes do evento.</p></details>
-      <details><summary>Posso passar meu ingresso para outra pessoa?</summary><p>Não. O ingresso é nominal, e o credenciamento confere nome e documento.</p></details>
-      <details><summary>Preciso ser cristão para participar?</summary><p>Não. O Técnica &amp; Testemunho é um congresso de harmonização facial, aberto a todos os profissionais. Depois de cada técnica, o palestrante conta a própria história e como a fé o sustentou. <span class="falta">CONFIRMAR: haverá oração ou louvor na programação?</span></p></details>
-      <details><summary>Como funciona o parcelamento?</summary><p>Em até 12x no cartão, com os juros da operadora, ou à vista no Pix.</p></details>
+    <div class="caixa revelar">
+      <div class="sete">7<small>dias</small></div>
+      <div>
+        <h2 style="font-size:clamp(26px,3.6vw,38px)">Você tem 7 dias para pensar com calma</h2>
+        <hr class="regua">
+        <p>E decidir se vai ver as técnicas de perto, no auditório, ou de longe, pelas redes. Se mudar de ideia nesse período, é só pedir o reembolso pelo WhatsApp e devolvemos 100% do seu dinheiro, sem burocracia. O pedido precisa chegar até 48 horas antes do evento.</p>
+        <a class="btn" href="#ingressos" style="margin-top:10px">Garantir meu ingresso</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 11. Rodapé -->
+<!-- Faixa da assinatura -->
+<div class="faixa faixa-assinatura" aria-label="Onde a fé inspira e a técnica transforma">
+  <div class="faixa-trilho" aria-hidden="true">
+    <span>Onde a fé inspira e a técnica transforma</span><span>Onde a fé inspira e a técnica transforma</span><span>Onde a fé inspira e a técnica transforma</span><span>Onde a fé inspira e a técnica transforma</span>
+    <span>Onde a fé inspira e a técnica transforma</span><span>Onde a fé inspira e a técnica transforma</span><span>Onde a fé inspira e a técnica transforma</span><span>Onde a fé inspira e a técnica transforma</span>
+  </div>
+</div>
+
+<!-- 15. FAQ -->
+<section class="faq" id="duvidas">
+  <div class="wrap estreito">
+    <h2>A sua dúvida pode estar aqui:</h2>
+    <div class="perguntas">
+      <details><summary>Qual é o aeroporto mais próximo?</summary><p>O Aeroporto Internacional de Confins. O Hotel Ouro Minas fica na Av. Cristiano Machado, caminho de quem vem de Confins pela Linha Verde. <span class="falta">CONFIRMAR: tempo de deslocamento</span></p></details>
+      <details><summary>Qual a rodoviária mais próxima?</summary><p>O Terminal Rodoviário de Belo Horizonte, no centro. De lá, você chega ao hotel de táxi ou aplicativo.</p></details>
+      <details><summary>Onde fica o evento?</summary><p>No Hotel Ouro Minas, Av. Cristiano Machado, 4001, Ipiranga, Belo Horizonte. <span class="falta">CONFIRMAR: endereço</span></p></details>
+      <details><summary>Qual é o horário?</summary><p>Credenciamento a partir das 8h30, início às 9h e encerramento às 18h30. O Encontro VIP vai das 18h45 às 19h45. Horários estimados, sujeitos a ajuste.</p></details>
+      <details><summary>Qual é o hotel mais próximo?</summary><p>O próprio Hotel Ouro Minas recebe o evento. <span class="falta">FALTA: tarifa ou condição para participantes, se houver</span></p></details>
+      <details><summary>Tem estacionamento?</summary><p><span class="falta">FALTA: estacionamento do Ouro Minas, valor e se tem valet</span></p></details>
+      <details><summary>Tem local para comer?</summary><p>O evento tem coffee breaks. O almoço é das 13h às 14h30, e o hotel e a região têm opções de restaurante. <span class="falta">CONFIRMAR</span></p></details>
+      <details><summary>Posso cancelar meu ingresso?</summary><p>Sim. Você pode cancelar em até 7 dias depois da compra, com reembolso total, desde que o pedido chegue até 48 horas antes do evento. Depois desse prazo, não fazemos cancelamentos.</p></details>
+      <details><summary>Posso passar meu ingresso para outra pessoa?</summary><p>Não. O ingresso é nominal, e o credenciamento confere nome e documento.</p></details>
+      <details><summary>A condição de estudante vale para pós-graduação?</summary><p>Não. A condição é exclusiva para estudantes de graduação. Quem faz pós-graduação compra o ingresso Profissional.</p></details>
+      <details><summary>Preciso comprovar vínculo estudantil?</summary><p>Sim. O comprovante de matrícula é validado pelo WhatsApp na compra e conferido na entrada, junto com um documento com foto.</p></details>
+      <details><summary>Preciso ser cristão para participar?</summary><p>Não. O Técnica &amp; Testemunho é um congresso de harmonização facial, aberto a todos os profissionais. Depois de cada técnica, o palestrante conta a própria história e como a fé o sustentou. <span class="falta">CONFIRMAR: haverá oração ou louvor na programação?</span></p></details>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <p class="marca">TÉCNICA &amp; TESTEMUNHO</p>
-    <p>Congresso de Harmonização Facial · 14/11/2026 · Hotel Ouro Minas, Belo Horizonte</p>
+    <p>Técnica &amp; Testemunho · Todos os direitos reservados</p>
     <p><span class="falta">FALTA: razão social e CNPJ do organizador</span></p>
     <p><a href="#" data-whatsapp>Atendimento pelo WhatsApp</a> · <a href="#">Política de privacidade</a> <span class="falta">FALTA</span></p>
   </div>
 </footer>
 
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1041423195618484&ev=PageView&noscript=1"></noscript>
+
 <script>
 /* ============================================================
-   CONFIG · tudo que muda (preço, lote, link) fica aqui.
-   Fonte dos preços e lotes: briefing oficial do evento.
+   CONFIG · tudo que muda (preço, parcela, lote, link) fica aqui.
+   Nunca coloque aqui o token da API de Conversões: esta página é pública.
    ============================================================ */
 const CONFIG = {
-  pixelId: "",            // FALTA: ID do Pixel do Meta
-  whatsapp: "",           // FALTA: número com DDI e DDD, só dígitos (ex.: 5531999999999)
-  checkout: {             // FALTA: links da Ticto
-    vip: "",
-    profissional: "",     // um link por lote, se a Ticto exigir: use lotes[].checkout
-    estudante: ""
+  pixelId: "1041423195618484",
+  whatsapp: "5531953491799",
+  // Valor de cada parcela em 12x (Ticto, juros do comprador), por preço à vista
+  parcelas: {
+    1297: "134,13",
+    497: "51,40", 597: "61,74", 697: "72,08",
+    397: "41,05", 477: "49,33", 557: "57,60"
   },
+  vip: { preco: 1297, checkout: "https://payment.ticto.app/O99FD1428" },
   // Lote vira na data (23h59, horário de Brasília) ou ao esgotar.
   lotes: [
-    { nome: "1º lote", fim: "2026-10-25T23:59:59-03:00", fimTexto: "25/10", profissional: 497, estudante: 397, vagas: 100 },
-    { nome: "2º lote", fim: "2026-11-04T23:59:59-03:00", fimTexto: "04/11", profissional: 597, estudante: 477, vagas: 110 },
-    { nome: "3º lote", fim: "2026-11-13T23:59:59-03:00", fimTexto: "13/11", profissional: 697, estudante: 557, vagas: 80 }
+    { nome: "1º lote", fim: "2026-10-25T23:59:59-03:00", fimTexto: "25/10", vagas: 100,
+      profissional: { preco: 497, checkout: "https://payment.ticto.app/O29F8C641" },
+      estudante:    { preco: 397, checkout: "https://payment.ticto.app/O916934E8" } },
+    { nome: "2º lote", fim: "2026-11-04T23:59:59-03:00", fimTexto: "04/11", vagas: 110,
+      profissional: { preco: 597, checkout: "https://payment.ticto.app/O77A23151" },
+      estudante:    { preco: 477, checkout: "https://payment.ticto.app/OC5DF6A8A" } },
+    { nome: "3º lote", fim: "2026-11-13T23:59:59-03:00", fimTexto: "13/11", vagas: 80,
+      profissional: { preco: 697, checkout: "https://payment.ticto.app/O8F7466D1" },
+      estudante:    { preco: 557, checkout: "https://payment.ticto.app/OA38F974B" } }
   ],
   // Para virar o lote antes da data (esgotou), troque para 1 ou 2.
   loteForcado: null
@@ -770,33 +751,53 @@ const CONFIG = {
   const lote = CONFIG.lotes[i];
   const prox = CONFIG.lotes[i + 1];
   const fmt = n => n.toLocaleString("pt-BR");
+  const ingressos = { vip: CONFIG.vip, profissional: lote.profissional, estudante: lote.estudante };
 
-  document.querySelectorAll("[data-lote-nome]").forEach(el => el.textContent = lote.nome);
-  document.querySelectorAll("[data-lote-fim]").forEach(el => el.textContent = lote.fimTexto);
-  document.querySelectorAll('[data-preco="profissional"]').forEach(el => el.textContent = fmt(lote.profissional));
-  document.querySelectorAll('[data-preco="estudante"]').forEach(el => el.textContent = fmt(lote.estudante));
-  const txt = document.querySelector('[data-lote-texto="profissional"]');
-  if (txt) txt.textContent = `${lote.nome} até ${lote.fimTexto} ou ${lote.vagas} lugares` + (prox ? ` · depois, R$ ${fmt(prox.profissional)}` : " · último lote");
-
-  // UTMs da página seguem para o checkout
-  const params = new URLSearchParams(location.search);
-  document.querySelectorAll("[data-checkout]").forEach(a => {
-    const base = (CONFIG.lotes[i].checkout || {})[a.dataset.checkout] || CONFIG.checkout[a.dataset.checkout];
-    if (!base) { a.addEventListener("click", e => { e.preventDefault(); alert("Prévia: link de checkout da Ticto ainda não configurado."); }); return; }
-    const url = new URL(base);
-    params.forEach((v, k) => { if (k.startsWith("utm_") || k === "src" || k === "fbclid") url.searchParams.set(k, v); });
-    a.href = url.toString();
-    a.addEventListener("click", () => window.fbq && fbq("track", "InitiateCheckout", { content_name: a.dataset.checkout }));
+  Object.entries(ingressos).forEach(([tipo, ing]) => {
+    document.querySelectorAll(`[data-parcela="${tipo}"]`).forEach(el => el.textContent = CONFIG.parcelas[ing.preco] || "");
+    document.querySelectorAll(`[data-preco="${tipo}"]`).forEach(el => el.textContent = fmt(ing.preco));
   });
-  if (CONFIG.whatsapp) document.querySelectorAll("[data-whatsapp]").forEach(a => {
-    a.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent("Olá, tenho uma dúvida sobre o Técnica & Testemunho.")}`;
+  ["profissional", "estudante"].forEach(tipo => {
+    const el = document.querySelector(`[data-lote-texto="${tipo}"]`);
+    if (!el) return;
+    const extra = tipo === "estudante" ? " · 40 lugares no total" : ` ou ${lote.vagas} lugares`;
+    el.textContent = `${lote.nome} até ${lote.fimTexto}${extra}` + (prox ? ` · próximo lote: R$ ${fmt(prox[tipo].preco)}` : "");
   });
 
-  // Pixel do Meta (só carrega com ID configurado)
+  // Pixel do Meta. Compra e checkout são enviados pela Ticto (Pixel + API de Conversões).
   if (CONFIG.pixelId) {
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq("init", CONFIG.pixelId); fbq("track", "PageView");
+    fbq("init", CONFIG.pixelId);
+    fbq("track", "PageView");
   }
+  const track = (...a) => window.fbq && fbq(...a);
+
+  // Links de checkout com UTMs repassadas
+  const params = new URLSearchParams(location.search);
+  document.querySelectorAll("[data-checkout]").forEach(a => {
+    const ing = ingressos[a.dataset.checkout];
+    const url = new URL(ing.checkout);
+    params.forEach((v, k) => { if (k.startsWith("utm_") || k === "src" || k === "sck" || k === "fbclid") url.searchParams.set(k, v); });
+    a.href = url.toString();
+    a.addEventListener("click", () => track("trackCustom", "CliqueCheckout", { ingresso: a.dataset.checkout, value: ing.preco, currency: "BRL" }));
+  });
+  document.querySelectorAll("[data-whatsapp]").forEach(a => {
+    a.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent("Olá, tenho uma dúvida sobre o Técnica & Testemunho.")}`;
+    a.target = "_blank"; a.rel = "noopener";
+  });
+
+  // ViewContent quando a seção de ingressos aparece
+  const secIngressos = document.getElementById("ingressos");
+  if ("IntersectionObserver" in window && secIngressos) {
+    const vc = new IntersectionObserver(es => { if (es[0].isIntersecting) { track("track", "ViewContent", { content_name: "Ingressos" }); vc.disconnect(); } }, { threshold: .25 });
+    vc.observe(secIngressos);
+  }
+
+  // Abas dos palestrantes
+  const abas = document.querySelectorAll(".aba");
+  abas.forEach(aba => aba.addEventListener("click", () => {
+    abas.forEach(a => { a.setAttribute("aria-selected", a === aba); document.getElementById(a.getAttribute("aria-controls")).hidden = a !== aba; });
+  }));
 
   // Revelação ao rolar
   const io = "IntersectionObserver" in window && new IntersectionObserver(es => es.forEach(e => {
