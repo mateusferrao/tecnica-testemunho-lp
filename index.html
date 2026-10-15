@@ -60,8 +60,6 @@
   }
   .btn:hover { background: #d8b67f; transform: translateY(-1px); }
   .btn:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--ouro); outline-offset: 3px; }
-  .preco-linha { font-size: 14px; color: var(--texto-suave); margin-top: 12px; }
-  .preco-linha strong { color: var(--ouro); font-weight: 600; }
 
   section { padding: 88px 0; }
   .claro { background: var(--creme); color: var(--tinta); }
@@ -70,7 +68,6 @@
 
   /* Topo */
   .barra-data { text-align: center; font: 500 13px/1.4 var(--corpo); letter-spacing: .06em; color: var(--cacau); background: var(--ouro); padding: 9px 16px; }
-  .publico { text-align: center; font-size: 13px; color: var(--texto-suave); padding: 10px 20px; margin: 0; border-bottom: 1px solid var(--linha-escura); }
 
   /* Hero */
   .hero { padding: 0 0 72px; }
@@ -107,29 +104,26 @@
   .claro .card p { color: var(--tinta-suave); }
   .card .palco-tag { font: 600 12px/1.4 var(--corpo); letter-spacing: .12em; text-transform: uppercase; color: var(--bronze); margin: 0 0 14px; }
   .topo-card { display: flex; gap: 14px; align-items: center; margin-bottom: 14px; }
-  .rosto { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; background: url(assets/key-visual.webp) no-repeat; background-size: 640% auto; }
-  .rosto.aline { background-position: 63% 33%; }
-  .rosto.gabriel { background-position: 39% 33%; }
-  .rosto.natalie { background-position: 9% 32%; }
-  .rosto.pamela { background-position: 93% 34%; }
+  .rosto { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; border: 1px dashed var(--bronze); background: var(--creme-2); display: grid; place-items: center; font: 600 11px/1 var(--corpo); letter-spacing: .1em; color: var(--bronze); }
   .card h3 { color: var(--tinta); }
   .card .prof { font-size: 14px; margin: 2px 0 0; }
   .card p { margin: 0 0 12px; }
   .claro .card .frase { font: italic 500 18px/1.4 var(--titulo); color: var(--tinta); }
-  .video-curto { margin-top: auto !important; padding: 12px 14px; border: 1px dashed rgba(107,74,50,.45); border-radius: 4px; font-size: 14px; }
-  .anfitria-tag { display: inline-block; font: 600 11px/1 var(--corpo); letter-spacing: .14em; text-transform: uppercase; color: var(--cacau); background: var(--ouro); padding: 5px 8px; border-radius: 3px; margin-bottom: 6px; }
+    .anfitria-tag { display: inline-block; font: 600 11px/1 var(--corpo); letter-spacing: .14em; text-transform: uppercase; color: var(--cacau); background: var(--ouro); padding: 5px 8px; border-radius: 3px; margin-bottom: 6px; }
 
   /* Âncora */
   .ancora { text-align: center; }
   .total { font: 600 clamp(40px, 7vw, 68px)/1 var(--titulo); color: var(--ouro); margin: 22px 0 6px; }
   .lista-cursos { list-style: none; padding: 0; margin: 32px auto 28px; max-width: 620px; text-align: left; }
-  .lista-cursos li { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--linha-escura); font-size: 16px; }
+  .lista-cursos li { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--linha-clara); font-size: 16px; }
+  .claro .total { color: var(--bronze); }
   .lista-cursos small { display: block; color: var(--texto-suave); font-size: 14px; }
-  .lista-cursos li > span:last-child { white-space: nowrap; }
+  .lista-cursos li > span:last-child { text-align: right; color: var(--tinta-suave); }
 
   /* Depoimentos: faixa rolável */
   .depos { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; margin-top: 28px; }
-  .depo { flex: 0 0 220px; aspect-ratio: 9 / 14; scroll-snap-align: start; color: var(--bronze); background: var(--creme-2); border-radius: 6px; font-size: 14px; }
+  .depo { flex: 0 0 220px; aspect-ratio: 9 / 16; scroll-snap-align: start; color: var(--texto-suave); background: var(--cacau-2); border-radius: 6px; font-size: 14px; }
+  .depo b { display: block; color: var(--texto); font: 500 17px/1.3 var(--titulo); margin-bottom: 10px; }
 
   /* Ingressos */
   .ingressos { text-align: center; padding-top: 96px; }
@@ -154,10 +148,12 @@
   .inclui li.nao::before { content: "–"; color: rgba(196,177,156,.6); }
   .aviso { font-size: 13px; color: var(--texto-suave); margin: 14px 0 0; }
 
-  /* Aline */
-  .foto-aline { aspect-ratio: 4 / 5; color: var(--bronze); background: var(--creme-2); border-radius: 6px; font-size: 15px; line-height: 1.6; }
-  .conheca h2 { margin-bottom: 18px; }
-  .claro .abre { font: italic 500 21px/1.4 var(--titulo); color: var(--tinta); }
+  /* Como é o dia */
+  .agenda { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--linha-clara); }
+  .agenda li { display: grid; grid-template-columns: 76px 1fr; gap: 16px; padding: 15px 0; border-bottom: 1px solid var(--linha-clara); color: var(--tinta); font-size: 17px; }
+  .agenda time { font: 600 17px/1.5 var(--titulo); color: var(--bronze); }
+  .agenda small { display: block; font-size: 14px; color: var(--tinta-suave); margin-top: 2px; }
+  .agenda .vip-linha { background: rgba(201,164,106,.16); padding-left: 12px; padding-right: 12px; margin: 0 -12px; }
 
   /* Garantia */
   .garantia { padding: 64px 0; }
@@ -213,7 +209,6 @@
 <body>
 
 <div class="barra-data">Sábado, 14 de novembro · Hotel Ouro Minas · Belo Horizonte</div>
-<p class="publico">Para biomédicos, cirurgiões-dentistas, médicos e estudantes de graduação da área</p>
 
 <!-- 1. Hero -->
 <header class="hero">
@@ -233,7 +228,6 @@
     <p class="sub">Um congresso de um dia com palestras 100% demonstrativas. Depois de cada técnica, quem acabou de aplicá-la conta como a fé sustentou a própria carreira.</p>
     <p class="assinatura">Onde a fé inspira e a técnica transforma.</p>
     <a class="btn" href="#ingressos">Garantir meu ingresso</a>
-    <p class="preco-linha">Profissional por <strong>12x de R$ <span data-parcela="profissional"></span></strong> · <span data-lote-nome>1º lote</span> até <span data-lote-fim>25/10</span></p>
   </div>
 </header>
 
@@ -283,66 +277,61 @@
     <div class="cards">
       <article class="card">
         <p class="palco-tag">No palco: full face ao vivo</p>
-        <div class="topo-card"><div class="rosto aline" role="img" aria-label="Aline Filgueiras"></div><div><span class="anfitria-tag">Anfitriã</span><h3>Aline Filgueiras</h3><p class="prof">Biomédica</p></div></div>
+        <div class="topo-card"><div class="rosto" title="FALTA: foto de Aline Filgueiras">FOTO</div><div><span class="anfitria-tag">Anfitriã</span><h3>Aline Filgueiras</h3><p class="prof">Biomédica</p></div></div>
         <p>Ensina harmonização facial com foco em anatomia. Estudou em dissecção fresh frozen nos Estados Unidos e em cursos de anatomia na Europa.</p>
         <p class="frase"><span class="falta">FALTA: linha de testemunho da Aline</span></p>
-        <p class="video-curto"><span class="falta">FALTA: vídeo de 30 a 60 s da Aline ensinando</span></p>
       </article>
       <article class="card">
         <p class="palco-tag">No palco: <span class="falta">FALTA: área ou técnica do Gabriel</span></p>
-        <div class="topo-card"><div class="rosto gabriel" role="img" aria-label="Gabriel Magalhães"></div><div><h3>Gabriel Magalhães</h3><p class="prof">Biomédico</p></div></div>
+        <div class="topo-card"><div class="rosto" title="FALTA: foto de Gabriel Magalhães">FOTO</div><div><h3>Gabriel Magalhães</h3><p class="prof">Biomédico</p></div></div>
         <p>Há 15 anos na harmonização facial e corporal. CEO do TopFit Group e fundador da TopFit Academy, que diz ter <span class="falta">CONFIRMAR: mais de 5.000 alunos</span>.</p>
         <p class="frase">“Nunca foi sorte, sempre foi Deus.” <span class="falta">FALTA: ok</span></p>
-        <p class="video-curto"><span class="falta">FALTA: vídeo de 30 a 60 s do Gabriel ensinando</span></p>
       </article>
       <article class="card">
         <p class="palco-tag">No palco: nariz <span class="falta">CONFIRMAR</span></p>
-        <div class="topo-card"><div class="rosto natalie" role="img" aria-label="Natalie Rodrigues"></div><div><h3>Natalie Rodrigues</h3><p class="prof">Cirurgiã-dentista e médica</p></div></div>
+        <div class="topo-card"><div class="rosto" title="FALTA: foto de Natalie Rodrigues">FOTO</div><div><h3>Natalie Rodrigues</h3><p class="prof">Cirurgiã-dentista e médica</p></div></div>
         <p>Criou a técnica Nariz Perfeito, publicada em artigo científico em 2021 (DOI 10.24077/2021276067). Atende em Belo Horizonte, São Paulo e Boston.</p>
         <p class="frase"><span class="falta">FALTA: linha de testemunho da Natalie</span></p>
-        <p class="video-curto"><span class="falta">FALTA: vídeo de 30 a 60 s da Natalie ensinando</span></p>
       </article>
       <article class="card">
         <p class="palco-tag">No palco: Posicionamento Facial® <span class="falta">CONFIRMAR</span></p>
-        <div class="topo-card"><div class="rosto pamela" role="img" aria-label="Pamela Soares"></div><div><h3>Pamela Soares</h3><p class="prof">Biomédica</p></div></div>
+        <div class="topo-card"><div class="rosto" title="FALTA: foto de Pamela Soares">FOTO</div><div><h3>Pamela Soares</h3><p class="prof">Biomédica</p></div></div>
         <p>Biomédica desde 2015 e fundadora da IPS Clinic, que tem três unidades em São Paulo. Criou o Posicionamento Facial®.</p>
         <p class="frase">“Comecei com uma maca e R$ 7 mil de dívida.” <span class="falta">FALTA: ok</span></p>
-        <p class="video-curto"><span class="falta">FALTA: vídeo de 30 a 60 s da Pamela ensinando</span></p>
       </article>
     </div>
-    <p style="margin-top:18px;font-size:14px"><span class="falta">FALTA: foto individual quadrada de cada palestrante (mínimo 600 x 600 px). Os rostos atuais são recortes do pôster e ficam borrados</span></p>
+    <p style="margin-top:18px;font-size:14px"><span class="falta">FALTA: foto de perfil de cada palestrante, quadrada, mínimo 600 x 600 px, rosto centralizado, fundo neutro</span></p>
   </div>
 </section>
 
-<!-- 5. Âncora -->
-<section class="ancora">
+<!-- 5. Vídeos dos palestrantes -->
+<section>
+  <div class="wrap">
+    <p class="rotulo">Antes do palco</p>
+    <h2>Veja cada um deles ensinando.</h2>
+    <div class="depos">
+      <div class="vaga depo"><span><b>Aline Filgueiras</b><br><span class="falta">FALTA: vídeo vertical de 30 a 60 s dando aula</span></span></div>
+      <div class="vaga depo"><span><b>Gabriel Magalhães</b><br><span class="falta">FALTA: vídeo vertical de 30 a 60 s dando aula</span></span></div>
+      <div class="vaga depo"><span><b>Natalie Rodrigues</b><br><span class="falta">FALTA: vídeo vertical de 30 a 60 s dando aula</span></span></div>
+      <div class="vaga depo"><span><b>Pamela Soares</b><br><span class="falta">FALTA: vídeo vertical de 30 a 60 s dando aula</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Âncora -->
+<section class="claro ancora">
   <div class="wrap">
     <h2>Quanto custaria fazer o curso de cada um deles separadamente?</h2>
     <p class="total">Mais de R$ 20 mil</p>
-    <p style="color:var(--texto-suave)">somando um curso de cada palestrante</p>
+    <p>somando um curso de cada palestrante</p>
     <ul class="lista-cursos">
-      <li><span>Aline Filgueiras<small><span class="falta">FALTA: curso presencial</span></small></span><span class="falta">FALTA</span></li>
-      <li><span>Gabriel Magalhães<small>Imersão em Preenchedores Corporais</small></span><span class="falta">FALTA: preço</span></li>
-      <li><span>Natalie Rodrigues<small>Nariz Perfeito</small></span><span>R$ 1.997</span></li>
-      <li><span>Pamela Soares<small>Na Prática 2.0</small></span><span>R$ 2.997</span></li>
-      <li><span><span class="falta">FALTA: demais itens até fechar R$ 20 mil</span></span><span></span></li>
+      <li><span>Aline Filgueiras</span><span><span class="falta">FALTA: nome do curso presencial</span></span></li>
+      <li><span>Gabriel Magalhães</span><span>Imersão em Preenchedores Corporais</span></li>
+      <li><span>Natalie Rodrigues</span><span>Nariz Perfeito</span></li>
+      <li><span>Pamela Soares</span><span>Na Prática 2.0</span></li>
     </ul>
     <p style="max-width:600px;margin:0 auto 28px;font-size:18px">No Técnica &amp; Testemunho, você aprende com os quatro em um único dia, no ambiente certo, com as pessoas certas.</p>
     <a class="btn" href="#ingressos">Ver ingressos</a>
-  </div>
-</section>
-
-<!-- 6. Depoimentos -->
-<section class="claro">
-  <div class="wrap">
-    <p class="rotulo">Quem já aprendeu com eles</p>
-    <h2>Vou deixar que eles falem por mim:</h2>
-    <p style="margin-top:8px">Aline Filgueiras</p>
-    <div class="depos">
-      <div class="vaga depo"><span class="falta">FALTA: depoimento em vídeo de aluno (sem resultado em paciente)</span></div>
-      <div class="vaga depo"><span class="falta">FALTA: depoimento em vídeo de aluno</span></div>
-      <div class="vaga depo"><span class="falta">FALTA: depoimento em vídeo de aluno</span></div>
-    </div>
   </div>
 </section>
 
@@ -418,19 +407,24 @@
   </div>
 </section>
 
-<!-- 8. Aline + garantia -->
-<section class="claro conheca">
-  <div class="wrap duas centro-v">
-    <div class="vaga foto-aline"><span class="falta">FALTA: foto individual da Aline, vertical 4:5 (mínimo 1000 x 1250 px), de preferência em ação (dando aula, de jaleco ou na dissecção), luz natural, sem texto por cima</span></div>
+<!-- 8. Como é o dia -->
+<section class="claro" id="programacao">
+  <div class="wrap duas">
     <div>
-      <p class="rotulo">Anfitriã</p>
-      <h2>Conheça Aline Filgueiras</h2>
-      <p class="abre"><span class="falta">FALTA: frase de abertura da história da Aline</span></p>
-      <p>Biomédica, Aline fez da anatomia o centro do que ensina em harmonização facial. Estudou em dissecção fresh frozen nos Estados Unidos e em cursos de anatomia na Europa.</p>
-      <p>Hoje forma profissionais na Filgueiras Academy, com mais de 70 horas de aulas de harmonização facial, e já formou <span class="falta">FALTA: nº de alunos</span>. São <span class="falta">CONFIRMAR: mais de 11 anos</span> de profissão.</p>
-      <p><span class="falta">FALTA: por que ela criou o Técnica &amp; Testemunho e o que a fé representa na carreira dela</span></p>
-      <p style="margin:0">No palco do Técnica &amp; Testemunho, ela faz um full face ao vivo.</p>
+      <p class="rotulo">Sábado, 14 de novembro</p>
+      <h2>Como é o dia</h2>
+      <p style="margin-top:16px">Um dia inteiro no Hotel Ouro Minas, em Belo Horizonte. Se você vem de fora, conte com o credenciamento às 8h30 e o encerramento às 18h30 (19h45 no VIP) para marcar passagem e hospedagem.</p>
+      <p style="font-size:14px">Horários estimados, sujeitos a ajuste. A programação final chega por e-mail e WhatsApp antes do evento.</p>
     </div>
+    <ol class="agenda">
+      <li><time>8h30</time><span>Credenciamento<small>VIP com entrada separada. Leve documento com foto.</small></span></li>
+      <li><time>9h</time><span>Abertura com Aline Filgueiras</span></li>
+      <li><time>Manhã</time><span>Duas palestras: técnica ao vivo e testemunho<small><span class="falta">A DEFINIR: ordem dos palestrantes</span></small></span></li>
+      <li><time>13h</time><span>Almoço<small>Até 14h30. Não incluso no Profissional e no Estudante.</small></span></li>
+      <li><time>Tarde</time><span>Duas palestras: técnica ao vivo e testemunho</span></li>
+      <li><time>18h30</time><span>Encerramento</span></li>
+      <li class="vip-linha"><time>18h45</time><span>Encontro VIP com Aline e palestrantes<small>Até 19h45, só para o ingresso VIP. <span class="falta">CONFIRMAR</span></small></span></li>
+    </ol>
   </div>
 </section>
 
