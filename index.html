@@ -136,8 +136,13 @@
     scrollbar-width: none;
   }
   .depos::-webkit-scrollbar { display: none; }
-  .depo { flex: 0 0 72%; max-width: 280px; margin: 0; scroll-snap-align: start; }
+  .depo { position: relative; flex: 0 0 72%; max-width: 280px; margin: 0; scroll-snap-align: start; }
   .depo video { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; background: var(--cacau-2); border-radius: 6px; }
+  .depo .som { position: absolute; left: 0; right: 0; top: 0; aspect-ratio: 9 / 16; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 6px; }
+  .depo .som span { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: rgba(28,18,12,.72); color: var(--texto); }
+  .depo .som svg { width: 18px; height: 18px; }
+  .depo .som .ligado, .depo.com-som .som .mudo { display: none; }
+  .depo.com-som .som .ligado { display: block; }
   .depo figcaption { margin-top: 10px; color: var(--texto); font: 500 17px/1.3 var(--titulo); }
 
   /* Ingressos */
@@ -336,10 +341,10 @@
     <p class="rotulo">Antes do palco</p>
     <h2>Veja cada um deles ensinando.</h2>
     <div class="depos">
-      <figure class="depo"><video controls playsinline preload="none" poster="assets/videos/aline.jpg"><source src="assets/videos/aline.mp4" type="video/mp4"></video><figcaption>Dra. Aline Filgueiras</figcaption></figure>
-      <figure class="depo"><video controls playsinline preload="none" poster="assets/videos/gabriel.jpg"><source src="assets/videos/gabriel.mp4" type="video/mp4"></video><figcaption>Dr. Gabriel Magalhães</figcaption></figure>
-      <figure class="depo"><video controls playsinline preload="none" poster="assets/videos/natalie.jpg"><source src="assets/videos/natalie.mp4" type="video/mp4"></video><figcaption>Dra. Natalie Rodrigues</figcaption></figure>
-      <figure class="depo"><video controls playsinline preload="none" poster="assets/videos/pamela.jpg"><source src="assets/videos/pamela.mp4" type="video/mp4"></video><figcaption>Dra. Pamela Soares</figcaption></figure>
+      <figure class="depo"><video muted loop playsinline preload="none" poster="assets/videos/aline.jpg"><source src="assets/videos/aline.mp4" type="video/mp4"></video><button class="som" type="button" aria-label="Ativar o som" aria-pressed="false"><span><svg class="mudo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6M17 9l6 6"/></svg><svg class="ligado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></span></button><figcaption>Dra. Aline Filgueiras</figcaption></figure>
+      <figure class="depo"><video muted loop playsinline preload="none" poster="assets/videos/gabriel.jpg"><source src="assets/videos/gabriel.mp4" type="video/mp4"></video><button class="som" type="button" aria-label="Ativar o som" aria-pressed="false"><span><svg class="mudo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6M17 9l6 6"/></svg><svg class="ligado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></span></button><figcaption>Dr. Gabriel Magalhães</figcaption></figure>
+      <figure class="depo"><video muted loop playsinline preload="none" poster="assets/videos/natalie.jpg"><source src="assets/videos/natalie.mp4" type="video/mp4"></video><button class="som" type="button" aria-label="Ativar o som" aria-pressed="false"><span><svg class="mudo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6M17 9l6 6"/></svg><svg class="ligado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></span></button><figcaption>Dra. Natalie Rodrigues</figcaption></figure>
+      <figure class="depo"><video muted loop playsinline preload="none" poster="assets/videos/pamela.jpg"><source src="assets/videos/pamela.mp4" type="video/mp4"></video><button class="som" type="button" aria-label="Ativar o som" aria-pressed="false"><span><svg class="mudo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6M17 9l6 6"/></svg><svg class="ligado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></span></button><figcaption>Dra. Pamela Soares</figcaption></figure>
     </div>
   </div>
 </section>
@@ -583,9 +588,26 @@ const CONFIG = {
   tick();
   relogio = setInterval(tick, 1000);
 
-  // Só um vídeo de palestrante tocando por vez.
-  const depos = document.querySelectorAll(".depo video");
-  depos.forEach(v => v.addEventListener("play", () => depos.forEach(o => { if (o !== v) o.pause(); })));
+  // Vídeos dos palestrantes: rodam em loop sem som; o toque liga ou desliga o som (um com som por vez).
+  // Fora da tela eles param, só para não gastar dados; voltam a rodar ao aparecer.
+  const depos = [...document.querySelectorAll(".depo")];
+  const somDe = (fig, ligado) => {
+    const v = fig.querySelector("video"), b = fig.querySelector(".som");
+    v.muted = !ligado;
+    fig.classList.toggle("com-som", ligado);
+    b.setAttribute("aria-pressed", String(ligado));
+    b.setAttribute("aria-label", ligado ? "Desativar o som" : "Ativar o som");
+  };
+  depos.forEach(fig => fig.querySelector(".som").addEventListener("click", () => {
+    const ligar = !fig.classList.contains("com-som");
+    depos.forEach(o => somDe(o, false));
+    if (ligar) { somDe(fig, true); fig.querySelector("video").play().catch(() => {}); }
+  }));
+  const roda = v => v.play().catch(() => {});
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? roda(e.target) : e.target.pause()), { threshold: .25 });
+    depos.forEach(fig => io.observe(fig.querySelector("video")));
+  } else depos.forEach(fig => roda(fig.querySelector("video")));
 
   // Pixel do Meta. Compra e checkout são enviados pela Ticto (Pixel + API de Conversões).
   if (CONFIG.pixelId) {
