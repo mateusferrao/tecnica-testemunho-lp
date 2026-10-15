@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Compra recebida · Técnica & Testemunho</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Playfair+Display:wght@400;500;600&family=Cormorant+Garamond:ital,wght@1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cacau: #1c120c; --cacau-2: #2a1b12; --cacau-3: #3a2619;
+    --ouro: #c9a46a; --ouro-claro: #ecd3a2; --ouro-fundo: #8a6a3e;
+    --creme: #f5ece0; --tinta: #2b1d14; --tinta-suave: #5e4a3c;
+    --texto: #efe3d3; --texto-suave: #c4b19c; --linha: rgba(201,164,106,.28);
+    --display: "Playfair Display", Georgia, serif; --logo: "Cinzel", Georgia, serif;
+    --italico: "Cormorant Garamond", Georgia, serif; --corpo: "Jost", "Helvetica Neue", sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--cacau); color: var(--texto); font: 400 17px/1.65 var(--corpo); overflow-x: hidden; }
+  a { color: inherit; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  h1, h2 { font-family: var(--display); font-weight: 500; margin: 0; }
+  p { margin: 0 0 1em; }
+  .falta { font: 500 .78em/1.4 var(--corpo); color: #3b2400; background: repeating-linear-gradient(-45deg, #f3c56b, #f3c56b 6px, #f7d68e 6px, #f7d68e 12px); padding: .1em .45em; border-radius: 3px; }
+
+  .faixa { background: linear-gradient(90deg, #a47c43, #e6c78c, #a47c43); color: var(--cacau); text-align: center; font: 600 12px/1 var(--corpo); letter-spacing: .28em; padding: 11px 16px; }
+
+  .topo {
+    text-align: center; padding: 72px 0 64px;
+    background: radial-gradient(80% 70% at 50% 0%, rgba(201,164,106,.24), transparent 70%);
+  }
+  .selo {
+    width: 76px; height: 76px; margin: 0 auto 26px; border-radius: 50%;
+    display: grid; place-items: center;
+    border: 1px solid var(--ouro); color: var(--ouro-claro); font-size: 34px;
+    background: radial-gradient(circle, rgba(201,164,106,.18), transparent 70%);
+    animation: surgir .9s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .marca { font: 500 13px/1.3 var(--logo); letter-spacing: .34em; color: var(--ouro); margin-bottom: 18px; }
+  .topo h1 {
+    font-size: clamp(32px, 6vw, 50px); line-height: 1.12;
+    background: linear-gradient(180deg, #fbf1de 0%, #ecd3a2 55%, #c9a46a 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .topo .sub { margin: 20px auto 0; max-width: 560px; font-size: 18px; color: var(--texto-suave); }
+
+  section { padding: 64px 0; }
+  .eyebrow { font: 500 12px/1.4 var(--corpo); letter-spacing: .32em; text-transform: uppercase; color: var(--ouro); }
+  .regua { width: 64px; height: 1px; border: 0; margin: 18px 0 24px; background: linear-gradient(90deg, var(--ouro), transparent); }
+  h2 { font-size: clamp(26px, 4vw, 36px); line-height: 1.18; }
+
+  .passos { list-style: none; padding: 0; margin: 0; counter-reset: p; display: grid; gap: 2px; }
+  .passos li { counter-increment: p; position: relative; padding: 24px 22px 22px 76px; background: linear-gradient(135deg, var(--cacau-2), var(--cacau-3)); border: 1px solid var(--linha); }
+  .passos li::before { content: counter(p); position: absolute; left: 24px; top: 20px; font: 500 34px/1 var(--display); color: var(--ouro); }
+  .passos b { display: block; font: 500 19px/1.3 var(--display); color: var(--creme); margin-bottom: 4px; }
+  .passos p { margin: 0; color: var(--texto-suave); font-size: 16px; }
+
+  .claro { background: var(--creme); color: var(--tinta); }
+  .claro .eyebrow { color: var(--ouro-fundo); }
+  .claro .regua { background: linear-gradient(90deg, var(--ouro-fundo), transparent); }
+  .info { margin: 0; border-top: 1px solid rgba(138,106,62,.35); }
+  .info div { display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(138,106,62,.35); }
+  .info dt { font: 600 12px/1.6 var(--corpo); letter-spacing: .16em; text-transform: uppercase; color: var(--ouro-fundo); }
+  .info dd { margin: 0; color: var(--tinta); }
+  .info dd small { display: block; color: var(--tinta-suave); font-size: 14px; }
+  .agenda-btn { margin-top: 26px; }
+
+  .btn {
+    display: inline-block; padding: 18px 30px;
+    font: 600 14px/1.25 var(--corpo); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; text-align: center;
+    color: var(--cacau); background: linear-gradient(135deg, #f1d9a6 0%, #c9a46a 45%, #a47c43 100%);
+    border-radius: 2px; box-shadow: 0 10px 30px -10px rgba(201,164,106,.55), inset 0 1px 0 rgba(255,255,255,.45);
+    transition: transform .25s ease, filter .25s ease;
+  }
+  .btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+  .btn-linha { color: var(--ouro-fundo); background: transparent; border: 1px solid var(--ouro-fundo); box-shadow: none; }
+  .btn:focus-visible { outline: 2px solid var(--ouro-claro); outline-offset: 3px; }
+
+  .duvida { text-align: center; }
+  .duvida .regua { margin-left: auto; margin-right: auto; background: linear-gradient(90deg, transparent, var(--ouro), transparent); }
+  .duvida p { color: var(--texto-suave); max-width: 520px; margin: 0 auto 28px; }
+  .assinatura { font: italic 500 clamp(22px, 3vw, 28px)/1.3 var(--italico); color: var(--ouro-claro); margin-top: 48px; }
+
+  footer { padding: 32px 0 44px; text-align: center; font-size: 13px; color: var(--texto-suave); border-top: 1px solid var(--linha); }
+  .miudo { font-size: 14px; color: var(--tinta-suave); margin-top: 24px; }
+
+  @keyframes surgir { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: none; } }
+  @media (max-width: 480px) {
+    .info div { grid-template-columns: 1fr; gap: 2px; }
+    section { padding: 52px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="faixa">14 DE NOVEMBRO NO HOTEL OURO MINAS · BH</div>
+
+<header class="topo">
+  <div class="wrap">
+    <div class="selo" aria-hidden="true">✓</div>
+    <p class="marca">TÉCNICA &amp; TESTEMUNHO</p>
+    <h1>Sua compra foi recebida. Nos vemos no dia 14 de novembro.</h1>
+    <p class="sub">Assim que o pagamento for aprovado, o seu ingresso com QR Code chega no e-mail que você usou na compra.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Próximos passos</p>
+    <hr class="regua">
+    <h2 style="margin-bottom:28px">O que fazer agora</h2>
+    <ol class="passos">
+      <li><b>Confira seu e-mail</b><p>O ingresso com QR Code chega depois da aprovação do pagamento. Se não aparecer na caixa de entrada, olhe o spam e a aba Promoções.</p></li>
+      <li><b>Comprou o ingresso Estudante?</b><p>Envie o comprovante de matrícula em graduação pelo WhatsApp. Ele também é conferido no credenciamento.</p></li>
+      <li><b>Salve a data</b><p>Coloque o evento na sua agenda e, se vem de fora de BH, já organize passagem e hospedagem.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="claro">
+  <div class="wrap">
+    <p class="eyebrow">Informações principais</p>
+    <hr class="regua">
+    <h2 style="margin-bottom:28px">Anote aí</h2>
+    <dl class="info">
+      <div><dt>Data</dt><dd>Sábado, 14 de novembro de 2026</dd></div>
+      <div><dt>Local</dt><dd>Hotel Ouro Minas<small>Av. Cristiano Machado, 4001, Ipiranga, Belo Horizonte (MG)</small></dd></div>
+      <div><dt>Horários</dt><dd>Credenciamento a partir das 8h30 · início às 9h<small>Almoço das 13h às 14h30 · encerramento às 18h30 · Encontro VIP das 18h45 às 19h45 <span class="falta">CONFIRMAR</span>. Horários estimados, sujeitos a ajuste.</small></dd></div>
+      <div><dt>Leve</dt><dd>Documento com foto e o QR Code do ingresso<small>No ingresso Estudante, leve também o comprovante de matrícula.</small></dd></div>
+      <div><dt>Almoço</dt><dd>Não está incluído nos ingressos Profissional e Estudante<small>O hotel e a região têm opções de restaurante. No VIP, o almoço é em área reservada. <span class="falta">CONFIRMAR</span></small></dd></div>
+      <div><dt>Ingresso</dt><dd>Nominal e intransferível<small>O credenciamento confere nome e documento.</small></dd></div>
+      <div><dt>Programação</dt><dd>A programação final chega por e-mail e WhatsApp antes do evento</dd></div>
+    </dl>
+    <a class="btn btn-linha agenda-btn" target="_blank" rel="noopener"
+       href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=T%C3%A9cnica%20%26%20Testemunho%20%C2%B7%20Congresso%20de%20Harmoniza%C3%A7%C3%A3o%20Facial&dates=20261114T113000Z/20261114T213000Z&location=Hotel%20Ouro%20Minas%2C%20Av.%20Cristiano%20Machado%2C%204001%2C%20Belo%20Horizonte%20-%20MG&details=Credenciamento%20a%20partir%20das%208h30.%20Leve%20documento%20com%20foto%20e%20o%20QR%20Code%20do%20ingresso.">Adicionar à minha agenda</a>
+    <p class="miudo">Precisa cancelar? Você pode pedir o reembolso em até 7 dias depois da compra, desde que o pedido chegue até 48 horas antes do evento.</p>
+  </div>
+</section>
+
+<section class="duvida">
+  <div class="wrap">
+    <p class="eyebrow">Atendimento</p>
+    <hr class="regua">
+    <h2 style="margin-bottom:18px">Ficou com alguma dúvida?</h2>
+    <p>Manda uma mensagem para a gente no WhatsApp. A equipe do Técnica &amp; Testemunho responde por lá.</p>
+    <a class="btn" data-whatsapp href="https://wa.me/5531953491799" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    <p class="assinatura">Onde a fé inspira e a técnica transforma.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Técnica &amp; Testemunho · Todos os direitos reservados</p>
+  </div>
+</footer>
+
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1041423195618484&ev=PageView&noscript=1"></noscript>
+<script>
+  // A compra (Purchase) é enviada pela Ticto. Aqui só o PageView, para não duplicar.
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq("init", "1041423195618484");
+  fbq("track", "PageView");
+  document.querySelectorAll("[data-whatsapp]").forEach(a => {
+    a.href = "https://wa.me/5531953491799?text=" + encodeURIComponent("Olá, comprei meu ingresso para o Técnica & Testemunho e tenho uma dúvida.");
+  });
+</script>
+</body>
+</html>
