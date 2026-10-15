@@ -82,6 +82,10 @@
   .hero h1 { font-size: clamp(32px, 5.4vw, 56px); line-height: 1.08; color: #f6e8cf; }
   .hero .sub { margin: 20px auto 0; max-width: 620px; font-size: clamp(17px, 2vw, 19px); color: var(--texto); }
   .assinatura { font: italic 500 18px/1.4 var(--titulo); color: var(--ouro); margin: 14px 0 28px; }
+  .contador-hero { margin: 14px 0 0; font-size: 14px; color: var(--texto-suave); }
+  .contador-hero b { color: var(--ouro); font-weight: 600; }
+  [data-contador] { font-variant-numeric: tabular-nums lining-nums; }
+  .selo [data-contador] { text-transform: none; letter-spacing: .04em; }
 
   /* Dor */
   .dores { list-style: none; padding: 0; margin: 0; }
@@ -246,6 +250,7 @@
     <p class="sub">Quatro referências fazem ao vivo a técnica que as tornou reconhecidas e contam, no mesmo palco, o que nenhum post mostra: os começos difíceis e a fé que as sustentou.</p>
     <p class="assinatura">Onde a fé inspira e a técnica transforma.</p>
     <a class="btn" href="#ingressos">Garantir meu ingresso</a>
+    <p class="contador-hero"><span data-contador-rotulo>O valor sobe em</span> <b data-contador>25/10</b></p>
   </div>
 </header>
 
@@ -386,7 +391,7 @@
       </article>
 
       <article class="plano">
-        <span class="selo lote"><span data-lote-nome>1º lote</span> termina <span data-lote-fim>25/10</span></span>
+        <span class="selo lote"><span data-lote-nome>1º lote</span> termina em <span data-contador>25/10</span></span>
         <h3>Profissional</h3>
         <p class="desc">Acesso completo ao dia para profissionais habilitados em harmonização facial.</p>
         <p class="por">Por 12x de</p>
@@ -406,7 +411,7 @@
       </article>
 
       <article class="plano">
-        <span class="selo lote"><span data-lote-nome>1º lote</span> termina <span data-lote-fim>25/10</span></span>
+        <span class="selo lote"><span data-lote-nome>1º lote</span> termina em <span data-contador>25/10</span></span>
         <h3>Estudante</h3>
         <p class="desc">Exclusivo para graduação, com matrícula ativa na data do evento. Não vale para pós-graduação.</p>
         <p class="por">Por 12x de</p>
@@ -496,7 +501,7 @@
 
 <!-- Barra fixa de compra (celular) -->
 <div class="fixa">
-  <div class="info"><span data-lote-nome>1º lote</span> termina<strong><span data-lote-fim>25/10</span></strong></div>
+  <div class="info"><span data-lote-nome>1º lote</span> termina em<strong data-contador>25/10</strong></div>
   <a class="btn" href="#ingressos">Garantir ingresso</a>
 </div>
 
@@ -554,6 +559,31 @@ const CONFIG = {
     const vagas = "Vagas limitadas";
     el.textContent = vagas + (prox ? ` · depois, R$ ${fmt(prox[tipo].preco)}` : "");
   });
+
+  // Countdown até o fim do lote vigente (d/h/min). Ao zerar, recarrega já no lote seguinte.
+  const fim = new Date(lote.fim);
+  const contadores = document.querySelectorAll("[data-contador]");
+  if (!prox) document.querySelectorAll("[data-contador-rotulo]").forEach(el => el.textContent = "As vendas encerram em");
+  const dois = n => String(n).padStart(2, "0");
+  const formata = ms => {
+    const min = Math.floor(ms / 60000);
+    const d = Math.floor(min / 1440), h = Math.floor(min / 60) % 24, m = min % 60;
+    return (d ? `${d}d ` : "") + `${dois(h)}h ${dois(m)}m`;
+  };
+  let relogio;
+  const tick = () => {
+    const falta = fim - new Date();
+    if (falta <= 0) {
+      clearInterval(relogio);
+      if (prox && CONFIG.loteForcado == null) { location.reload(); return; }
+      document.querySelectorAll(".contador-hero").forEach(el => el.hidden = true);
+      contadores.forEach(el => el.textContent = lote.fimTexto);
+      return;
+    }
+    contadores.forEach(el => el.textContent = formata(falta));
+  };
+  tick();
+  relogio = setInterval(tick, 30000);
 
   // Pixel do Meta. Compra e checkout são enviados pela Ticto (Pixel + API de Conversões).
   if (CONFIG.pixelId) {
