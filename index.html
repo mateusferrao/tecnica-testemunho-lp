@@ -100,7 +100,7 @@
   .passos b { display: block; color: var(--texto); font-weight: 600; margin-bottom: 2px; }
   .passos p { margin: 0; color: var(--texto-suave); }
   .fonte { font: italic 500 21px/1.3 var(--titulo); color: var(--texto); margin-bottom: 26px; }
-  .midia-ao-vivo { aspect-ratio: 4 / 5; color: var(--texto-suave); background: var(--cacau-2); border-radius: 6px; }
+  .midia-ao-vivo { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--cacau-2); border-radius: 6px; }
 
   /* Palestrantes */
   .cards { display: grid; gap: 18px; margin-top: 36px; }
@@ -108,11 +108,12 @@
   .claro .card p { color: var(--tinta-suave); }
   .card .palco-tag { font: 600 12px/1.4 var(--corpo); letter-spacing: .12em; text-transform: uppercase; color: var(--bronze); margin: 0 0 14px; }
   .topo-card { display: flex; gap: 14px; align-items: center; margin-bottom: 14px; }
-  .rosto { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; border: 1px dashed var(--bronze); background: var(--creme-2); display: grid; place-items: center; font: 600 11px/1 var(--corpo); letter-spacing: .1em; color: var(--bronze); }
+  .rosto { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; object-fit: cover; background: var(--creme-2); }
   .card h3 { color: var(--tinta); }
   .card .prof { font-size: 14px; margin: 2px 0 0; }
   .card p { margin: 0 0 12px; }
   .claro .card .frase { font: italic 500 18px/1.4 var(--titulo); color: var(--tinta); }
+  .card .frase small { display: block; margin-top: 6px; font: 500 12px/1.4 var(--corpo); letter-spacing: .08em; text-transform: uppercase; color: var(--bronze); }
   .selos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 4px 0 14px; padding-bottom: 14px; border-bottom: 1px solid var(--linha-clara); }
   .selos b { display: block; font: 600 26px/1.1 var(--titulo); color: var(--bronze); }
   .selos span { display: block; font-size: 12px; line-height: 1.35; color: var(--tinta-suave); margin-top: 4px; }
@@ -135,9 +136,9 @@
     scrollbar-width: none;
   }
   .depos::-webkit-scrollbar { display: none; }
-  .depo { flex: 0 0 72%; max-width: 280px; aspect-ratio: 9 / 16; scroll-snap-align: start; color: var(--texto-suave); background: var(--cacau-2); border-radius: 6px; font-size: 14px; padding: 16px; }
-  .depo .falta { display: inline-block; max-width: 100%; }
-  .depo b { display: block; color: var(--texto); font: 500 17px/1.3 var(--titulo); margin-bottom: 10px; }
+  .depo { flex: 0 0 72%; max-width: 280px; margin: 0; scroll-snap-align: start; }
+  .depo video { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; background: var(--cacau-2); border-radius: 6px; }
+  .depo figcaption { margin-top: 10px; color: var(--texto); font: 500 17px/1.3 var(--titulo); }
 
   /* Ingressos */
   .ingressos { text-align: center; padding-top: 96px; }
@@ -167,7 +168,6 @@
   .agenda li { display: grid; grid-template-columns: 76px 1fr; gap: 16px; padding: 15px 0; border-bottom: 1px solid var(--linha-clara); color: var(--tinta); font-size: 17px; }
   .agenda time { font: 600 17px/1.5 var(--titulo); color: var(--bronze); }
   .agenda small { display: block; font-size: 14px; color: var(--tinta-suave); margin-top: 2px; }
-  .agenda .vip-linha { background: rgba(201,164,106,.16); padding-left: 12px; padding-right: 12px; margin: 0 -12px; }
 
   /* Garantia */
   .garantia { padding: 64px 0; }
@@ -204,7 +204,7 @@
   .fixa .btn { padding: 14px 18px; font-size: 14px; white-space: nowrap; }
 
   /* Algarismos alinhados: o atalho font: zera o que vem do body */
-  .parcela, .total, .garantia .sete, .agenda time, .selos b, .card .frase, .fonte, .assinatura, .depo b, .plano h3 { font-variant-numeric: lining-nums; }
+  .parcela, .total, .garantia .sete, .agenda time, .selos b, .card .frase, .fonte, .assinatura, .plano h3 { font-variant-numeric: lining-nums; }
 
   @media (min-width: 760px) {
     .duas { grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
@@ -282,12 +282,12 @@
       <ol class="passos">
         <li><b>A técnica, ao vivo</b><p>Cada palestrante tem uma técnica e <span class="falta">CONFIRMAR: um paciente modelo</span> para demonstração.</p></li>
         <li><b>O raciocínio em voz alta</b><p>Você entende o raciocínio clínico por trás de cada decisão e acompanha os ajustes em tempo real.</p></li>
-        <li><b>O testemunho</b><p>Para o Dr. Gabriel, “nunca foi sorte, sempre foi Deus”. A Dra. Pamela começou com uma maca e R$ 7 mil de dívida. <span class="falta">FALTA: frase da Aline</span> <span class="falta">FALTA: frase da Natalie</span> No palco, cada um conta essa história inteira e o lugar de Deus nela.</p></li>
+        <li><b>O testemunho</b><p>O Dr. Gabriel ora para que cada paciente receba a bênção de Deus através do que ele faz. A Dra. Aline aprendeu que é debaixo de pressão que se ganha força para sustentar o que se pede em oração. No palco, cada um conta essa história inteira e o lugar de Deus nela.</p></li>
       </ol>
       <p class="fonte">Tudo direto da fonte.</p>
       <a class="btn" href="#ingressos">Quero ver ao vivo</a>
     </div>
-    <div class="vaga midia-ao-vivo"><span class="falta">FALTA: foto ou vídeo curto (sem som, em loop) da Aline aplicando uma técnica ao vivo em aula ou no palco, com o telão ao fundo se houver. Vertical 4:5, mínimo 1000 x 1250 px</span></div>
+    <video class="midia-ao-vivo" autoplay muted loop playsinline preload="metadata" poster="assets/videos/aline-ao-vivo.jpg" aria-label="Dra. Aline Filgueiras aplicando uma técnica ao vivo, com alunas acompanhando"><source src="assets/videos/aline-ao-vivo.mp4" type="video/mp4"></video>
   </div>
 </section>
 
@@ -300,34 +300,33 @@
     <div class="cards">
       <article class="card">
         <p class="palco-tag">No palco: full face ao vivo</p>
-        <div class="topo-card"><div class="rosto" title="FALTA: foto de Dra. Aline Filgueiras">FOTO</div><div><h3>Dra. Aline Filgueiras</h3></div></div>
+        <div class="topo-card"><img class="rosto" src="assets/aline.jpg" alt="Dra. Aline Filgueiras" width="72" height="72" loading="lazy"><div><h3>Dra. Aline Filgueiras</h3></div></div>
         <div class="selos"><div><b>12+</b><span>anos atendendo</span></div><div><b>2.000+</b><span>alunas formadas</span></div><div><b>Pós</b><span>em parceria com a FAEX</span></div></div>
         <p>Fundou a Filgueiras Academy. Estudou e ensina anatomia em cursos nos Estados Unidos e na Europa.</p>
-        <p class="frase"><span class="falta">FALTA: linha de testemunho da Aline</span></p>
+        <p class="frase">“Muitas vezes é debaixo de pressão que você desenvolve a força necessária para sustentar aquilo que tanto pede em oração.”</p>
       </article>
       <article class="card">
         <p class="palco-tag">No palco: <span class="falta">FALTA: área ou técnica do Gabriel</span></p>
-        <div class="topo-card"><div class="rosto" title="FALTA: foto de Dr. Gabriel Magalhães">FOTO</div><div><h3>Dr. Gabriel Magalhães</h3></div></div>
+        <div class="topo-card"><img class="rosto" src="assets/gabriel.jpg" alt="Dr. Gabriel Magalhães" width="72" height="72" loading="lazy"><div><h3>Dr. Gabriel Magalhães</h3></div></div>
         <div class="selos"><div><b>15</b><span>anos de carreira</span></div><div><b>5.000+</b><span>alunos na TopFit Academy <span class="falta">CONFIRMAR</span></span></div><div><b>CEO</b><span>do TopFit Group</span></div></div>
-        <p>Formado em Teologia pelo RHEMA, construiu o TopFit Group com atuação em BH e SP.</p>
-        <p class="frase">“Nunca foi sorte, sempre foi Deus.” <span class="falta">FALTA: ok</span></p>
+        <p>Doutor em Ciências Biomédicas, palestrante em Harvard e formado em Teologia pelo RHEMA. Construiu o TopFit Group, com atuação em BH e SP.</p>
+        <p class="frase">“Oro para que cada pessoa que chegar até mim receba a bênção de Deus através daquilo que faço.”</p>
       </article>
       <article class="card">
         <p class="palco-tag">No palco: nariz <span class="falta">CONFIRMAR</span></p>
-        <div class="topo-card"><div class="rosto" title="FALTA: foto de Dra. Natalie Rodrigues">FOTO</div><div><h3>Dra. Natalie Rodrigues</h3></div></div>
-        <div class="selos"><div><b>2021</b><span>artigo científico do Nariz Perfeito</span></div><div><b>3</b><span>cidades: BH, SP e Boston</span></div><div><b>Orlando</b><span>curso de dissecção</span></div></div>
-        <p>Criou a técnica Nariz Perfeito e coordena um curso de anatomia em cadáver fresco em Orlando.</p>
-        <p class="frase"><span class="falta">FALTA: linha de testemunho da Natalie</span></p>
+        <div class="topo-card"><img class="rosto" src="assets/natalie.jpg" alt="Dra. Natalie Rodrigues" width="72" height="72" loading="lazy"><div><h3>Dra. Natalie Rodrigues</h3></div></div>
+        <div class="selos"><div><b>2021</b><span>artigo científico do Nariz Perfeito</span></div><div><b>3</b><span>cidades: BH, SP e Boston</span></div><div><b>Orlando</b><span>American College, curso de dissecção</span></div></div>
+        <p>Criou a técnica Nariz Perfeito e coordena em Orlando o American College, curso de dissecção em cadáver fresco com certificação do American College of Surgeons.</p>
+        <p class="frase">“Descubra seu propósito e trilhe o caminho para a felicidade. Não é somente sobre o que fazemos, mas também o porquê fazemos.”</p>
       </article>
       <article class="card">
         <p class="palco-tag">No palco: Posicionamento Facial® <span class="falta">CONFIRMAR</span></p>
-        <div class="topo-card"><div class="rosto" title="FALTA: foto de Dra. Pamela Soares">FOTO</div><div><h3>Dra. Pamela Soares</h3></div></div>
-        <div class="selos"><div><b>3</b><span>clínicas em São Paulo</span></div><div><b>30+</b><span>colaboradores</span></div><div><b>Mentora</b><span>de profissionais</span></div></div>
-        <p>Fundou a IPS Clinic, com unidades na Faria Lima, em Alphaville e no Tatuapé, e criou o método Posicionamento Facial.</p>
-        <p class="frase">“Comecei com uma maca e R$ 7 mil de dívida.” <span class="falta">FALTA: ok</span></p>
+        <div class="topo-card"><img class="rosto" src="assets/pamela.jpg" alt="Dra. Pamela Soares" width="72" height="72" loading="lazy"><div><h3>Dra. Pamela Soares</h3></div></div>
+        <div class="selos"><div><b>3</b><span>clínicas em São Paulo</span></div><div><b>30+</b><span>colaboradores</span></div><div><b>Autora</b><span>de Provoque seus Milagres</span></div></div>
+        <p>Fundou a IPS Clinic, com unidades na Faria Lima, em Alphaville e no Tatuapé. Criou o método Posicionamento Facial® e tem especialização em Harvard.</p>
+        <p class="frase">“Não é sobre acelerar processos, mas sobre se posicionar corretamente. Porque quando a fé deixa de ser discurso e se torna prática, milagres deixam de ser exceção.” <small>Provoque seus Milagres</small></p>
       </article>
     </div>
-    <p style="margin-top:18px;font-size:14px"><span class="falta">FALTA: foto de perfil de cada palestrante, quadrada, mínimo 600 x 600 px, rosto centralizado, fundo neutro</span></p>
   </div>
 </section>
 
@@ -337,10 +336,10 @@
     <p class="rotulo">Antes do palco</p>
     <h2>Veja cada um deles ensinando.</h2>
     <div class="depos">
-      <div class="vaga depo"><span><b>Dra. Aline Filgueiras</b><br><span class="falta">FALTA: vídeo vertical de 30 a 60 s dando aula</span></span></div>
-      <div class="vaga depo"><span><b>Dr. Gabriel Magalhães</b><br><span class="falta">FALTA: vídeo vertical de 30 a 60 s dando aula</span></span></div>
-      <div class="vaga depo"><span><b>Dra. Natalie Rodrigues</b><br><span class="falta">FALTA: vídeo vertical de 30 a 60 s dando aula</span></span></div>
-      <div class="vaga depo"><span><b>Dra. Pamela Soares</b><br><span class="falta">FALTA: vídeo vertical de 30 a 60 s dando aula</span></span></div>
+      <figure class="depo"><video controls playsinline preload="none" poster="assets/videos/aline.jpg"><source src="assets/videos/aline.mp4" type="video/mp4"></video><figcaption>Dra. Aline Filgueiras</figcaption></figure>
+      <figure class="depo"><video controls playsinline preload="none" poster="assets/videos/gabriel.jpg"><source src="assets/videos/gabriel.mp4" type="video/mp4"></video><figcaption>Dr. Gabriel Magalhães</figcaption></figure>
+      <figure class="depo"><video controls playsinline preload="none" poster="assets/videos/natalie.jpg"><source src="assets/videos/natalie.mp4" type="video/mp4"></video><figcaption>Dra. Natalie Rodrigues</figcaption></figure>
+      <figure class="depo"><video controls playsinline preload="none" poster="assets/videos/pamela.jpg"><source src="assets/videos/pamela.mp4" type="video/mp4"></video><figcaption>Dra. Pamela Soares</figcaption></figure>
     </div>
   </div>
 </section>
@@ -373,7 +372,7 @@
       <article class="plano vip">
         <span class="selo">Mais completo</span>
         <h3>VIP</h3>
-        <p class="desc">A experiência mais próxima do palco, com primeiras fileiras e uma hora de conversa com a Dra. Aline e os palestrantes depois do encerramento. <span class="falta">CONFIRMAR</span></p>
+        <p class="desc">A experiência mais próxima do palco, com primeiras fileiras e um encontro exclusivo com a Dra. Aline e os palestrantes.</p>
         <p class="por">Por 12x de</p>
         <p class="parcela"><span class="rs">R$</span><span data-parcela="vip"></span></p>
         <p class="avista">R$ 1.297,00 à vista</p>
@@ -386,7 +385,7 @@
           <li>Primeiras fileiras</li>
           <li>Credenciamento separado</li>
           <li>Almoço em área reservada <span class="falta">CONFIRMAR</span></li>
-          <li>Encontro VIP (18h45 às 19h45): perguntas, foto oficial e coquetel <span class="falta">CONFIRMAR</span></li>
+          <li>Encontro exclusivo com os palestrantes <span class="falta">CONFIRMAR</span></li>
         </ul>
       </article>
 
@@ -450,7 +449,6 @@
       <li><time>13h</time><span>Almoço<small>Até 14h30. Não incluso no Profissional e no Estudante.</small></span></li>
       <li><time>Tarde</time><span>Duas palestras: técnica ao vivo e testemunho</span></li>
       <li><time>18h30</time><span>Encerramento</span></li>
-      <li class="vip-linha"><time>18h45</time><span>Encontro VIP com a Dra. Aline e os palestrantes<small>Até 19h45, só para o ingresso VIP. <span class="falta">CONFIRMAR</span></small></span></li>
     </ol>
   </div>
 </section>
@@ -476,12 +474,12 @@
       <details><summary>Posso cancelar meu ingresso?</summary><p>Sim. Você pode cancelar em até 7 dias depois da compra, com reembolso total, desde que o pedido chegue até 48 horas antes do evento. Depois desse prazo, não fazemos cancelamentos.</p></details>
       <details><summary>A condição de estudante vale para pós-graduação?</summary><p>Não. A condição é exclusiva para estudantes de graduação. Quem faz pós-graduação compra o ingresso Profissional.</p></details>
       <details><summary>Preciso comprovar que sou estudante?</summary><p>Sim. O comprovante de matrícula é validado pelo WhatsApp na compra e conferido na entrada, junto com um documento com foto.</p></details>
-      <details><summary>Qual é o horário?</summary><p>Credenciamento a partir das 8h30, início às 9h e encerramento às 18h30. O Encontro VIP vai das 18h45 às 19h45. Horários estimados, sujeitos a ajuste.</p></details>
+      <details><summary>Qual é o horário?</summary><p>Credenciamento a partir das 8h30, início às 9h e encerramento às 18h30. Horários estimados, sujeitos a ajuste.</p></details>
       <details><summary>Preciso ser cristão para participar?</summary><p>Não. O congresso é de harmonização e aberto a todos os profissionais. Os palestrantes falam de Deus porque essa é a história real de cada um. <span class="falta">CONFIRMAR: haverá oração ou louvor na programação?</span></p></details>
       <details><summary>Posso passar meu ingresso para outra pessoa?</summary><p>Não. O ingresso é nominal, e o credenciamento confere nome e documento.</p></details>
       <details><summary>Onde fica o evento?</summary><p>No Hotel Ouro Minas, Av. Cristiano Machado, 4001, Ipiranga, Belo Horizonte. <span class="falta">CONFIRMAR: endereço</span></p></details>
-      <details><summary>Vou de fora de BH. Vocês me ajudam?</summary><p>Ajudamos. <a href="#" data-whatsapp>Chame a nossa equipe no WhatsApp</a> para indicações de hotel e de como chegar ao Ouro Minas. Para marcar a viagem, conte com o credenciamento às 8h30 e o encerramento às 18h30 (19h45 no VIP).</p></details>
-      <details><summary>Qual é o aeroporto mais próximo?</summary><p>O Aeroporto Internacional de Confins. O Hotel Ouro Minas fica na Av. Cristiano Machado, caminho de quem vem de Confins pela Linha Verde. <span class="falta">CONFIRMAR: tempo de deslocamento</span></p></details>
+      <details><summary>Vou de fora de BH. Vocês me ajudam?</summary><p>Ajudamos. <a href="#" data-whatsapp>Chame a nossa equipe no WhatsApp</a> para indicações de hotel e de como chegar ao Ouro Minas. Para marcar a viagem, conte com o credenciamento às 8h30 e o encerramento às 18h30.</p></details>
+      <details><summary>Qual é o aeroporto mais próximo?</summary><p>O Aeroporto Internacional de Confins. O Hotel Ouro Minas fica na Av. Cristiano Machado, caminho de quem vem de Confins pela Linha Verde, a cerca de 30 minutos de carro.</p></details>
       <details><summary>Qual a rodoviária mais próxima?</summary><p>O Terminal Rodoviário de Belo Horizonte, no centro. De lá, você chega ao hotel de táxi ou aplicativo.</p></details>
       <details><summary>Qual é o hotel mais próximo?</summary><p>O próprio Hotel Ouro Minas recebe o evento. <span class="falta">FALTA: tarifa ou condição para participantes, se houver</span></p></details>
       <details><summary>Tem estacionamento?</summary><p><span class="falta">FALTA: estacionamento do Ouro Minas, valor e se tem valet</span></p></details>
@@ -494,8 +492,8 @@
   <div class="wrap">
     <p class="marca" style="margin-bottom:10px">TÉCNICA &amp; TESTEMUNHO</p>
     <p class="assinatura">Onde a fé inspira e a técnica transforma.</p>
-    <p><span class="falta">FALTA: razão social e CNPJ do organizador</span></p>
-    <p><a href="#" data-whatsapp>Atendimento pelo WhatsApp</a> · <a href="#">Política de privacidade</a> <span class="falta">FALTA</span></p>
+    <p>Filgueiras Treinamentos LTDA · CNPJ 48.239.615/0001-00</p>
+    <p><a href="#" data-whatsapp>Atendimento pelo WhatsApp</a> · <a href="privacidade/">Política de privacidade</a></p>
   </div>
 </footer>
 
@@ -584,6 +582,10 @@ const CONFIG = {
   };
   tick();
   relogio = setInterval(tick, 1000);
+
+  // Só um vídeo de palestrante tocando por vez.
+  const depos = document.querySelectorAll(".depo video");
+  depos.forEach(v => v.addEventListener("play", () => depos.forEach(o => { if (o !== v) o.pause(); })));
 
   // Pixel do Meta. Compra e checkout são enviados pela Ticto (Pixel + API de Conversões).
   if (CONFIG.pixelId) {
