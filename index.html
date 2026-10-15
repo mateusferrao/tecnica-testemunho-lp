@@ -35,7 +35,7 @@
   }
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: var(--cacau); color: var(--texto); font: 400 17px/1.65 var(--corpo); overflow-x: hidden; }
+  body { margin: 0; background: var(--cacau); color: var(--texto); font: 400 17px/1.65 var(--corpo); font-variant-numeric: lining-nums; overflow-x: hidden; }
   img { max-width: 100%; height: auto; display: block; }
   a { color: inherit; }
   .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
@@ -109,7 +109,9 @@
   .card .prof { font-size: 14px; margin: 2px 0 0; }
   .card p { margin: 0 0 12px; }
   .claro .card .frase { font: italic 500 18px/1.4 var(--titulo); color: var(--tinta); }
-    .anfitria-tag { display: inline-block; font: 600 11px/1 var(--corpo); letter-spacing: .14em; text-transform: uppercase; color: var(--cacau); background: var(--ouro); padding: 5px 8px; border-radius: 3px; margin-bottom: 6px; }
+  .selos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 4px 0 14px; padding-bottom: 14px; border-bottom: 1px solid var(--linha-clara); }
+  .selos b { display: block; font: 600 26px/1.1 var(--titulo); color: var(--bronze); }
+  .selos span { display: block; font-size: 12px; line-height: 1.35; color: var(--tinta-suave); margin-top: 4px; }
 
   /* Âncora */
   .ancora { text-align: center; }
@@ -119,6 +121,7 @@
   .claro .total { color: var(--bronze); }
   .lista-cursos small { display: block; color: var(--texto-suave); font-size: 14px; }
   .lista-cursos li > span:last-child { text-align: right; color: var(--tinta-suave); }
+  .lista-cursos li > span:first-child { white-space: nowrap; }
 
   /* Depoimentos: faixa rolável */
   .depos {
@@ -196,6 +199,9 @@
   .fixa .info strong { display: block; font-size: 16px; color: var(--texto); }
   .fixa .btn { padding: 14px 18px; font-size: 14px; white-space: nowrap; }
 
+  /* Algarismos alinhados: o atalho font: zera o que vem do body */
+  .parcela, .total, .garantia .sete, .agenda time, .selos b, .card .frase, .fonte, .assinatura, .depo b, .plano h3 { font-variant-numeric: lining-nums; }
+
   @media (min-width: 760px) {
     .duas { grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
     .duas.centro-v { align-items: center; }
@@ -237,7 +243,7 @@
     <p style="margin:0 0 14px"><span class="falta">CONFIRMAR: nome sob cada rosto (ordem do key visual)</span></p>
     <p class="marca">TÉCNICA &amp; TESTEMUNHO</p>
     <h1>As maiores referências da harmonização demonstrando suas técnicas ao vivo no mesmo palco.</h1>
-    <p class="sub">Um congresso de um dia com palestras 100% demonstrativas. Depois de cada técnica, quem acabou de aplicá-la conta como a fé sustentou a própria carreira.</p>
+    <p class="sub">Quatro referências fazem ao vivo a técnica que as tornou reconhecidas e contam, no mesmo palco, o que nenhum post mostra: os começos difíceis e a fé que as sustentou.</p>
     <p class="assinatura">Onde a fé inspira e a técnica transforma.</p>
     <a class="btn" href="#ingressos">Garantir meu ingresso</a>
   </div>
@@ -271,7 +277,7 @@
       <ol class="passos">
         <li><b>A técnica, ao vivo</b><p>Cada palestrante tem uma técnica e <span class="falta">CONFIRMAR: um paciente modelo</span> para demonstração.</p></li>
         <li><b>O raciocínio em voz alta</b><p>Você entende o raciocínio clínico por trás de cada decisão e acompanha os ajustes em tempo real.</p></li>
-        <li><b>Depois, o testemunho</b><p>Quando a técnica termina, o mesmo palestrante conta o que viveu até chegar ali e como a fé o sustentou na carreira.</p></li>
+        <li><b>O testemunho</b><p>Para o Dr. Gabriel, “nunca foi sorte, sempre foi Deus”. A Dra. Pamela começou com uma maca e R$ 7 mil de dívida. <span class="falta">FALTA: frase da Aline</span> <span class="falta">FALTA: frase da Natalie</span> No palco, cada um conta essa história inteira e o lugar de Deus nela.</p></li>
       </ol>
       <p class="fonte">Tudo direto da fonte.</p>
       <a class="btn" href="#ingressos">Quero ver ao vivo</a>
@@ -285,30 +291,34 @@
   <div class="wrap">
     <p class="rotulo">Palestrantes</p>
     <h2>As referências da harmonização facial reunidas no mesmo palco.</h2>
-    <p style="margin-top:14px;font-size:18px">Uma anfitriã e três convidados, cada um com uma técnica ao vivo e uma história para contar.</p>
+    <p style="margin-top:14px;font-size:18px">Quatro trajetórias diferentes, um mesmo palco.</p>
     <div class="cards">
       <article class="card">
         <p class="palco-tag">No palco: full face ao vivo</p>
-        <div class="topo-card"><div class="rosto" title="FALTA: foto de Dra. Aline Filgueiras">FOTO</div><div><span class="anfitria-tag">Anfitriã</span><h3>Dra. Aline Filgueiras</h3></div></div>
-        <p>Ensina harmonização facial com foco em anatomia. Estudou em dissecção fresh frozen nos Estados Unidos e em cursos de anatomia na Europa.</p>
+        <div class="topo-card"><div class="rosto" title="FALTA: foto de Dra. Aline Filgueiras">FOTO</div><div><h3>Dra. Aline Filgueiras</h3></div></div>
+        <div class="selos"><div><b>12+</b><span>anos atendendo</span></div><div><b>2.000+</b><span>alunas formadas</span></div><div><b>Pós</b><span>em parceria com a FAEX</span></div></div>
+        <p>Fundou a Filgueiras Academy. Estudou e ensina anatomia em cursos nos Estados Unidos e na Europa.</p>
         <p class="frase"><span class="falta">FALTA: linha de testemunho da Aline</span></p>
       </article>
       <article class="card">
         <p class="palco-tag">No palco: <span class="falta">FALTA: área ou técnica do Gabriel</span></p>
         <div class="topo-card"><div class="rosto" title="FALTA: foto de Dr. Gabriel Magalhães">FOTO</div><div><h3>Dr. Gabriel Magalhães</h3></div></div>
-        <p>Há 15 anos na harmonização facial e corporal. CEO do TopFit Group e fundador da TopFit Academy, que diz ter <span class="falta">CONFIRMAR: mais de 5.000 alunos</span>.</p>
+        <div class="selos"><div><b>15</b><span>anos de carreira</span></div><div><b>5.000+</b><span>alunos na TopFit Academy <span class="falta">CONFIRMAR</span></span></div><div><b>CEO</b><span>do TopFit Group</span></div></div>
+        <p>Formado em Teologia pelo RHEMA, construiu o TopFit Group com atuação em BH e SP.</p>
         <p class="frase">“Nunca foi sorte, sempre foi Deus.” <span class="falta">FALTA: ok</span></p>
       </article>
       <article class="card">
         <p class="palco-tag">No palco: nariz <span class="falta">CONFIRMAR</span></p>
         <div class="topo-card"><div class="rosto" title="FALTA: foto de Dra. Natalie Rodrigues">FOTO</div><div><h3>Dra. Natalie Rodrigues</h3></div></div>
-        <p>Criou a técnica Nariz Perfeito, publicada em artigo científico em 2021 (DOI 10.24077/2021276067). Atende em Belo Horizonte, São Paulo e Boston.</p>
+        <div class="selos"><div><b>2021</b><span>artigo científico do Nariz Perfeito</span></div><div><b>3</b><span>cidades: BH, SP e Boston</span></div><div><b>Orlando</b><span>curso de dissecção</span></div></div>
+        <p>Criou a técnica Nariz Perfeito e coordena um curso de anatomia em cadáver fresco em Orlando.</p>
         <p class="frase"><span class="falta">FALTA: linha de testemunho da Natalie</span></p>
       </article>
       <article class="card">
         <p class="palco-tag">No palco: Posicionamento Facial® <span class="falta">CONFIRMAR</span></p>
         <div class="topo-card"><div class="rosto" title="FALTA: foto de Dra. Pamela Soares">FOTO</div><div><h3>Dra. Pamela Soares</h3></div></div>
-        <p>Fundadora da IPS Clinic, que tem três unidades em São Paulo. Criou o Posicionamento Facial®.</p>
+        <div class="selos"><div><b>3</b><span>clínicas em São Paulo</span></div><div><b>30+</b><span>colaboradores</span></div><div><b>Mentora</b><span>de profissionais</span></div></div>
+        <p>Fundou a IPS Clinic, com unidades na Faria Lima, em Alphaville e no Tatuapé, e criou o método Posicionamento Facial.</p>
         <p class="frase">“Comecei com uma maca e R$ 7 mil de dívida.” <span class="falta">FALTA: ok</span></p>
       </article>
     </div>
@@ -337,10 +347,10 @@
     <p class="total">Mais de R$ 20 mil</p>
     <p>somando um curso de cada palestrante</p>
     <ul class="lista-cursos">
-      <li><span>Dra. Aline Filgueiras</span><span><span class="falta">FALTA: nome do curso presencial</span></span></li>
-      <li><span>Dr. Gabriel Magalhães</span><span>Imersão em Preenchedores Corporais</span></li>
-      <li><span>Dra. Natalie Rodrigues</span><span>Nariz Perfeito</span></li>
-      <li><span>Dra. Pamela Soares</span><span>Na Prática 2.0</span></li>
+      <li><span>Dra. Aline Filgueiras</span><span>Curso presencial de anatomia</span></li>
+      <li><span>Dr. Gabriel Magalhães</span><span>Imersão presencial</span></li>
+      <li><span>Dra. Natalie Rodrigues</span><span>Curso de rinomodelação</span></li>
+      <li><span>Dra. Pamela Soares</span><span>Curso de preenchimento</span></li>
     </ul>
     <p style="max-width:600px;margin:0 auto 28px;font-size:18px">No Técnica &amp; Testemunho, você aprende com os quatro em um único dia, no ambiente certo, com as pessoas certas.</p>
     <a class="btn" href="#ingressos">Ver ingressos</a>
@@ -425,7 +435,7 @@
     <div>
       <p class="rotulo">Sábado, 14 de novembro</p>
       <h2>Como é o dia</h2>
-      <p style="margin-top:16px">Um dia inteiro no Hotel Ouro Minas, em Belo Horizonte. Se você vem de fora, conte com o credenciamento às 8h30 e o encerramento às 18h30 (19h45 no VIP) para marcar passagem e hospedagem.</p>
+      <p style="margin-top:16px">Um dia inteiro no Hotel Ouro Minas, em Belo Horizonte.</p>
       <p style="font-size:14px">Horários estimados, sujeitos a ajuste. A programação final chega por e-mail e WhatsApp antes do evento.</p>
     </div>
     <ol class="agenda">
@@ -462,9 +472,10 @@
       <details><summary>A condição de estudante vale para pós-graduação?</summary><p>Não. A condição é exclusiva para estudantes de graduação. Quem faz pós-graduação compra o ingresso Profissional.</p></details>
       <details><summary>Preciso comprovar que sou estudante?</summary><p>Sim. O comprovante de matrícula é validado pelo WhatsApp na compra e conferido na entrada, junto com um documento com foto.</p></details>
       <details><summary>Qual é o horário?</summary><p>Credenciamento a partir das 8h30, início às 9h e encerramento às 18h30. O Encontro VIP vai das 18h45 às 19h45. Horários estimados, sujeitos a ajuste.</p></details>
-      <details><summary>Preciso ser cristão para participar?</summary><p>Não. O Técnica &amp; Testemunho é um congresso de harmonização facial, aberto a todos os profissionais. Depois de cada técnica, o palestrante conta a própria história e como a fé o sustentou. <span class="falta">CONFIRMAR: haverá oração ou louvor na programação?</span></p></details>
+      <details><summary>Preciso ser cristão para participar?</summary><p>Não. O congresso é de harmonização e aberto a todos os profissionais. Os palestrantes falam de Deus porque essa é a história real de cada um. <span class="falta">CONFIRMAR: haverá oração ou louvor na programação?</span></p></details>
       <details><summary>Posso passar meu ingresso para outra pessoa?</summary><p>Não. O ingresso é nominal, e o credenciamento confere nome e documento.</p></details>
       <details><summary>Onde fica o evento?</summary><p>No Hotel Ouro Minas, Av. Cristiano Machado, 4001, Ipiranga, Belo Horizonte. <span class="falta">CONFIRMAR: endereço</span></p></details>
+      <details><summary>Vou de fora de BH. Vocês me ajudam?</summary><p>Ajudamos. <a href="#" data-whatsapp>Chame a nossa equipe no WhatsApp</a> para indicações de hotel e de como chegar ao Ouro Minas. Para marcar a viagem, conte com o credenciamento às 8h30 e o encerramento às 18h30 (19h45 no VIP).</p></details>
       <details><summary>Qual é o aeroporto mais próximo?</summary><p>O Aeroporto Internacional de Confins. O Hotel Ouro Minas fica na Av. Cristiano Machado, caminho de quem vem de Confins pela Linha Verde. <span class="falta">CONFIRMAR: tempo de deslocamento</span></p></details>
       <details><summary>Qual a rodoviária mais próxima?</summary><p>O Terminal Rodoviário de Belo Horizonte, no centro. De lá, você chega ao hotel de táxi ou aplicativo.</p></details>
       <details><summary>Qual é o hotel mais próximo?</summary><p>O próprio Hotel Ouro Minas recebe o evento. <span class="falta">FALTA: tarifa ou condição para participantes, se houver</span></p></details>
@@ -485,7 +496,7 @@
 
 <!-- Barra fixa de compra (celular) -->
 <div class="fixa">
-  <div class="info"><strong>12x de R$ <span data-parcela="profissional"></span></strong>Profissional · <span data-lote-nome>1º lote</span> até <span data-lote-fim>25/10</span></div>
+  <div class="info"><span data-lote-nome>1º lote</span> termina<strong><span data-lote-fim>25/10</span></strong></div>
   <a class="btn" href="#ingressos">Garantir ingresso</a>
 </div>
 
