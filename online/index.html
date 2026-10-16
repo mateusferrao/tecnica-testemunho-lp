@@ -64,6 +64,8 @@
   @media (prefers-reduced-motion: reduce) { .btn { animation: none; } }
 </style>
 <script src="../config.js"></script>
+<!-- Utmify: guarda as UTMs do anúncio e repassa ao checkout da Ticto (script oficial, versão legível) -->
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
 </head>
 <body class="carregando">
 
@@ -138,8 +140,12 @@
   document.querySelectorAll("[data-parcela]").forEach(el => el.textContent = CONFIG.parcelas[CONFIG.online.preco] || "");
   document.body.classList.remove("carregando");
 
-  // Checkout com UTMs repassadas
-  const params = new URLSearchParams(location.search);
+  // Checkout com UTMs repassadas. O back redirect da Ticto chega aqui sem UTMs:
+  // nesse caso usa as da página onde a pessoa clicou no checkout (gravadas no tt_volta).
+  let params = new URLSearchParams(location.search);
+  if (![...params.keys()].some(k => k.startsWith("utm_")) && recente && volta.url) {
+    try { const u = new URL(volta.url); if (u.origin === location.origin) params = u.searchParams; } catch (e) {}
+  }
   const url = new URL(CONFIG.online.checkout);
   params.forEach((v, k) => { if (k.startsWith("utm_") || k === "src" || k === "sck" || k === "fbclid") url.searchParams.set(k, v); });
   if (!url.searchParams.get("utm_content")) url.searchParams.set("utm_content", "downsell");
@@ -148,7 +154,7 @@
   // "Não": volta para onde a pessoa estava antes do checkout (LP nos ingressos ou resultado do quiz).
   // A LP e o quiz gravam essa página no clique do checkout. Sem registro, vai para a LP.
   let voltar = new URL("../", location.href);
-  params.forEach((v, k) => { if (k.startsWith("utm_")) voltar.searchParams.set(k, v); });
+  new URLSearchParams(location.search).forEach((v, k) => { if (k.startsWith("utm_")) voltar.searchParams.set(k, v); });
   try {
     if (recente && volta.url) { const u = new URL(volta.url); if (u.origin === location.origin) voltar = u; }
   } catch (e) {}
