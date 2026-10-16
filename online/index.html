@@ -60,16 +60,17 @@
   .porque b { color: var(--tinta); font-weight: 600; }
   .nao { display: block; margin: 18px auto 0; padding: 8px; text-align: center; font-size: 14px; color: var(--tinta-suave); }
   .rodape { max-width: 480px; margin: 0 auto; padding: 0 16px 24px; text-align: center; font-size: 11px; color: var(--tinta-suave); }
+  body.carregando h1, body.carregando .oferta { visibility: hidden; }
   @media (prefers-reduced-motion: reduce) { .btn { animation: none; } }
 </style>
 <script src="../config.js"></script>
 </head>
-<body>
+<body class="carregando">
 
 <div class="faixa">Espera! Oferta só desta página</div>
 
 <main>
-  <h1>Não dá para ir a BH? Assista ao vivo por R$ 197.</h1>
+  <h1>Não dá para ir a BH? Assista ao vivo por R$&nbsp;<span data-preco></span>.</h1>
   <p class="lead">As 4 técnicas e os testemunhos do dia 14, em tempo real, de onde você estiver.</p>
   <div class="rostos" aria-hidden="true">
     <img src="../assets/aline.jpg" alt="" width="46" height="46"><img src="../assets/gabriel.jpg" alt="" width="46" height="46"><img src="../assets/natalie.jpg" alt="" width="46" height="46"><img src="../assets/pamela.jpg" alt="" width="46" height="46">
@@ -77,10 +78,10 @@
   <p class="rostos-txt">Dra. Aline, Dr. Gabriel, Dra. Natalie e Dra. Pamela</p>
 
   <div class="oferta">
-    <div class="compara"><span>Presencial <s data-preco-presencial>R$ 497</s></span><span>Online <b>R$ <span data-preco>197</span></b></span></div>
-    <span class="economia">R$ <span data-economia>300</span> a menos e sem custo de viagem</span>
-    <p class="parcela">12x de<b><span class="rs">R$</span><span data-parcela>20,37</span></b></p>
-    <p class="vista">ou R$ <span data-preco>197</span>,00 à vista</p>
+    <div class="compara"><span>Presencial <s data-preco-presencial></s></span><span>Online <b>R$ <span data-preco></span></b></span></div>
+    <span class="economia">R$ <span data-economia></span> a menos e sem custo de viagem</span>
+    <p class="parcela">12x de<b><span class="rs">R$</span><span data-parcela></span></b></p>
+    <p class="vista">ou R$ <span data-preco></span>,00 à vista</p>
     <ul class="itens">
       <li>Transmissão ao vivo do sábado, 14/11, a partir das 9h</li>
       <li>As 4 técnicas e os testemunhos, na hora do palco</li>
@@ -122,6 +123,7 @@
   document.querySelectorAll("[data-economia]").forEach(el => el.textContent = fmt(lote.profissional.preco - CONFIG.online.preco));
   document.querySelectorAll("[data-preco]").forEach(el => el.textContent = fmt(CONFIG.online.preco));
   document.querySelectorAll("[data-parcela]").forEach(el => el.textContent = CONFIG.parcelas[CONFIG.online.preco] || "");
+  document.body.classList.remove("carregando");
 
   // Checkout com UTMs repassadas
   const params = new URLSearchParams(location.search);
