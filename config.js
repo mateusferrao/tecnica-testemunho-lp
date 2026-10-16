@@ -1,6 +1,6 @@
 /* ============================================================
    CONFIG · tudo que muda (preço, parcela, lote, link) fica aqui.
-   Usado pela LP (index.html) e pelo quiz (quiz/index.html).
+   Usado pela LP (index.html), pelo quiz (quiz/index.html) e pelo downsell (online/index.html).
    Nunca coloque aqui o token da API de Conversões nem o do ManyChat: o arquivo é público.
    ============================================================ */
 const CONFIG = {
@@ -12,9 +12,12 @@ const CONFIG = {
   parcelas: {
     1297: "134,13",
     497: "51,40", 597: "61,74", 697: "72,08",
-    397: "41,05", 477: "49,33", 557: "57,60"
+    397: "41,05", 477: "49,33", 557: "57,60",
+    197: "20,37"
   },
   vip: { preco: 1297, checkout: "https://payment.ticto.app/O99FD1428" },
+  // Ingresso online (downsell em /online/, só via back redirect da Ticto). Obrigado em /obrigado/remoto/.
+  online: { preco: 197, checkout: "https://payment.ticto.app/OF85D6B95" },
   // Lote vira na data (23h59, horário de Brasília) ou ao esgotar.
   lotes: [
     { nome: "1º lote", fim: "2026-10-25T23:59:59-03:00", fimTexto: "25/10", vagas: 100,

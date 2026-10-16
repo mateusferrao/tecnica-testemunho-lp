@@ -661,7 +661,11 @@
     const url = new URL(ing.checkout);
     params.forEach((v, k) => { if (k.startsWith("utm_") || k === "src" || k === "sck" || k === "fbclid") url.searchParams.set(k, v); });
     a.href = url.toString();
-    a.addEventListener("click", () => track("trackCustom", "CliqueCheckout", { ingresso: a.dataset.checkout, value: ing.preco, currency: "BRL" }));
+    a.addEventListener("click", () => {
+      track("trackCustom", "CliqueCheckout", { ingresso: a.dataset.checkout, value: ing.preco, currency: "BRL" });
+      // Para o downsell (/online/) saber para onde voltar se a pessoa recusar
+      try { localStorage.setItem("tt_volta", JSON.stringify({ url: location.href.split("#")[0] + "#ingressos", t: Date.now() })); } catch (e) {}
+    });
   });
   document.querySelectorAll("[data-whatsapp]").forEach(a => {
     a.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent("Olá, tenho uma dúvida sobre o Técnica & Testemunho.")}`;

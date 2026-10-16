@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Qual ingresso combina com você? · Técnica &amp; Testemunho</title>
-<meta name="description" content="Responda 6 perguntas rápidas e veja o ingresso do congresso Técnica &amp; Testemunho indicado para o seu momento na harmonização.">
-<meta property="og:title" content="Qual ingresso do Técnica &amp; Testemunho combina com você?">
+<title>O que está travando a sua evolução na harmonização? · Técnica &amp; Testemunho</title>
+<meta name="description" content="Teste de 2 minutos: responda 7 perguntas e veja o que está travando a sua evolução na harmonização e o que fazer a respeito.">
+<meta property="og:title" content="Você termina o curso, mas na frente da paciente a segurança some?">
 <meta property="og:image" content="../assets/key-visual.webp">
 <meta name="theme-color" content="#f5ece0">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
@@ -85,7 +85,13 @@
   .faces::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(28, 18, 12, .92) 100%); }
   .faces .nomes { position: absolute; left: 0; right: 0; bottom: 8px; z-index: 2; display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; padding: 0 4px; }
   .faces .nomes b { font: 600 11px/1.2 var(--corpo); color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, .9); }
-  .capa h1 { margin-top: 20px; }
+  .capa h1 { margin-top: 12px; }
+  .capa .data { margin-top: 0; }
+  .faces-capa { margin-top: 28px; }
+  .diag h3 { font-size: 19px; margin: 0 0 10px; }
+  .diag h3 + .itens { margin-bottom: 0; }
+  .lista-diag { list-style: none; margin: 0 0 22px; padding: 0; }
+  .lista-diag li { padding: 8px 0 8px 14px; border-left: 3px solid var(--ouro); margin-bottom: 8px; background: #fbf6ee; border-radius: 0 10px 10px 0; font-size: 15px; color: var(--tinta); }
   .data { display: inline-block; margin-top: 16px; font: 600 12px/1.3 var(--corpo); letter-spacing: .12em; text-transform: uppercase; color: var(--bronze); }
 
   /* "Sim" */
@@ -218,10 +224,12 @@
   const linkWhats = texto => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`;
 
   /* ---------- Estado (volta para a mesma tela se recarregar) ---------- */
-  const CHAVE = "tt_quiz_v1";
+  const CHAVE = "tt_quiz_v2";
   const novoId = () => (crypto.randomUUID ? crypto.randomUUID() : "q" + Date.now() + Math.random().toString(16).slice(2));
   let E = null;
   try { E = JSON.parse(sessionStorage.getItem(CHAVE) || "null"); } catch (e) {}
+  // Voltou do checkout em outra aba: recupera o resultado salvo no clique (vale 48 h)
+  if (!E) try { const v = JSON.parse(localStorage.getItem(CHAVE) || "null"); if (v && v.e && Date.now() - v.t < 1728e5) E = v.e; } catch (e) {}
   if (!E || !E.atual) E = { atual: "capa", pilha: [], r: {}, whatsapp: "", eventId: novoId(), enviado: {} };
   const esc = t => String(t).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const salva = () => { try { sessionStorage.setItem(CHAVE, JSON.stringify(E)); } catch (e) {} };
@@ -231,9 +239,9 @@
     area: { biomedicina: "TT · Biomedicina", odontologia: "TT · Odontologia", medicina: "TT · Medicina", outra: "TT · Outra área da saúde", graduacao: "TT · Graduação" },
     tempo: { ate2: "TT · Até 2 anos", "2a5": "TT · 2 a 5 anos", mais5: "TT · 5+ anos" },
     aprende: { online: "TT · Aprende on-line", presencial: "TT · Aprende presencial", congressos: "TT · Aprende congressos", mentoria: "TT · Aprende mentoria" },
-    dor: { tecnica: "TT · Dor técnica", intercorrencia: "TT · Dor intercorrência", clinica: "TT · Dor clínica", proposito: "TT · Dor propósito" },
+    dor: { tecnica: "TT · Dor técnica", intercorrencia: "TT · Dor intercorrência", avaliacao: "TT · Dor avaliação", clinica: "TT · Dor clínica", proposito: "TT · Dor propósito" },
     fe: { sim: "TT · Fé sim", asvezes: "TT · Fé às vezes", nao: "TT · Fé não" },
-    objecao: { valor: "TT · Objeção valor", viagem: "TT · Objeção viagem", data: "TT · Objeção data", nada: "TT · Sem objeção" }
+    objecao: { valor: "TT · Objeção valor", viagem: "TT · Objeção viagem", data: "TT · Objeção data", nivel: "TT · Objeção nível", nada: "TT · Sem objeção" }
   };
   const indicado = () => {
     if (E.r.area === "graduacao") return "estudante";
@@ -298,75 +306,119 @@
   const ICONE_SIM = `<div class="icone"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.4-9.3-9A5.2 5.2 0 0 1 12 6.6 5.2 5.2 0 0 1 21.3 12C19 16.6 12 21 12 21z"/></svg></div>`;
 
   /* ---------- Telas ---------- */
+  const grad = () => E.r.area === "graduacao";
   const T = {
     capa: {
       tipo: "capa",
       html: () => `
-        <div class="faces"><img src="../assets/key-visual.webp" alt="Dra. Aline Filgueiras, Dr. Gabriel Magalhães, Dra. Natalie Rodrigues e Dra. Pamela Soares" width="1080" height="1350">
-          <div class="nomes"><b>Dra. Natalie</b><b>Dr. Gabriel</b><b>Dra. Aline</b><b>Dra. Pamela</b></div></div>
         <div class="capa">
-          <span class="data">Sábado, 14/11 · Hotel Ouro Minas · BH</span>
-          <h1>Qual ingresso do congresso combina com o seu momento na harmonização?</h1>
-          <p class="sub">6 perguntas rápidas. No fim, você vê o ingresso indicado para você e o valor do lote atual.</p>
-          <div class="acao"><button class="btn" type="button" data-ir>Começar</button></div>
+          <span class="data">Teste de 2 minutos para quem trabalha com harmonização</span>
+          <h1>Você termina o curso, mas na frente da paciente a segurança some?</h1>
+          <p class="sub">Responda 7 perguntas e veja o que está travando a sua evolução e o que fazer a respeito.</p>
+          <div class="acao"><button class="btn" type="button" data-ir>Fazer o teste</button></div>
           <p class="nota">Leva cerca de 3 minutos</p>
-        </div>`
+        </div>
+        <div class="faces faces-capa"><img src="../assets/key-visual.webp" alt="Dra. Aline Filgueiras, Dr. Gabriel Magalhães, Dra. Natalie Rodrigues e Dra. Pamela Soares" width="1080" height="1350">
+          <div class="nomes"><b>Dra. Natalie</b><b>Dr. Gabriel</b><b>Dra. Aline</b><b>Dra. Pamela</b></div></div>
+        <p class="nota">Com Dra. Aline, Dr. Gabriel, Dra. Natalie e Dra. Pamela · 14/11 · Belo Horizonte</p>`
     },
     area: {
-      tipo: "pergunta", campo: "area", rotulo: "Pergunta 1 de 6", titulo: "Qual é a sua área?",
+      tipo: "pergunta", campo: "area", titulo: "Para começar, qual é a sua área?",
       opcoes: [["biomedicina", "Biomedicina"], ["odontologia", "Odontologia"], ["medicina", "Medicina"], ["outra", "Enfermagem, Farmácia ou outra área da saúde"], ["graduacao", "Estou na graduação"]]
     },
-    palestrantes: {
-      tipo: "conteudo",
-      html: () => `
-        <p class="rotulo">No palco, dia 14</p>
-        <h2>Quem sobe ao palco no dia 14.</h2>
-        <p class="sub">${E.r.area === "graduacao" ? "Você vai ver de perto, ainda na graduação, como trabalham quatro referências da harmonização." : "Quatro trajetórias diferentes na harmonização, cada uma com a sua técnica ao vivo."}</p>
-        <div class="grade">${PAL.map(p => `<div class="pal"><img src="../assets/${p.foto}.jpg" alt="${p.nome}" width="72" height="72" loading="lazy"><b>${p.nome}</b><span class="palco">${p.palco}</span><small>${p.selo}</small></div>`).join("")}</div>
-        <div class="acao"><button class="btn" type="button" data-ir>Continuar</button></div>`
-    },
     tempo: {
-      tipo: "pergunta", campo: "tempo", rotulo: "Pergunta 2 de 6", titulo: "Há quanto tempo você atua na harmonização?",
+      tipo: "pergunta", campo: "tempo", titulo: "Há quanto tempo você aplica harmonização?",
       opcoes: [["ate2", "Menos de 2 anos"], ["2a5", "De 2 a 5 anos"], ["mais5", "Mais de 5 anos"]]
     },
-    sim1: { tipo: "sim", titulo: "Você já terminou um curso e continuou com dúvida na hora de aplicar?", botao: "Sim, já passei por isso" },
+    dor: {
+      tipo: "pergunta", campo: "dor", titulo: "Qual destas frases mais parece com você hoje?",
+      opcoes: () => [
+        ["tecnica", grad() ? "Tenho medo de me formar e travar na primeira paciente" : "Faço o curso, entendo a técnica, mas na hora de aplicar a dúvida volta"],
+        ["intercorrencia", grad() ? "Tenho medo de uma intercorrência quando começar a atender" : "Tenho medo de uma intercorrência e já evitei procedimento por isso"],
+        ["avaliacao", "Olho a paciente e fico em dúvida sobre qual técnica resolve aquela queixa"],
+        ["clinica", grad() ? "Não sei como vou transformar a técnica em uma carreira que cresce" : "Aplico bem, mas a clínica não cresce e não sei o próximo passo"],
+        ["proposito", "Trabalho muito e sinto que falta sentido no que faço"]
+      ]
+    },
+    espelho: {
+      tipo: "conteudo",
+      html: () => {
+        const c = {
+          tecnica: grad()
+            ? ["Você ainda está na graduação e já se pergunta se vai estar pronta para a primeira paciente.", "Esse medo aparece em quem leva a profissão a sério. Na faculdade e no curso você aprende o passo a passo. O que dá segurança é ver alguém decidir quando a paciente foge do que estava na aula."]
+            : ["Você estudou, fez o curso, tem o certificado. E na hora de aplicar, a dúvida volta.", "Isso acontece com quem leva a profissão a sério. Você aprendeu o passo a passo, mas é raro alguém mostrar como decidir quando a paciente é diferente da que estava na aula."],
+          intercorrencia: ["O medo de uma intercorrência faz você recuar no que sabe fazer.", "Cada procedimento adiado é uma paciente que vai para outra profissional e mais um mês em que a sua técnica fica parada."],
+          avaliacao: ["A paciente senta na sua frente e você fica entre duas ou três técnicas.", "Escolher pela queixa é uma decisão. E decisão se aprende vendo quem tem prática tomar a decisão na sua frente."],
+          clinica: grad()
+            ? ["Você já pensa em como a técnica vai virar uma carreira.", "Quem chega lá olha para a técnica e também para as decisões do caminho: onde atender, como se posicionar, o que oferecer."]
+            : ["Sua técnica evoluiu. A agenda e o faturamento não acompanharam.", "Mais um curso de técnica raramente muda isso sozinho. Falta ver como quem construiu clínicas tomou as decisões do caminho."],
+          proposito: ["Você trabalha muito, a agenda anda, e mesmo assim falta alguma coisa.", "Quando a carreira cresce sem um porquê, o cansaço chega antes da realização."]
+        }[E.r.dor] || ["", ""];
+        const voz = {
+          tecnica: ["18 de 27 profissionais pediram para ver demonstrações práticas ao vivo.", "Pesquisa da Dra. Aline com profissionais da harmonização (2024)"],
+          intercorrencia: ["“O medo das possíveis intercorrências me paralisa.”", "Resposta de uma profissional à pesquisa da Dra. Aline (2024)"],
+          avaliacao: ["“Dificuldade em fazer uma boa avaliação, qual técnica usar, qual procedimento é indicado para aquela queixa.”", "Resposta de uma profissional à pesquisa da Dra. Aline (2024)"],
+          clinica: ["13 de 27 profissionais disseram buscar ideias para expandir o negócio.", "Pesquisa da Dra. Aline com profissionais da harmonização (2024)"],
+          proposito: ["Espiritualidade e propósito na carreira foi o tema mais pedido: 21 de 27 votos.", "Pesquisa da Dra. Aline com profissionais da harmonização (2024)"]
+        }[E.r.dor] || ["", ""];
+        return `
+          <p class="rotulo">Você não está sozinha</p>
+          <h2>${c[0]}</h2>
+          <p class="sub">${c[1]}</p>
+          <div class="frase-pal"><p>${voz[0]}</p><cite>${voz[1]}</cite></div>
+          <div class="acao"><button class="btn" type="button" data-ir>Continuar</button></div>`;
+      }
+    },
+    custo: {
+      tipo: "pergunta", campo: "custo", titulo: "Nos últimos meses, isso já te fez…",
+      opcoes: () => grad()
+        ? [["adiar", "Adiar a decisão de começar a atender"], ["curso", "Fazer curso atrás de curso sem me sentir pronta"], ["desistir", "Duvidar se escolhi a área certa"], ["medo", "Ainda não, mas tenho medo de que aconteça"]]
+        : [["adiar", "Adiar ou recusar um procedimento"], ["cobrar", "Cobrar menos do que eu queria"], ["curso", "Comprar mais um curso esperando que fosse diferente"], ["desistir", "Pensar em desistir da área"], ["medo", "Ainda não, mas tenho medo de que aconteça"]]
+    },
+    sim1: { tipo: "sim", titulo: "Você sente que já estudou bastante e ainda falta alguma coisa?", botao: "Sim, sinto isso" },
     aprende: {
-      tipo: "pergunta", campo: "aprende", rotulo: "Pergunta 3 de 6", titulo: "Hoje, como você mais aprende técnica?",
+      tipo: "pergunta", campo: "aprende", titulo: "Hoje, como você mais aprende técnica?",
       opcoes: [["online", "Cursos on-line"], ["presencial", "Cursos presenciais"], ["congressos", "Congressos"], ["mentoria", "Mentoria ou por conta própria"]]
     },
-    palco: {
+    mecanismo: {
       tipo: "conteudo",
       html: () => {
         const abre = {
-          online: ["Um curso on-line mostra a técnica pela tela, um palestrante de cada vez.", "No Técnica & Testemunho, você vê a aplicação inteira de perto, com quatro especialistas no mesmo dia."],
-          presencial: ["Você já sabe o quanto ver de perto muda a forma de aplicar.", "Aqui são quatro especialistas no mesmo dia, cada um fazendo a sua técnica ao vivo."],
-          congressos: ["Muito congresso tem palestra curta e teórica, em que você vê pouco de muita coisa.", "Aqui cada palestrante faz a técnica ao vivo, do começo ao fim, na sua frente."],
-          mentoria: ["Aprender por conta própria ou só na mentoria leva tempo.", "Aqui você vê quatro especialistas aplicando ao vivo, no mesmo dia, e entende as escolhas de cada um."]
-        }[E.r.aprende] || ["", ""];
+          online: "Na aula gravada, você vê a técnica pronta e editada, um professor de cada vez.",
+          presencial: "No curso presencial, você vê de perto, mas quase sempre uma técnica e um professor.",
+          congressos: "Em muito congresso, a palestra é curta e a técnica fica no slide.",
+          mentoria: "Por conta própria ou na mentoria, você aprende com um olhar só, no seu tempo."
+        }[E.r.aprende] || "";
         return `
-          <p class="rotulo">Como funciona cada palestra</p>
-          <h2>${abre[0]}</h2>
-          <p class="sub">${abre[1]}</p>
+          <p class="rotulo">Por que isso acontece</p>
+          <h2>O curso mostra o passo a passo. A segurança vem de ver a decisão.</h2>
+          <p class="sub">${abre} Falta o momento em que o especialista olha a paciente, escolhe o que fazer e ajusta no meio do caminho. É ali que a segurança se forma.</p>
           ${video("aline-ao-vivo", "Dra. Aline Filgueiras aplicando ao vivo, em aula")}
           <div class="acao"><button class="btn" type="button" data-ir>Continuar</button></div>`;
       }
     },
-    sim2: { tipo: "sim", titulo: "A insegurança na hora de aplicar já te travou na frente da paciente?", botao: "Sim, já me travou" },
-    dor: {
-      tipo: "pergunta", campo: "dor", rotulo: "Pergunta 4 de 6", titulo: "O que mais pesa no seu dia a dia hoje?",
-      opcoes: [["tecnica", "Insegurança na técnica"], ["intercorrencia", "Medo de intercorrência"], ["clinica", "Fazer a clínica crescer"], ["proposito", "Encontrar propósito na carreira"]]
+    sim2: { tipo: "sim", titulo: "Se você visse de perto como quatro especialistas decidem, isso mudaria a forma como você aplica?", botao: "Sim, mudaria" },
+    solucao: {
+      tipo: "conteudo",
+      html: () => `
+        <p class="rotulo">Sábado, 14/11 · Hotel Ouro Minas · BH</p>
+        <h2>Foi para isso que o Técnica &amp; Testemunho foi criado.</h2>
+        <p class="sub">${grad() ? "Ainda na graduação, você vê de perto como trabalham quatro referências da harmonização. " : ""}Quatro especialistas aplicam ao vivo, explicam cada decisão em voz alta e depois contam a história por trás da técnica.</p>
+        <div class="grade">${PAL.map(p => `<div class="pal"><img src="../assets/${p.foto}.jpg" alt="${p.nome}" width="72" height="72" loading="lazy"><b>${p.nome}</b><span class="palco">${p.palco}</span><small>${p.selo}</small></div>`).join("")}</div>
+        <div class="acao"><button class="btn" type="button" data-ir>Continuar</button></div>`
     },
     prova: {
       tipo: "conteudo",
       html: () => {
         const c = {
           tecnica: ["Cada decisão, explicada em voz alta.", "No palco, cada palestrante faz a sua técnica ao vivo. Você entende o raciocínio clínico por trás de cada escolha e acompanha os ajustes em tempo real.", video("natalie", "Dra. Natalie Rodrigues ensinando no palco", true)],
-          intercorrencia: ["Segurança vem de ver a decisão sendo tomada.", "O medo de intercorrência foi uma das dores mais citadas pelas profissionais que responderam à pesquisa da Dra. Aline. No palco, você acompanha cada etapa ao vivo e entende o raciocínio clínico de quem tem anos de prática.", video("aline", "Dra. Aline Filgueiras ensinando no palco", true)],
+          intercorrencia: ["Segurança vem de ver a decisão sendo tomada.", "Como lidar com intercorrências foi um dos temas mais pedidos na pesquisa da Dra. Aline. No palco, você acompanha cada etapa ao vivo e ouve o raciocínio clínico de quem tem anos de prática.", video("aline", "Dra. Aline Filgueiras ensinando no palco", true)],
+          avaliacao: ["Quatro técnicas, quatro formas de avaliar a queixa.", "Cada palestrante aplica a sua técnica e explica por que escolheu aquele caminho. Ver quatro raciocínios no mesmo dia ajuda você a montar o seu.", video("natalie", "Dra. Natalie Rodrigues ensinando no palco", true)],
           clinica: ["No palco, quem construiu clínicas e empresas.", "O Dr. Gabriel é CEO do TopFit Group, com atuação em BH e SP. A Dra. Pamela fundou a IPS Clinic, com três unidades em São Paulo. No testemunho, cada um conta como começou e o que pesou no caminho.", video("gabriel", "Dr. Gabriel Magalhães no palco", true)],
           proposito: ["Técnica e propósito no mesmo palco.", "Depois de cada técnica, o palestrante conta a história por trás dela: como começou, o que pesou no caminho e o lugar de Deus nessa trajetória.", video("pamela", "Dra. Pamela Soares no palco", true)]
         }[E.r.dor] || ["", "", ""];
         return `
-          <p class="rotulo">Para você</p>
+          <p class="rotulo">Para o que você contou</p>
           <h2>${c[0]}</h2>
           <p class="sub">${c[1]}</p>
           ${c[2]}
@@ -378,8 +430,8 @@
       html: () => `
         <div class="cartao">
           <p class="rotulo">Quase lá</p>
-          <h2>Seu resultado está quase pronto.</h2>
-          <p class="sub">Deixe seu WhatsApp para ver o ingresso indicado.</p>
+          <h2>Seu diagnóstico está quase pronto.</h2>
+          <p class="sub">Deixe seu nome e WhatsApp para ver o resultado.</p>
           <form data-form-whats novalidate>
             <div class="campo">
               <label for="nome">Seu primeiro nome</label>
@@ -391,14 +443,14 @@
               <input id="whats" name="whats" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(31) 99999-9999" value="${mascara(E.whatsapp)}">
               <p class="msg">Confira o número: DDD e WhatsApp, só números.</p>
             </div>
-            <div class="acao"><button class="btn" type="submit">Ver meu resultado</button></div>
+            <div class="acao"><button class="btn" type="submit">Continuar para o resultado</button></div>
           </form>
         </div>`
     },
-    sim3: { tipo: "sim", titulo: "Você quer uma carreira em que técnica e propósito andem juntos?", botao: "Sim, é o que eu busco" },
+    sim3: { tipo: "sim", titulo: "Você acredita que dá para crescer na carreira sem deixar a fé de fora?", botao: "Sim, acredito" },
     fe: {
-      tipo: "pergunta", campo: "fe", rotulo: "Pergunta 5 de 6", titulo: "A fé faz parte da sua vida profissional?",
-      opcoes: [["sim", "Sim, faz parte do meu dia a dia"], ["asvezes", "Às vezes"], ["nao", "Não sou cristã ou prefiro não dizer"]]
+      tipo: "pergunta", campo: "fe", titulo: "Nos dias de insegurança, a fé te ajuda a seguir?",
+      opcoes: [["sim", "Sim, sempre"], ["asvezes", "Às vezes"], ["nao", "Não sou cristã ou prefiro não dizer"]]
     },
     testemunho: {
       tipo: "conteudo",
@@ -409,19 +461,19 @@
           <p class="sub">A técnica vem primeiro, com quatro demonstrações ao vivo e o raciocínio de quem aplica. Os palestrantes falam de Deus porque essa é a história real de cada um, e o dia inteiro é seu para aprender.</p>
           ${video("aline-ao-vivo", "Técnica ao vivo, de perto")}
           <div class="acao"><button class="btn" type="button" data-ir>Continuar</button></div>`;
-        const p = PAL[E.palIndice ?? 0];
+        const p = PAL[{ clinica: 3, proposito: 2 }[E.r.dor] ?? 0];
         return `
           <p class="rotulo">O testemunho</p>
-          <h2>No palco, cada um conta a história inteira.</h2>
-          <p class="sub">Quem acabou de mostrar a técnica conta, em seguida, como começou, o que pesou no caminho e por que fala de Deus com tanta naturalidade.</p>
+          <h2>Quem sobe ao palco também passou por pressão.</h2>
+          <p class="sub">Depois de cada técnica, o palestrante conta como começou, o que pesou no caminho e onde a fé entrou nessa história.</p>
           <div class="frase-pal"><p>“${p.frase}”</p><cite>${p.nome}</cite></div>
           <div class="vozes">${VOZES.map(v => `<blockquote><p>“${v[0]}”</p><cite>${v[1]}</cite></blockquote>`).join("")}</div>
           <div class="acao"><button class="btn" type="button" data-ir>Continuar</button></div>`;
       }
     },
     objecao: {
-      tipo: "pergunta", campo: "objecao", rotulo: "Pergunta 6 de 6", titulo: "O que pode te impedir de ir?",
-      opcoes: [["valor", "O valor"], ["viagem", "A viagem até BH"], ["data", "A data (sábado, 14/11)"], ["nada", "Nada, eu quero ir"]]
+      tipo: "pergunta", campo: "objecao", titulo: "O que pode te impedir de ir?",
+      opcoes: [["valor", "O valor"], ["viagem", "A viagem até BH"], ["data", "A data (sábado, 14/11)"], ["nivel", "Não sei se é para o meu nível"], ["nada", "Nada, eu quero ir"]]
     },
     resposta: {
       tipo: "conteudo",
@@ -431,13 +483,19 @@
           <h2>O Ouro Minas fica a cerca de 30 minutos do Aeroporto de Confins.</h2>
           <p class="sub">O hotel fica na Av. Cristiano Machado, caminho de quem vem de Confins pela Linha Verde. O credenciamento começa às 8h30 e o encerramento é às 18h30, então dá para ir e voltar no mesmo fim de semana.</p>
           <div class="destaque">Nossa equipe ajuda com indicações de hotel e de como chegar. <a href="${linkWhats("Olá, vou de fora de BH para o Técnica & Testemunho e queria indicações de hotel e de como chegar.")}" target="_blank" rel="noopener">Falar com a equipe no WhatsApp</a></div>
-          <div class="acao"><button class="btn" type="button" data-ir>Ver meu resultado</button></div>`;
+          <div class="acao"><button class="btn" type="button" data-ir>Ver meu diagnóstico</button></div>`;
         if (E.r.objecao === "data") return `
           <p class="rotulo">A data</p>
           <h2>Um sábado inteiro, das 8h30 às 18h30.</h2>
           <p class="sub">Sábado, 14 de novembro, no Hotel Ouro Minas, em Belo Horizonte. Credenciamento a partir das 8h30, abertura às 9h e encerramento às 18h30 (horários estimados).</p>
           <div class="destaque">Em um único sábado, você vê <b>quatro técnicas ao vivo</b>, com quem é referência em cada uma.</div>
-          <div class="acao"><button class="btn" type="button" data-ir>Ver meu resultado</button></div>`;
+          <div class="acao"><button class="btn" type="button" data-ir>Ver meu diagnóstico</button></div>`;
+        if (E.r.objecao === "nivel") return `
+          <p class="rotulo">O seu nível</p>
+          <h2>O dia foi pensado para quem já aplica e para quem está chegando.</h2>
+          <p class="sub">Cada palestrante explica a decisão em voz alta, então você acompanha o raciocínio mesmo sem dominar a técnica. Quem tem mais tempo de prática compara com o próprio jeito de fazer.</p>
+          <div class="destaque">${grad() ? "Para quem está na graduação existe o ingresso <b>Estudante</b>, com comprovante de matrícula." : "O ingresso indicado no seu diagnóstico leva em conta o seu tempo de atuação."}</div>
+          <div class="acao"><button class="btn" type="button" data-ir>Ver meu diagnóstico</button></div>`;
         return `
           <p class="rotulo">O valor</p>
           <h2>Quanto custaria fazer o curso de cada um deles separadamente?</h2>
@@ -449,15 +507,15 @@
             <li><span>Dra. Natalie Rodrigues</span><span>Curso de rinomodelação</span></li>
             <li><span>Dra. Pamela Soares</span><span>Curso de preenchimento</span></li>
           </ul>
-          <div class="destaque">No congresso, você vê os quatro em um dia, ${E.r.area === "graduacao" ? `no ingresso Estudante por <b>12x de R$ ${parcela("estudante")}</b>` : `no ingresso Profissional por <b>12x de R$ ${parcela("profissional")}</b>`}. E tem 7 dias para pedir 100% do valor de volta.</div>
-          <div class="acao"><button class="btn" type="button" data-ir>Ver meu resultado</button></div>`;
+          <div class="destaque">No congresso, você vê os quatro em um dia, ${grad() ? `no ingresso Estudante por <b>12x de R$ ${parcela("estudante")}</b>` : `no ingresso Profissional por <b>12x de R$ ${parcela("profissional")}</b>`}. E tem 7 dias para pedir 100% do valor de volta.</div>
+          <div class="acao"><button class="btn" type="button" data-ir>Ver meu diagnóstico</button></div>`;
       }
     },
     resultado: { tipo: "resultado" }
   };
 
   /* ---------- Sequência ---------- */
-  const ORDEM = ["capa", "area", "palestrantes", "tempo", "sim1", "aprende", "palco", "sim2", "dor", "prova", "whats", "sim3", "fe", "testemunho", "objecao", "resposta", "resultado"];
+  const ORDEM = ["capa", "area", "tempo", "dor", "espelho", "custo", "sim1", "aprende", "mecanismo", "sim2", "solucao", "prova", "whats", "sim3", "fe", "testemunho", "objecao", "resposta", "resultado"];
   const pula = id => (id === "tempo" && E.r.area === "graduacao") || (id === "resposta" && E.r.objecao === "nada");
   const proxima = id => { let i = ORDEM.indexOf(id) + 1; while (i < ORDEM.length && pula(ORDEM[i])) i++; return ORDEM[i]; };
 
@@ -501,8 +559,26 @@
   const cartaoOutro = (tipo, texto) => `
     <div class="outro"><p>${texto}<small>12x de R$ ${parcela(tipo)} · R$ ${fmt(ING[tipo].preco)},00 à vista</small></p>
     <a class="btn sec" href="${linkCheckout(tipo)}" data-checkout="${tipo}">Ver ${ING[tipo].nome}</a></div>`;
+  const DIAG = {
+    tecnica: ["Você sabe a técnica. Falta segurança na hora de decidir.", ["Quatro técnicas aplicadas ao vivo, do começo ao fim", "O porquê de cada escolha, explicado em voz alta", "Como quatro especialistas decidem, cada um na sua técnica"]],
+    intercorrencia: ["O medo de errar está decidindo por você.", ["Cada etapa da aplicação acompanhada ao vivo, sem edição", "O raciocínio de quem tem anos de prática, a cada decisão", "No testemunho, o que pesou no caminho de cada palestrante"]],
+    avaliacao: ["Você conhece as técnicas. Falta clareza para escolher.", ["Como cada palestrante pensa a queixa antes de aplicar", "Quatro técnicas diferentes no mesmo dia, para comparar", "O raciocínio de cada escolha, explicado em voz alta"]],
+    clinica: ["Sua técnica cresceu mais rápido que a sua clínica.", ["Como o Dr. Gabriel (CEO do TopFit Group) e a Dra. Pamela (3 clínicas em SP) começaram", "As decisões do caminho, contadas no testemunho de cada um", "Quatro técnicas ao vivo no mesmo dia"]],
+    proposito: ["Você cresceu na técnica, e o porquê ficou para trás.", ["Quatro histórias reais de quem une técnica e fé na profissão", "Testemunhos contados por quem acabou de aplicar ao vivo", "Um dia inteiro entre profissionais da harmonização"]]
+  };
+  const CONTOU = {
+    dor: { tecnica: "A dúvida volta na hora de aplicar.", intercorrencia: "O medo de intercorrência pesa nas suas decisões.", avaliacao: "Você fica em dúvida sobre qual técnica resolve a queixa.", clinica: "A clínica não cresce no ritmo da sua técnica.", proposito: "Falta sentido no que você faz." },
+    custo: { adiar: "Isso já te fez adiar ou recusar procedimento.", cobrar: "Isso já te fez cobrar menos do que queria.", curso: "Você já fez mais um curso esperando que fosse diferente.", desistir: "Você já pensou em desistir da área.", medo: "Você tem medo de que isso aconteça." },
+    aprende: { online: "Hoje você aprende mais pela tela, em cursos on-line.", presencial: "Hoje você aprende em cursos presenciais, uma técnica por vez.", congressos: "Hoje você aprende em congressos.", mentoria: "Hoje você aprende por conta própria ou na mentoria." }
+  };
   const htmlResultado = () => {
     const tipo = indicado();
+    const d = DIAG[E.r.dor] || DIAG.tecnica;
+    const contou = [CONTOU.dor[E.r.dor], CONTOU.custo[E.r.custo], CONTOU.aprende[E.r.aprende]].filter(Boolean);
+    if (grad() && E.r.dor === "tecnica") contou[0] = "Você tem medo de travar na primeira paciente.";
+    if (grad() && E.r.custo === "adiar") contou[1] = "Isso já te fez adiar o começo dos atendimentos.";
+    if (grad() && E.r.custo === "desistir") contou[1] = "Você já duvidou da sua escolha pela área.";
+    if (grad() && E.r.custo === "curso") contou[1] = "Você já fez curso atrás de curso sem se sentir pronta.";
     const TEXTO_OUTRO = {
       vip: "Quer ficar mais perto do palco e do encontro com os palestrantes? Veja o VIP.",
       profissional: "Prefere o acesso ao dia sem os extras do VIP? Veja o Profissional.",
@@ -512,11 +588,19 @@
     if (tipo === "estudante") TEXTO_OUTRO.profissional = "Já se formou ou vai se formar antes do evento? Veja o Profissional.";
     const extra = `<p class="rotulo" style="margin:26px 0 0;text-align:center">Outras opções de ingresso</p>` +
       ORDEM_OUTROS[tipo].map(t => cartaoOutro(t, TEXTO_OUTRO[t])).join("");
+    const nome = E.nome ? esc(E.nome.split(" ")[0]) + ", " : "";
     return `
-      <div class="res-topo"><p class="rotulo">Seu resultado</p><h1>O ingresso que combina com você é o ${ING[tipo].nome}.</h1></div>
+      <div class="res-topo"><p class="rotulo">Seu diagnóstico</p><h1>${d[0]}</h1></div>
+      <div class="cartao diag">
+        <h3>${nome}o que você contou</h3>
+        <ul class="lista-diag">${contou.map(t => `<li>${t}</li>`).join("")}</ul>
+        <h3>O que você leva do dia 14</h3>
+        <ul class="itens">${d[1].map(t => `<li>${t}</li>`).join("")}</ul>
+      </div>
+      <p class="rotulo" style="margin:30px 0 16px;text-align:center">Para o seu momento</p>
       ${cartaoIngresso(tipo)}
       ${extra}
-      <p class="duvida">Ficou com alguma dúvida? <a href="${linkWhats("Olá, fiz o quiz do Técnica & Testemunho e fiquei com uma dúvida.")}" target="_blank" rel="noopener">Fale com a equipe no WhatsApp</a></p>`;
+      <p class="duvida">Ficou com alguma dúvida? <a href="${linkWhats("Olá, fiz o teste do Técnica & Testemunho e fiquei com uma dúvida.")}" target="_blank" rel="noopener">Fale com a equipe no WhatsApp</a></p>`;
   };
 
   /* ---------- Countdown ---------- */
@@ -548,8 +632,10 @@
     raiz.querySelectorAll("video").forEach(v => v.pause());
     let html = "";
     if (t.tipo === "pergunta") {
-      html = `<div class="cartao"><p class="rotulo">${t.rotulo}</p><h2>${t.titulo}</h2>
-        <div class="opcoes" role="group" aria-label="${t.titulo}">${t.opcoes.map(o => `<button class="opcao${E.r[t.campo] === o[0] ? " marcada" : ""}" type="button" data-valor="${o[0]}">${o[1]}</button>`).join("")}</div></div>`;
+      const perguntas = ORDEM.filter(k => T[k].tipo === "pergunta" && !pula(k));
+      const ops = typeof t.opcoes === "function" ? t.opcoes() : t.opcoes;
+      html = `<div class="cartao"><p class="rotulo">Pergunta ${perguntas.indexOf(id) + 1} de ${perguntas.length}</p><h2>${t.titulo}</h2>
+        <div class="opcoes" role="group" aria-label="${t.titulo}">${ops.map(o => `<button class="opcao${E.r[t.campo] === o[0] ? " marcada" : ""}" type="button" data-valor="${o[0]}">${o[1]}</button>`).join("")}</div></div>`;
     } else if (t.tipo === "sim") {
       html = `<div class="cartao sim">${ICONE_SIM}<h2>${t.titulo}</h2><div class="acao"><button class="btn" type="button" data-ir>${t.botao}</button></div></div>`;
     } else if (t.tipo === "resultado") {
@@ -602,6 +688,11 @@
     if (ck) {
       const tipo = ck.dataset.checkout;
       track("trackCustom", "CliqueCheckout", { ingresso: tipo, value: ING[tipo].preco, currency: "BRL", origem: "quiz" });
+      // Para o downsell (/online/) voltar ao resultado do quiz se a pessoa recusar
+      try {
+        localStorage.setItem("tt_volta", JSON.stringify({ url: location.href.split("#")[0], t: Date.now() }));
+        localStorage.setItem(CHAVE, JSON.stringify({ e: E, t: Date.now() }));
+      } catch (e) {}
     }
   });
 
