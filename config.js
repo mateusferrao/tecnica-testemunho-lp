@@ -13,11 +13,11 @@ const CONFIG = {
     1297: "134,14",
     497: "51,40", 597: "61,74", 697: "72,09",
     397: "41,06", 477: "49,33", 557: "57,61",
-    197: "20,37"
+    297: "30,71"
   },
   vip: { preco: 1297, checkout: "https://payment.ticto.app/O99FD1428" },
   // Ingresso online (downsell em /online/, só via back redirect da Ticto). Obrigado em /obrigado/remoto/.
-  online: { preco: 197, checkout: "https://payment.ticto.app/OF85D6B95" },
+  online: { preco: 297, checkout: "https://payment.ticto.app/OF85D6B95" },
   // Lote vira na data (23h59, horário de Brasília) ou ao esgotar.
   lotes: [
     { nome: "1º lote", fim: "2026-10-25T23:59:59-03:00", fimTexto: "25/10", vagas: 100,
