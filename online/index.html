@@ -64,6 +64,7 @@
   @media (prefers-reduced-motion: reduce) { .btn { animation: none; } }
 </style>
 <script src="../config.js"></script>
+<script src="../analise.js"></script>
 <!-- Utmify: guarda as UTMs do anúncio e repassa ao checkout da Ticto (script oficial, versão legível) -->
 <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
 </head>
@@ -161,8 +162,13 @@
   document.querySelector("[data-nao]").href = voltar.toString();
 
   track("track", "ViewContent", { content_name: "Ingresso online", content_category: "Online", value: CONFIG.online.preco, currency: "BRL" });
+  TTA.evento("downsell_visto", { comparado_com: tipo });
   document.addEventListener("click", ev => {
-    if (ev.target.closest("[data-checkout]")) track("trackCustom", "CliqueCheckout", { ingresso: "online", value: CONFIG.online.preco, currency: "BRL", origem: "downsell" });
+    if (ev.target.closest("[data-checkout]")) {
+      track("trackCustom", "CliqueCheckout", { ingresso: "online", value: CONFIG.online.preco, currency: "BRL", origem: "downsell" });
+      TTA.evento("downsell_checkout", { valor: CONFIG.online.preco, comparado_com: tipo });
+    }
+    if (ev.target.closest("[data-nao]")) TTA.evento("downsell_nao", { comparado_com: tipo });
   });
 })();
 </script>

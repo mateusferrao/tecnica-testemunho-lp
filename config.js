@@ -18,6 +18,10 @@ const CONFIG = {
   vip: { preco: 1297, checkout: "https://payment.ticto.app/O99FD1428" },
   // Ingresso online (downsell em /online/, só via back redirect da Ticto). Obrigado em /obrigado/remoto/.
   online: { preco: 297, checkout: "https://payment.ticto.app/OF85D6B95" },
+  // Análise do funil (PostHog, servidor da Europa) e gravação de sessão (Microsoft Clarity).
+  // São chaves públicas, feitas para ficar na página. Vazias = desligado. Ver analise.js.
+  posthog: { chave: "", host: "https://eu.i.posthog.com" },
+  clarityId: "yyqq1bh16c",
   // Lote vira na data (23h59, horário de Brasília) ou ao esgotar.
   lotes: [
     { nome: "1º lote", fim: "2026-10-25T23:59:59-03:00", fimTexto: "25/10", vagas: 100,

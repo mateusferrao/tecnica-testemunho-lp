@@ -547,6 +547,7 @@
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1324439740761727&ev=PageView&noscript=1"></noscript>
 
 <script src="config.js"></script>
+<script src="analise.js"></script>
 <script>
 (function () {
   const agora = new Date();
@@ -668,6 +669,7 @@
     a.href = url.toString();
     a.addEventListener("click", () => {
       track("trackCustom", "CliqueCheckout", { ingresso: a.dataset.checkout, value: ing.preco, currency: "BRL" });
+      TTA.evento("lp_checkout", { ingresso: a.dataset.checkout, valor: ing.preco });
       // Para o downsell (/online/) saber para onde voltar se a pessoa recusar
       try { localStorage.setItem("tt_volta", JSON.stringify({ url: location.href.split("#")[0] + "#ingressos", tipo: a.dataset.checkout, t: Date.now() })); } catch (e) {}
     });
@@ -688,7 +690,7 @@
     new IntersectionObserver(([e]) => { passouHero = !e.isIntersecting && e.boundingClientRect.top < 0; atualiza(); }).observe(heroBtn);
     new IntersectionObserver(([e]) => {
       vendoIngressos = e.isIntersecting;
-      if (e.isIntersecting && !vcEnviado) { track("track", "ViewContent", { content_name: "Ingressos" }); vcEnviado = true; }
+      if (e.isIntersecting && !vcEnviado) { track("track", "ViewContent", { content_name: "Ingressos" }); TTA.evento("lp_ingressos_vistos"); vcEnviado = true; }
       atualiza();
     }).observe(secIngressos);
   }

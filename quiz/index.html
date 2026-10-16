@@ -188,6 +188,7 @@
   @media (prefers-reduced-motion: reduce) { .tela { animation: none; } .progresso span { transition: none; } }
 </style>
 <script src="../config.js"></script>
+<script src="../analise.js"></script>
 <!-- Utmify: guarda as UTMs do anúncio e repassa ao checkout da Ticto (script oficial, versão legível) -->
 <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
 </head>
@@ -688,6 +689,8 @@
 
     raiz.querySelectorAll("video").forEach(v => { const p = v.play(); if (p && p.catch) p.catch(() => {}); });
     if (id !== "capa") track("trackCustom", "QuizEtapa", { etapa: id, ordem: pos });
+    // Funil (PostHog/Clarity): uma etapa por tela, com as respostas até aqui. Sem nome nem telefone.
+    TTA.evento("quiz_etapa", Object.assign({ etapa: id, ordem: pos, passou_whats: !!E.whatsapp }, E.r));
     if (id === "resultado") {
       ligaRelogio();
       const principal = raiz.querySelector("[data-principal]"), barraCompra = raiz.querySelector("[data-barra]");
@@ -696,6 +699,7 @@
       }
       track("track", "ViewContent", { content_name: "Resultado do quiz", content_category: ING[indicado()].nome });
       enviar("resultado");
+      TTA.evento("quiz_resultado", Object.assign({ indicado: ING[indicado()].nome }, E.r));
     }
     const foco = raiz.querySelector("h1, h2");
     if (foco && id !== "capa") { foco.setAttribute("tabindex", "-1"); foco.focus({ preventScroll: true }); }
@@ -718,7 +722,7 @@
       return;
     }
     if (ev.target.closest("[data-ir]")) {
-      if (E.atual === "capa") track("trackCustom", "QuizInicio", {});
+      if (E.atual === "capa") { track("trackCustom", "QuizInicio", {}); TTA.evento("quiz_inicio"); }
       vaiPara(proxima(E.atual));
       return;
     }
@@ -726,6 +730,7 @@
     if (ck) {
       const tipo = ck.dataset.checkout;
       track("trackCustom", "CliqueCheckout", { ingresso: tipo, value: ING[tipo].preco, currency: "BRL", origem: "quiz" });
+      TTA.evento("quiz_checkout", Object.assign({ ingresso: tipo, valor: ING[tipo].preco, indicado: ING[indicado()].nome }, E.r));
       // Para o downsell (/online/) voltar ao resultado do quiz se a pessoa recusar
       try {
         localStorage.setItem("tt_volta", JSON.stringify({ url: location.href.split("#")[0], tipo, t: Date.now() }));
@@ -759,6 +764,10 @@
     salva();
     track("track", "Lead", { content_name: "Quiz Técnica & Testemunho" }, { eventID: E.eventId });
     enviar("lead");
+    // Liga a visita ao lead pelo mesmo event_id do n8n (sem mandar nome nem telefone)
+    TTA.identificar(E.eventId, { passou_whats: true });
+    TTA.marcar("passou_whats", true);
+    TTA.evento("quiz_whats", Object.assign({}, E.r));
     vaiPara(proxima("whats"));
   });
 
