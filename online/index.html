@@ -9,167 +9,94 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<link rel="preload" href="../assets/key-visual.webp" as="image" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://connect.facebook.net">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cacau: #1c120c;
-    --ouro: #c9a46a;
-    --ouro-escuro: #a9844b;
-    --creme: #f5ece0;
-    --creme-2: #ebdfcd;
-    --tinta: #2b1d14;
-    --tinta-suave: #5e4a3c;
-    --bronze: #6b4a32;
+    --cacau: #1c120c; --ouro: #c9a46a; --ouro-escuro: #a9844b;
+    --creme: #f5ece0; --creme-2: #ebdfcd; --tinta: #2b1d14; --tinta-suave: #5e4a3c; --bronze: #6b4a32;
     --linha: rgba(43, 29, 20, .14);
-    --sombra: 0 10px 30px rgba(43, 29, 20, .10), 0 2px 6px rgba(43, 29, 20, .06);
-    --titulo: "Playfair Display", Georgia, serif;
-    --corpo: "Jost", "Helvetica Neue", Arial, sans-serif;
+    --sombra: 0 10px 30px rgba(43, 29, 20, .12), 0 2px 6px rgba(43, 29, 20, .06);
+    --titulo: "Playfair Display", Georgia, serif; --corpo: "Jost", "Helvetica Neue", Arial, sans-serif;
   }
   *, *::before, *::after { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: var(--creme); color: var(--tinta); font: 400 17px/1.6 var(--corpo); font-variant-numeric: lining-nums; overflow-x: hidden; }
-  img, video { display: block; max-width: 100%; height: auto; }
-  figure { margin: 0; }
-  h1, h2, h3 { font-family: var(--titulo); font-weight: 500; margin: 0; letter-spacing: -.01em; color: var(--tinta); font-variant-numeric: lining-nums; }
-  h1 { font-size: clamp(28px, 7.4vw, 38px); line-height: 1.14; }
-  h2 { font-size: clamp(24px, 6.2vw, 30px); line-height: 1.18; }
-  h3 { font-size: 19px; line-height: 1.3; }
-  p { margin: 0 0 14px; color: var(--tinta-suave); }
+  body { margin: 0; min-height: 100vh; background: var(--creme); color: var(--tinta); font: 400 16px/1.5 var(--corpo); font-variant-numeric: lining-nums; overflow-x: hidden; }
+  img { display: block; max-width: 100%; }
+  h1, h2 { font-family: var(--titulo); font-weight: 500; margin: 0; letter-spacing: -.01em; color: var(--tinta); font-variant-numeric: lining-nums; }
+  p { margin: 0; color: var(--tinta-suave); }
   a { color: var(--bronze); }
 
-  .faixa { background: var(--cacau); color: var(--ouro); text-align: center; font: 600 12px/1.3 var(--corpo); letter-spacing: .2em; padding: 11px 16px; text-transform: uppercase; }
-  main { max-width: 560px; margin: 0 auto; padding: 26px 16px 40px; }
-  section + section { margin-top: 40px; }
-  .rotulo { font: 600 12px/1.4 var(--corpo); letter-spacing: .16em; text-transform: uppercase; color: var(--bronze); margin: 0 0 10px; }
-  .sub { font-size: 17px; margin-top: 14px; }
-  .sub b { color: var(--tinta); font-weight: 600; }
+  .faixa { background: #b4483b; color: #fff; text-align: center; font: 600 13px/1.3 var(--corpo); letter-spacing: .14em; padding: 10px 16px; text-transform: uppercase; }
+  main { max-width: 480px; margin: 0 auto; padding: 22px 16px 28px; }
+  h1 { font-size: clamp(26px, 7vw, 32px); line-height: 1.15; text-align: center; }
+  .lead { margin-top: 10px; text-align: center; font-size: 16px; }
+  .rostos { display: flex; justify-content: center; margin-top: 16px; }
+  .rostos img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 2px solid var(--creme); margin-left: -8px; background: var(--creme-2); }
+  .rostos img:first-child { margin-left: 0; }
+  .rostos-txt { margin-top: 6px; text-align: center; font-size: 13px; }
 
-  .btn { display: flex; width: 100%; align-items: center; justify-content: center; min-height: 60px; padding: 16px 20px; border: 0; border-radius: 14px; background: var(--ouro); color: var(--cacau); font: 600 17px/1.25 var(--corpo); letter-spacing: .02em; text-decoration: none; text-align: center; cursor: pointer; box-shadow: 0 6px 16px rgba(169, 132, 75, .35); transition: transform .15s ease, background .15s ease; }
+  .oferta { margin-top: 18px; background: #fff; border: 2px solid var(--ouro); border-radius: 20px; box-shadow: var(--sombra); padding: 20px 18px 18px; text-align: center; }
+  .compara { display: flex; justify-content: center; align-items: baseline; gap: 10px; font-size: 15px; }
+  .compara s { color: var(--tinta-suave); }
+  .economia { display: inline-block; margin-top: 8px; padding: 4px 12px; border-radius: 999px; background: #fbf1e3; color: var(--bronze); font: 600 13px/1.4 var(--corpo); }
+  .parcela { margin-top: 10px; font: 600 15px/1.2 var(--corpo); color: var(--tinta-suave); }
+  .parcela b { display: block; font: 600 52px/1.05 var(--titulo); color: var(--tinta); }
+  .parcela b .rs { font-size: 22px; vertical-align: top; margin-right: 2px; }
+  .vista { margin-top: 4px; font-size: 14px; }
+  .itens { list-style: none; margin: 16px 0 18px; padding: 0; text-align: left; }
+  .itens li { position: relative; padding: 6px 0 6px 26px; font-size: 15px; color: var(--tinta); }
+  .itens li::before { content: ""; position: absolute; left: 2px; top: 12px; width: 12px; height: 7px; border-left: 2px solid var(--ouro-escuro); border-bottom: 2px solid var(--ouro-escuro); transform: rotate(-45deg); }
+  .btn { display: flex; width: 100%; align-items: center; justify-content: center; min-height: 64px; padding: 16px 20px; border: 0; border-radius: 14px; background: var(--ouro); color: var(--cacau); font: 600 18px/1.25 var(--corpo); text-decoration: none; text-align: center; cursor: pointer; box-shadow: 0 8px 20px rgba(169, 132, 75, .4); transition: transform .15s ease, background .15s ease; animation: pulsa 2.4s ease-in-out infinite; }
   .btn:hover { background: #d3b07a; }
   .btn:active { transform: scale(.98); }
+  @keyframes pulsa { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
   .btn:focus-visible, .nao:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; }
-  .nao { display: block; margin: 16px auto 0; padding: 8px; text-align: center; font-size: 14px; color: var(--tinta-suave); }
-
-  .faces { position: relative; margin-top: 22px; border-radius: 18px; overflow: hidden; background: var(--cacau); aspect-ratio: 1080 / 600; box-shadow: var(--sombra); }
-  .faces img { width: 100%; margin-top: -26%; }
-  .faces::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(28, 18, 12, .92) 100%); }
-  .faces .nomes { position: absolute; left: 0; right: 0; bottom: 8px; z-index: 2; display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; padding: 0 4px; }
-  .faces .nomes b { font: 600 11px/1.2 var(--corpo); color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, .9); }
-
-  .grade { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
-  .pal { background: #fff; border: 1px solid var(--linha); border-radius: 16px; padding: 14px 12px; text-align: center; box-shadow: 0 2px 8px rgba(43, 29, 20, .05); }
-  .pal img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; margin: 0 auto 10px; background: var(--creme-2); }
-  .pal b { display: block; font: 600 14px/1.25 var(--corpo); color: var(--tinta); }
-  .pal span { display: block; margin-top: 6px; font: 600 10.5px/1.35 var(--corpo); letter-spacing: .1em; text-transform: uppercase; color: var(--bronze); }
-
-  .midia { position: relative; margin-top: 18px; border-radius: 16px; overflow: hidden; background: var(--cacau); box-shadow: var(--sombra); }
-  .midia video { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
-  .midia figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 14px 12px; font: 500 13px/1.35 var(--corpo); color: #fff; background: linear-gradient(180deg, transparent, rgba(28, 18, 12, .85)); }
-
-  .total { font: 500 clamp(38px, 11vw, 48px)/1.05 var(--titulo); color: var(--bronze); margin: 14px 0 2px; }
-  .cursos { list-style: none; margin: 14px 0 0; padding: 0; }
-  .cursos li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--linha); font-size: 15px; }
-  .cursos li span:last-child { color: var(--tinta-suave); text-align: right; }
-
-  .objecoes { display: grid; gap: 12px; margin-top: 18px; }
-  .objecao { background: #fff; border: 1px solid var(--linha); border-radius: 16px; padding: 18px; box-shadow: 0 2px 8px rgba(43, 29, 20, .05); }
-  .objecao h3 { margin-bottom: 8px; }
-  .objecao p { margin: 0; font-size: 16px; }
-
-  .ingresso { position: relative; margin-top: 18px; background: #fff; border: 2px solid var(--ouro); border-radius: 20px; box-shadow: var(--sombra); padding: 26px 18px 22px; }
-  .selo { position: absolute; top: -12px; left: 18px; padding: 4px 10px; border-radius: 999px; background: var(--cacau); color: var(--ouro); font: 600 11px/1.3 var(--corpo); letter-spacing: .12em; text-transform: uppercase; }
-  .ingresso h2 { font-size: 30px; }
-  .de { margin: 10px 0 0; font-size: 15px; }
-  .de s { color: var(--tinta-suave); }
-  .preco { margin-top: 8px; }
-  .preco small { display: block; font-size: 14px; color: var(--tinta-suave); }
-  .preco .parcela { font: 600 44px/1.05 var(--titulo); color: var(--tinta); }
-  .preco .parcela .rs { font-size: 20px; vertical-align: top; margin-right: 2px; }
-  .preco .vista { font-size: 14px; color: var(--tinta-suave); }
-  .itens { list-style: none; margin: 16px 0 14px; padding: 0; }
-  .itens li { position: relative; padding: 7px 0 7px 26px; font-size: 15px; color: var(--tinta); border-bottom: 1px solid var(--linha); }
-  .itens li:last-child { border-bottom: 0; }
-  .itens li::before { content: ""; position: absolute; left: 2px; top: 13px; width: 12px; height: 7px; border-left: 2px solid var(--ouro-escuro); border-bottom: 2px solid var(--ouro-escuro); transform: rotate(-45deg); }
-  .fora { font-size: 14px; margin: 0 0 18px; }
-  .garantia { margin: 12px 0 0; font-size: 14px; text-align: center; color: var(--tinta-suave); }
-
-  .rodape { max-width: 560px; margin: 0 auto; padding: 0 16px 32px; text-align: center; font-size: 12px; color: var(--tinta-suave); }
-  @media (min-width: 600px) { main { padding-top: 40px; } }
+  .garantia { margin-top: 10px; font-size: 13px; }
+  .porque { margin-top: 16px; display: grid; gap: 8px; }
+  .porque p { font-size: 14px; padding: 10px 12px; border-radius: 12px; background: #fbf6ee; border: 1px solid var(--creme-2); }
+  .porque b { color: var(--tinta); font-weight: 600; }
+  .nao { display: block; margin: 18px auto 0; padding: 8px; text-align: center; font-size: 14px; color: var(--tinta-suave); }
+  .rodape { max-width: 480px; margin: 0 auto; padding: 0 16px 24px; text-align: center; font-size: 11px; color: var(--tinta-suave); }
+  @media (prefers-reduced-motion: reduce) { .btn { animation: none; } }
 </style>
 <script src="../config.js"></script>
 </head>
 <body>
 
-<div class="faixa">Espera, antes de sair</div>
+<div class="faixa">Espera! Oferta só desta página</div>
 
 <main>
-  <section>
-    <p class="rotulo">Para quem não pode ir a BH</p>
-    <h1>Não dá para ir a BH no dia 14? Assista ao vivo de onde você estiver.</h1>
-    <p class="sub">O ingresso online custa <b>R$ 197</b>. O presencial está em <b data-preco-presencial>R$ 497</b> no <span data-lote>1º lote</span>.</p>
-    <div class="faces"><img src="../assets/key-visual.webp" alt="Dra. Aline Filgueiras, Dr. Gabriel Magalhães, Dra. Natalie Rodrigues e Dra. Pamela Soares" width="1080" height="1350">
-      <div class="nomes"><b>Dra. Natalie</b><b>Dr. Gabriel</b><b>Dra. Aline</b><b>Dra. Pamela</b></div></div>
-    <div style="margin-top:22px"><a class="btn" href="#ingresso" data-ancora>Quero aproveitar essa oportunidade</a></div>
-  </section>
+  <h1>Não dá para ir a BH? Assista ao vivo por R$ 197.</h1>
+  <p class="lead">As 4 técnicas e os testemunhos do dia 14, em tempo real, de onde você estiver.</p>
+  <div class="rostos" aria-hidden="true">
+    <img src="../assets/aline.jpg" alt="" width="46" height="46"><img src="../assets/gabriel.jpg" alt="" width="46" height="46"><img src="../assets/natalie.jpg" alt="" width="46" height="46"><img src="../assets/pamela.jpg" alt="" width="46" height="46">
+  </div>
+  <p class="rostos-txt">Dra. Aline, Dr. Gabriel, Dra. Natalie e Dra. Pamela</p>
 
-  <section>
-    <p class="rotulo">O que você assiste</p>
-    <h2>Quatro especialistas aplicam ao vivo e explicam cada decisão em voz alta.</h2>
-    <p class="sub">Depois de cada técnica, o palestrante conta a história por trás dela: como começou, o que pesou no caminho e o lugar de Deus nessa trajetória.</p>
-    <div class="grade">
-      <div class="pal"><img src="../assets/aline.jpg" alt="Dra. Aline Filgueiras" width="72" height="72" loading="lazy"><b>Dra. Aline Filgueiras</b><span>Full face ao vivo</span></div>
-      <div class="pal"><img src="../assets/gabriel.jpg" alt="Dr. Gabriel Magalhães" width="72" height="72" loading="lazy"><b>Dr. Gabriel Magalhães</b><span>Harmonização facial e corporal</span></div>
-      <div class="pal"><img src="../assets/natalie.jpg" alt="Dra. Natalie Rodrigues" width="72" height="72" loading="lazy"><b>Dra. Natalie Rodrigues</b><span>Nariz Perfeito</span></div>
-      <div class="pal"><img src="../assets/pamela.jpg" alt="Dra. Pamela Soares" width="72" height="72" loading="lazy"><b>Dra. Pamela Soares</b><span>Posicionamento Facial®</span></div>
-    </div>
-    <figure class="midia"><video autoplay muted loop playsinline preload="metadata" poster="../assets/videos/aline-ao-vivo.jpg" aria-label="Dra. Aline Filgueiras aplicando ao vivo, em aula"><source src="../assets/videos/aline-ao-vivo.mp4" type="video/mp4"></video><figcaption>Dra. Aline Filgueiras aplicando ao vivo, em aula</figcaption></figure>
-  </section>
-
-  <section>
-    <p class="rotulo">O valor do dia</p>
-    <h2>Quanto custaria fazer o curso de cada um deles separadamente?</h2>
-    <p class="total">Mais de R$ 50 mil</p>
-    <p style="margin:0">somando um curso de cada palestrante</p>
-    <ul class="cursos">
-      <li><span>Dra. Aline Filgueiras</span><span>Curso presencial de anatomia</span></li>
-      <li><span>Dr. Gabriel Magalhães</span><span>Imersão presencial</span></li>
-      <li><span>Dra. Natalie Rodrigues</span><span>Curso de rinomodelação</span></li>
-      <li><span>Dra. Pamela Soares</span><span>Curso de preenchimento</span></li>
+  <div class="oferta">
+    <div class="compara"><span>Presencial <s data-preco-presencial>R$ 497</s></span><span>Online <b>R$ <span data-preco>197</span></b></span></div>
+    <span class="economia">R$ <span data-economia>300</span> a menos e sem custo de viagem</span>
+    <p class="parcela">12x de<b><span class="rs">R$</span><span data-parcela>20,37</span></b></p>
+    <p class="vista">ou R$ <span data-preco>197</span>,00 à vista</p>
+    <ul class="itens">
+      <li>Transmissão ao vivo do sábado, 14/11, a partir das 9h</li>
+      <li>As 4 técnicas e os testemunhos, na hora do palco</li>
+      <li>Certificado de participação on-line</li>
+      <li>Link da sala no seu WhatsApp em 13/11</li>
     </ul>
-  </section>
+    <a class="btn" href="#" data-checkout>Quero aproveitar essa oportunidade</a>
+    <p class="garantia">7 dias para pedir 100% do valor de volta. Compra segura pela Ticto.</p>
+  </div>
 
-  <section>
-    <p class="rotulo">Antes de decidir</p>
-    <h2>As dúvidas de quem não pode viajar.</h2>
-    <div class="objecoes">
-      <div class="objecao"><h3>Não consigo viajar até BH.</h3><p>Você assiste de casa ou da clínica e economiza passagem, hotel e o dia de viagem. O link da sala chega no seu WhatsApp em 13/11.</p></div>
-      <div class="objecao"><h3>On-line é a mesma coisa que estar lá?</h3><p>A transmissão é ao vivo, na mesma hora do palco. Você acompanha cada técnica enquanto ela acontece, com o palestrante explicando a decisão em voz alta, e ouve os testemunhos logo em seguida.</p></div>
-      <div class="objecao"><h3>Vale a pena por R$ 197?</h3><p>Um curso on-line de um único palestrante já custa R$ 2 mil ou mais. No dia 14 você vê os quatro, com certificado de participação.</p></div>
-    </div>
-  </section>
+  <div class="porque">
+    <p><b>Só um curso on-line</b> de um desses palestrantes custa R$ 2 mil ou mais. Aqui são os quatro no mesmo dia.</p>
+    <p><b>Ao vivo, sem edição:</b> você vê cada técnica enquanto ela acontece, com a decisão explicada em voz alta.</p>
+  </div>
 
-  <section id="ingresso">
-    <div class="ingresso">
-      <span class="selo">Só nesta página</span>
-      <h2>Ingresso online</h2>
-      <p class="de">Presencial: <s data-preco-presencial>R$ 497</s></p>
-      <div class="preco"><small>Por 12x de</small><div class="parcela"><span class="rs">R$</span><span data-parcela>20,37</span></div><span class="vista">ou R$ <span data-preco>197</span>,00 à vista</span></div>
-      <ul class="itens">
-        <li>Transmissão ao vivo do sábado, 14/11</li>
-        <li>As 4 técnicas e os testemunhos, em tempo real</li>
-        <li>Certificado de participação on-line</li>
-        <li>Link da sala no seu WhatsApp em 13/11</li>
-      </ul>
-      <p class="fora">Coffee breaks, credenciamento e os extras do VIP ficam com quem vai a BH.</p>
-      <a class="btn" href="#" data-checkout>Quero aproveitar essa oportunidade</a>
-      <p class="garantia">Você tem 7 dias para pedir 100% do valor de volta, com o pedido até 48 horas antes do evento.</p>
-    </div>
-    <a class="nao" href="../" data-nao>Não, quero perder essa chance</a>
-  </section>
+  <a class="nao" href="../" data-nao>Não, quero perder essa chance</a>
 </main>
 
 <footer class="rodape">Filgueiras Treinamentos LTDA · CNPJ 48.239.615/0001-00 · <a href="../privacidade/">Política de privacidade</a></footer>
@@ -192,6 +119,7 @@
   const lote = CONFIG.lotes[iLote];
   document.querySelectorAll("[data-preco-presencial]").forEach(el => el.textContent = "R$ " + fmt(lote.profissional.preco));
   document.querySelectorAll("[data-lote]").forEach(el => el.textContent = lote.nome);
+  document.querySelectorAll("[data-economia]").forEach(el => el.textContent = fmt(lote.profissional.preco - CONFIG.online.preco));
   document.querySelectorAll("[data-preco]").forEach(el => el.textContent = fmt(CONFIG.online.preco));
   document.querySelectorAll("[data-parcela]").forEach(el => el.textContent = CONFIG.parcelas[CONFIG.online.preco] || "");
 
@@ -215,7 +143,6 @@
   track("track", "ViewContent", { content_name: "Ingresso online", content_category: "Online", value: CONFIG.online.preco, currency: "BRL" });
   document.addEventListener("click", ev => {
     if (ev.target.closest("[data-checkout]")) track("trackCustom", "CliqueCheckout", { ingresso: "online", value: CONFIG.online.preco, currency: "BRL", origem: "downsell" });
-    if (ev.target.closest("[data-ancora]")) { ev.preventDefault(); document.getElementById("ingresso").scrollIntoView({ behavior: "smooth" }); }
   });
 })();
 </script>
