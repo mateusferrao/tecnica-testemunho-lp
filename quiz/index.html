@@ -259,10 +259,21 @@
     fe: { sim: "TT · Fé sim", asvezes: "TT · Fé às vezes", nao: "TT · Fé não" },
     objecao: { valor: "TT · Objeção valor", viagem: "TT · Objeção viagem", data: "TT · Objeção data", nivel: "TT · Objeção nível", nada: "TT · Sem objeção" }
   };
+  // VIP por pontuação: experiência, dor de clínica/propósito, jeito de aprender e vontade de ir.
+  // Quem marcou "O valor" nunca recebe o VIP como indicado (ele segue nas outras opções).
+  const PONTOS_VIP = {
+    tempo: { mais5: 2, "2a5": 1 },
+    dor: { clinica: 2, proposito: 1 },
+    aprende: { mentoria: 1, congressos: 1 },
+    custo: { cobrar: 1 },
+    objecao: { nada: 2 }
+  };
+  const VIP_A_PARTIR = 3;
   const indicado = () => {
     if (E.r.area === "graduacao") return "estudante";
-    if (E.r.tempo === "mais5" || E.r.objecao === "nada") return "vip";
-    return "profissional";
+    if (E.r.objecao === "valor") return "profissional";
+    const pontos = Object.entries(PONTOS_VIP).reduce((s, [campo, tabela]) => s + (tabela[E.r[campo]] || 0), 0);
+    return pontos >= VIP_A_PARTIR ? "vip" : "profissional";
   };
   const tagsAtuais = final => {
     const t = ["TT · Quiz lead"];
