@@ -1,5 +1,5 @@
 /* ============================================================
-   Análise do funil (PostHog) e gravação de sessão (Microsoft Clarity).
+   Análise do funil e gravação de sessão (PostHog) e gravação com mapa de calor (Microsoft Clarity).
    Só liga se as chaves estiverem no config.js (são chaves públicas, feitas para ficar na página).
    Nunca mande nome, telefone ou e-mail para essas ferramentas: a ligação com o lead
    é feita pelo código da visita (o mesmo event_id que vai para o n8n).
@@ -29,11 +29,12 @@
       stub.__SV = 1;
       stub.init(ph.chave, {
         api_host: ph.host,
+        defaults: "2026-05-30",
         person_profiles: "identified_only", // perfil só para quem passou do WhatsApp
         autocapture: false,                 // só os eventos que mandamos
         capture_pageview: true,
         capture_pageleave: true,
-        disable_session_recording: true,    // a gravação fica com o Clarity
+        session_recording: { maskAllInputs: true }, // grava a navegação com nome e telefone ocultos
         persistence: "localStorage+cookie"
       });
     }
