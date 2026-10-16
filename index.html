@@ -541,37 +541,8 @@
 
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1324439740761727&ev=PageView&noscript=1"></noscript>
 
+<script src="config.js"></script>
 <script>
-/* ============================================================
-   CONFIG · tudo que muda (preço, parcela, lote, link) fica aqui.
-   Nunca coloque aqui o token da API de Conversões: esta página é pública.
-   ============================================================ */
-const CONFIG = {
-  pixelId: "1324439740761727",
-  whatsapp: "5531953491799",
-  // Valor de cada parcela em 12x (Ticto, juros do comprador), por preço à vista
-  parcelas: {
-    1297: "134,13",
-    497: "51,40", 597: "61,74", 697: "72,08",
-    397: "41,05", 477: "49,33", 557: "57,60"
-  },
-  vip: { preco: 1297, checkout: "https://payment.ticto.app/O99FD1428" },
-  // Lote vira na data (23h59, horário de Brasília) ou ao esgotar.
-  lotes: [
-    { nome: "1º lote", fim: "2026-10-25T23:59:59-03:00", fimTexto: "25/10", vagas: 100,
-      profissional: { preco: 497, checkout: "https://payment.ticto.app/O29F8C641" },
-      estudante:    { preco: 397, checkout: "https://payment.ticto.app/O916934E8" } },
-    { nome: "2º lote", fim: "2026-11-04T23:59:59-03:00", fimTexto: "04/11", vagas: 110,
-      profissional: { preco: 597, checkout: "https://payment.ticto.app/O77A23151" },
-      estudante:    { preco: 477, checkout: "https://payment.ticto.app/OC5DF6A8A" } },
-    { nome: "3º lote", fim: "2026-11-13T23:59:59-03:00", fimTexto: "13/11", vagas: 80,
-      profissional: { preco: 697, checkout: "https://payment.ticto.app/O8F7466D1" },
-      estudante:    { preco: 557, checkout: "https://payment.ticto.app/OA38F974B" } }
-  ],
-  // Para virar o lote antes da data (esgotou), troque para 1 ou 2.
-  loteForcado: null
-};
-
 (function () {
   const agora = new Date();
   let i = CONFIG.loteForcado ?? CONFIG.lotes.findIndex(l => agora <= new Date(l.fim));
