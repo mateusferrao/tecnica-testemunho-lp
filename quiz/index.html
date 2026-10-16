@@ -61,7 +61,8 @@
 
   /* Tela */
   main { max-width: 560px; margin: 0 auto; padding: 22px 16px 48px; }
-  .tela { animation: entra .35s ease both; }
+  /* "backwards": no fim da animação não sobra transform na tela, senão a barra fixa de compra fica presa à tela e não ao rodapé */
+  .tela { animation: entra .35s ease backwards; }
   @keyframes entra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   .cartao { background: #fff; border: 1px solid var(--linha); border-radius: 18px; box-shadow: var(--sombra); padding: 22px 18px; }
   .rotulo { font: 600 12px/1.4 var(--corpo); letter-spacing: .16em; text-transform: uppercase; color: var(--bronze); margin: 0 0 10px; }
@@ -691,6 +692,8 @@
     if (id !== "capa") track("trackCustom", "QuizEtapa", { etapa: id, ordem: pos });
     // Funil (PostHog/Clarity): uma etapa por tela, com as respostas até aqui. Sem nome nem telefone.
     TTA.evento("quiz_etapa", Object.assign({ etapa: id, ordem: pos, passou_whats: !!E.whatsapp }, E.r));
+    // Botão flutuante de WhatsApp: só no resultado
+    if (window.TTZap) TTZap.mostrar(id === "resultado");
     if (id === "resultado") {
       ligaRelogio();
       const principal = raiz.querySelector("[data-principal]"), barraCompra = raiz.querySelector("[data-barra]");
@@ -784,5 +787,6 @@
   render();
 })();
 </script>
+<script src="../whatsapp.js" data-pagina="quiz" data-mostrar="manual" data-mensagem="Olá, fiz o teste do Técnica &amp; Testemunho e fiquei com uma dúvida."></script>
 </body>
 </html>
