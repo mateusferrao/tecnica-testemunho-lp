@@ -79,7 +79,7 @@
 
   <div class="oferta">
     <div class="compara"><span>Presencial <span data-tipo-presencial></span> <s data-preco-presencial></s></span><span>Online <b>R$ <span data-preco></span></b></span></div>
-    <span class="economia">R$ <span data-economia></span> a menos e sem custo de viagem</span>
+    <span class="economia" data-economia></span>
     <p class="parcela">12x de<b><span class="rs">R$</span><span data-parcela></span></b></p>
     <p class="vista">ou R$ <span data-preco></span>,00 à vista</p>
     <ul class="itens">
@@ -129,7 +129,11 @@
   document.querySelectorAll("[data-tipo-presencial]").forEach(el => el.textContent = nomeTipo);
   document.querySelectorAll("[data-preco-presencial]").forEach(el => el.textContent = "R$ " + fmt(presencial));
   document.querySelectorAll("[data-lote]").forEach(el => el.textContent = lote.nome);
-  document.querySelectorAll("[data-economia]").forEach(el => el.textContent = fmt(presencial - CONFIG.online.preco));
+  // Economia pequena (ex.: Estudante) não ajuda a vender: aí o destaque fica só no custo de viagem.
+  const economia = presencial - CONFIG.online.preco;
+  document.querySelectorAll("[data-economia]").forEach(el => el.textContent = economia >= 200
+    ? `R$ ${fmt(economia)} a menos e sem custo de viagem`
+    : "Sem custo de viagem e de hotel");
   document.querySelectorAll("[data-preco]").forEach(el => el.textContent = fmt(CONFIG.online.preco));
   document.querySelectorAll("[data-parcela]").forEach(el => el.textContent = CONFIG.parcelas[CONFIG.online.preco] || "");
   document.body.classList.remove("carregando");
