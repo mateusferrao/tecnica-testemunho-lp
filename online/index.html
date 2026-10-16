@@ -78,7 +78,7 @@
   <p class="rostos-txt">Dra. Aline, Dr. Gabriel, Dra. Natalie e Dra. Pamela</p>
 
   <div class="oferta">
-    <div class="compara"><span>Presencial <s data-preco-presencial></s></span><span>Online <b>R$ <span data-preco></span></b></span></div>
+    <div class="compara"><span>Presencial <span data-tipo-presencial></span> <s data-preco-presencial></s></span><span>Online <b>R$ <span data-preco></span></b></span></div>
     <span class="economia">R$ <span data-economia></span> a menos e sem custo de viagem</span>
     <p class="parcela">12x de<b><span class="rs">R$</span><span data-parcela></span></b></p>
     <p class="vista">ou R$ <span data-preco></span>,00 à vista</p>
@@ -89,7 +89,7 @@
       <li>Link da sala no seu WhatsApp em 13/11</li>
     </ul>
     <a class="btn" href="#" data-checkout>Quero aproveitar essa oportunidade</a>
-    <p class="garantia">7 dias para pedir 100% do valor de volta. Compra segura pela Ticto.</p>
+    <p class="garantia">7 dias para pedir 100% do valor de volta, com pedido até 48 h antes do evento. Compra segura pela Ticto.</p>
   </div>
 
   <div class="porque">
@@ -118,9 +118,18 @@
   let iLote = CONFIG.loteForcado ?? CONFIG.lotes.findIndex(l => agora <= new Date(l.fim));
   if (iLote < 0) iLote = CONFIG.lotes.length - 1;
   const lote = CONFIG.lotes[iLote];
-  document.querySelectorAll("[data-preco-presencial]").forEach(el => el.textContent = "R$ " + fmt(lote.profissional.preco));
+  // Compara com o ingresso que a pessoa tentou comprar (gravado pela LP e pelo quiz no clique do checkout).
+  // Sem registro, compara com o Profissional.
+  let volta = null;
+  try { volta = JSON.parse(localStorage.getItem("tt_volta") || "null"); } catch (e) {}
+  const recente = volta && Date.now() - volta.t < 1728e5;
+  const tipo = recente && ["vip", "profissional", "estudante"].includes(volta.tipo) ? volta.tipo : "profissional";
+  const presencial = tipo === "vip" ? CONFIG.vip.preco : lote[tipo].preco;
+  const nomeTipo = { vip: "VIP", profissional: "Profissional", estudante: "Estudante" }[tipo];
+  document.querySelectorAll("[data-tipo-presencial]").forEach(el => el.textContent = nomeTipo);
+  document.querySelectorAll("[data-preco-presencial]").forEach(el => el.textContent = "R$ " + fmt(presencial));
   document.querySelectorAll("[data-lote]").forEach(el => el.textContent = lote.nome);
-  document.querySelectorAll("[data-economia]").forEach(el => el.textContent = fmt(lote.profissional.preco - CONFIG.online.preco));
+  document.querySelectorAll("[data-economia]").forEach(el => el.textContent = fmt(presencial - CONFIG.online.preco));
   document.querySelectorAll("[data-preco]").forEach(el => el.textContent = fmt(CONFIG.online.preco));
   document.querySelectorAll("[data-parcela]").forEach(el => el.textContent = CONFIG.parcelas[CONFIG.online.preco] || "");
   document.body.classList.remove("carregando");
@@ -137,8 +146,7 @@
   let voltar = new URL("../", location.href);
   params.forEach((v, k) => { if (k.startsWith("utm_")) voltar.searchParams.set(k, v); });
   try {
-    const v = JSON.parse(localStorage.getItem("tt_volta") || "null");
-    if (v && v.url && Date.now() - v.t < 1728e5) { const u = new URL(v.url); if (u.origin === location.origin) voltar = u; }
+    if (recente && volta.url) { const u = new URL(volta.url); if (u.origin === location.origin) voltar = u; }
   } catch (e) {}
   document.querySelector("[data-nao]").href = voltar.toString();
 

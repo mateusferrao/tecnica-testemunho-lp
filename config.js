@@ -10,9 +10,9 @@ const CONFIG = {
   webhookLead: "https://n8n.automato.pro/webhook/tt-quiz-lead",
   // Valor de cada parcela em 12x (Ticto, juros do comprador), por preço à vista
   parcelas: {
-    1297: "134,13",
-    497: "51,40", 597: "61,74", 697: "72,08",
-    397: "41,05", 477: "49,33", 557: "57,60",
+    1297: "134,14",
+    497: "51,40", 597: "61,74", 697: "72,09",
+    397: "41,06", 477: "49,33", 557: "57,61",
     197: "20,37"
   },
   vip: { preco: 1297, checkout: "https://payment.ticto.app/O99FD1428" },

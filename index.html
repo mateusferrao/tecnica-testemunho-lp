@@ -8,7 +8,10 @@
 <meta name="description" content="Dra. Aline Filgueiras, Dr. Gabriel Magalhães, Dra. Natalie Rodrigues e Dra. Pamela Soares fazem suas técnicas de harmonização ao vivo no Hotel Ouro Minas, em Belo Horizonte.">
 <meta property="og:title" content="Técnica & Testemunho · Congresso de Harmonização">
 <meta property="og:description" content="As maiores referências da harmonização demonstrando suas técnicas ao vivo no mesmo palco. 14/11/2026, Hotel Ouro Minas, BH.">
-<meta property="og:image" content="assets/key-visual.webp">
+<meta property="og:url" content="https://tecnicaetestemunho.alinefilgueiras.com.br/">
+<meta property="og:image" content="https://tecnicaetestemunho.alinefilgueiras.com.br/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -664,7 +667,7 @@
     a.addEventListener("click", () => {
       track("trackCustom", "CliqueCheckout", { ingresso: a.dataset.checkout, value: ing.preco, currency: "BRL" });
       // Para o downsell (/online/) saber para onde voltar se a pessoa recusar
-      try { localStorage.setItem("tt_volta", JSON.stringify({ url: location.href.split("#")[0] + "#ingressos", t: Date.now() })); } catch (e) {}
+      try { localStorage.setItem("tt_volta", JSON.stringify({ url: location.href.split("#")[0] + "#ingressos", tipo: a.dataset.checkout, t: Date.now() })); } catch (e) {}
     });
   });
   document.querySelectorAll("[data-whatsapp]").forEach(a => {
