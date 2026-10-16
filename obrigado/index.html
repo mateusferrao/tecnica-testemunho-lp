@@ -162,10 +162,19 @@
 
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1324439740761727&ev=PageView&noscript=1"></noscript>
 <script>
+  // Tira do endereço qualquer parâmetro que o checkout acrescente (pode ter dados do comprador)
+  // antes de o Pixel, o PostHog e o Clarity lerem a URL.
+  if (location.search) history.replaceState(null, "", location.pathname + location.hash);
+</script>
+<script src="../config.js"></script>
+<script src="../analise.js"></script>
+<script>
   // A compra (Purchase) é enviada pela Ticto. Aqui só o PageView, para não duplicar.
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
   fbq("init", "1324439740761727");
   fbq("track", "PageView");
+  // PostHog: marca a chegada ao obrigado (aproximação da compra, sem dados pessoais) para fechar o funil
+  if (window.TTA) TTA.evento("compra_obrigado", { tipo: "presencial" });
   document.querySelectorAll("[data-whatsapp]").forEach(a => {
     a.href = "https://wa.me/5531953491799?text=" + encodeURIComponent("Olá, comprei meu ingresso para o Técnica & Testemunho e tenho uma dúvida.");
   });

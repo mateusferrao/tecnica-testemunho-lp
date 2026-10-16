@@ -10,6 +10,16 @@
   const cfg = typeof CONFIG !== "undefined" ? CONFIG : {};
   const ph = cfg.posthog || {};
 
+  // Nas páginas de obrigado, nenhum endereço sai com parâmetros: o checkout pode acrescentar dados do comprador.
+  // A página já limpa a URL ao abrir, mas o evento de desempenho ($web_vitals) guarda o endereço original.
+  const noObrigado = location.pathname.indexOf("/obrigado") === 0;
+  const semParametros = (v, n) => {
+    if (typeof v === "string") return v.indexOf("/obrigado") > -1 && v.indexOf("?") > -1 ? v.split("?")[0] : v;
+    if (v && typeof v === "object" && n < 5) Object.keys(v).forEach(k => { v[k] = semParametros(v[k], n + 1); });
+    return v;
+  };
+  const limparObrigado = ev => (noObrigado && ev ? semParametros(ev, 0) : ev);
+
   // PostHog: carregador oficial em versão legível (fila os eventos até o script carregar)
   if (ph.chave && ph.host) {
     const stub = window.posthog = window.posthog || [];
@@ -35,7 +45,8 @@
         capture_pageview: true,
         capture_pageleave: true,
         session_recording: { maskAllInputs: true }, // grava a navegação com nome e telefone ocultos
-        persistence: "localStorage+cookie"
+        persistence: "localStorage+cookie",
+        before_send: limparObrigado
       });
     }
   }
