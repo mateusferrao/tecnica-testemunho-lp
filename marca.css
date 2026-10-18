@@ -70,7 +70,8 @@ body[class*="pg-"] [data-contador] { font-variant-numeric: tabular-nums lining-n
 
 /* Hero: fundo caramelo com brilho atrás dos rostos, ondas de luz e partículas */
 .pg-lp .hero { position: relative; overflow: hidden; padding-bottom: 84px;
-  background: radial-gradient(80% 60% at 50% 26%, #6b452c 0%, #5d3c26 38%, #3f2616 70%, #24150c 100%); }
+  /* o centro tem a cor da base da foto e escurece devagar: a foto se dissolve no fundo sem degrau */
+  background: radial-gradient(95% 52% at 50% 30%, #66503a 0%, #5d4530 34%, #4b3220 58%, #33200f 80%, #24150c 100%); }
 .pg-lp .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .7;
   background-image:
     radial-gradient(1.6px 1.6px at 12% 18%, #fff3d6, transparent), radial-gradient(1.2px 1.2px at 22% 64%, #ffe7b8, transparent),
@@ -80,9 +81,9 @@ body[class*="pg-"] [data-contador] { font-variant-numeric: tabular-nums lining-n
 .pg-lp .ondas { position: absolute; left: -10%; right: -10%; bottom: -2px; width: 120%; height: auto; pointer-events: none; opacity: .9; }
 .pg-lp .palco { aspect-ratio: 1080 / 900; max-width: 760px; background: none; }
 .pg-lp .palco img { margin-top: -10.6%;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 84%, transparent 100%), linear-gradient(180deg, transparent 0, #000 12%, #000 84%, transparent 99%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 84%, transparent 100%), linear-gradient(180deg, transparent 0, #000 16%, #000 88%, transparent 100%);
   -webkit-mask-composite: source-in;
-          mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 84%, transparent 100%), linear-gradient(180deg, transparent 0, #000 12%, #000 84%, transparent 99%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 84%, transparent 100%), linear-gradient(180deg, transparent 0, #000 16%, #000 88%, transparent 100%);
           mask-composite: intersect; }
 .pg-lp .palco::after { background: linear-gradient(180deg, transparent 80%, rgba(36, 21, 12, .0) 100%); }
 /* Nomes embaixo da foto (a foto tem o logo na base) */
@@ -153,7 +154,7 @@ body[class*="pg-"] [data-contador] { font-variant-numeric: tabular-nums lining-n
   .pg-lp .palco { aspect-ratio: 1080 / 920; }
 }
 @media (min-width: 1000px) {
-  .pg-lp .hero { background: radial-gradient(48% 70% at 27% 42%, #6b452c 0%, #5d3c26 40%, #3f2616 75%, #24150c 100%); }
+  .pg-lp .hero { background: radial-gradient(50% 72% at 27% 34%, #765a3f 0%, #66503a 26%, #574029 48%, #432c1a 66%, #2e1c0f 84%, #24150c 100%); }
   .pg-lp .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center; gap: 8px; padding: 24px max(24px, calc((100vw - 1180px) / 2)) 96px; }
   .pg-lp .palco { max-width: none; width: 100%; }
   .pg-lp .hero > .nomes { grid-column: 1; grid-row: 2; max-width: none; padding: 0 12%; margin-top: -18px; }
