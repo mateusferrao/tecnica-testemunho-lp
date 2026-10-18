@@ -1,0 +1,184 @@
+/* ============================================================
+   Identidade visual do Técnica & Testemunho, a partir da arte oficial (18/10/2026):
+   marrom caramelo com brilho no centro, dourado metálico com reflexo, ondas de luz e
+   serifa clássica (Cinzel no nome e nos rótulos, Cormorant Garamond nos títulos).
+   Carregado DEPOIS do <style> de cada página: redefine as cores e as fontes e ajusta os componentes.
+   Classe no <body>: pg-lp, pg-quiz, pg-online ou pg-obrigado.
+   ============================================================ */
+:root {
+  --cacau: #26160d;
+  --cacau-2: #37210f;
+  --caramelo: #6a442b;
+  --caramelo-claro: #8a5a36;
+  --ouro: #d9ac70;
+  --ouro-claro: #f3dcae;
+  --ouro-escuro: #a8763f;
+  --ouro-metal: linear-gradient(135deg, #f7e3b6 0%, #e2b77c 28%, #b98447 52%, #efcf93 76%, #c99556 100%);
+  --ouro-texto: linear-gradient(180deg, #fbebc6 0%, #ecc98e 45%, #c8955a 100%);
+  --fundo-escuro: radial-gradient(120% 70% at 50% 0%, #6a442b 0%, #4a2d1b 38%, #2c1a0f 72%, #22140b 100%);
+  --fundo-claro: linear-gradient(180deg, #f8eedf 0%, #f1e2cb 100%);
+  --creme: #f6ead8;
+  --creme-2: #ecdcc3;
+  --texto: #f3e6d2;
+  --texto-suave: #d0b998;
+  --linha-escura: rgba(236, 201, 142, .22);
+  --titulo: "Cormorant Garamond", Georgia, serif;
+  --display: "Cormorant Garamond", Georgia, serif;
+  --logo: "Cinzel", Georgia, serif;
+}
+
+/* ---------- Componentes comuns ---------- */
+h1, h2, h3 { font-family: var(--titulo); font-weight: 600; letter-spacing: 0; }
+.btn {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: var(--ouro-metal) !important; color: #2a1708 !important;
+  border: 0; font-weight: 600;
+  box-shadow: 0 10px 26px rgba(217, 172, 112, .32), inset 0 1px 0 rgba(255, 246, 222, .7), inset 0 -2px 0 rgba(120, 78, 36, .35);
+}
+.btn::after {
+  content: ""; position: absolute; inset: -40% auto -40% -60%; width: 40%; z-index: -1; pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255, 250, 235, .75), transparent);
+  transform: skewX(-18deg); animation: reflexo 5.5s ease-in-out infinite;
+}
+.btn:hover { filter: brightness(1.06); }
+@keyframes reflexo { 0%, 62% { left: -60%; } 82%, 100% { left: 130%; } }
+/* Cormorant usa números "antigos" por padrão: força algarismos alinhados (o contador continua tabular) */
+body[class*="pg-"] * { font-variant-numeric: lining-nums !important; }
+body[class*="pg-"] [data-contador] { font-variant-numeric: tabular-nums lining-nums !important; }
+.dourado { background: var(--ouro-texto); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.fio-dourado { height: 1px; border: 0; margin: 0; background: linear-gradient(90deg, transparent, rgba(236, 201, 142, .85), transparent); }
+@media (prefers-reduced-motion: reduce) { .btn::after { animation: none; display: none; } }
+
+/* ============================================================
+   LP
+   ============================================================ */
+.pg-lp { background: #22140b; }
+.pg-lp .rotulo, .pg-lp .card .palco-tag, .pg-lp .selo, .pg-lp .vozes cite, .pg-lp .card .frase small {
+  font-family: var(--logo); font-weight: 600; letter-spacing: .16em;
+}
+.pg-lp .rotulo { font-size: 13px; color: var(--ouro); }
+.pg-lp .claro .rotulo, .pg-lp .card .palco-tag { color: #8a5a2c; }
+.pg-lp h2 { font-size: clamp(34px, 5vw, 50px); line-height: 1.08; }
+.pg-lp h3 { font-size: 25px; }
+.pg-lp section:not(.claro) { background: var(--fundo-escuro); }
+.pg-lp .claro { background: var(--fundo-claro); position: relative; }
+.pg-lp .claro::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(185, 132, 71, .7), transparent); }
+.pg-lp .btn { border-radius: 999px; padding: 19px 34px; }
+
+/* Faixa do topo */
+.pg-lp .barra-data { background: var(--ouro-metal); color: #2a1708; font-family: var(--logo); font-weight: 600; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+
+/* Hero: fundo caramelo com brilho atrás dos rostos, ondas de luz e partículas */
+.pg-lp .hero { position: relative; overflow: hidden; padding-bottom: 84px;
+  background: radial-gradient(80% 60% at 50% 26%, #6b452c 0%, #5d3c26 38%, #3f2616 70%, #24150c 100%); }
+.pg-lp .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .7;
+  background-image:
+    radial-gradient(1.6px 1.6px at 12% 18%, #fff3d6, transparent), radial-gradient(1.2px 1.2px at 22% 64%, #ffe7b8, transparent),
+    radial-gradient(1.8px 1.8px at 84% 26%, #fff3d6, transparent), radial-gradient(1.2px 1.2px at 91% 58%, #ffe7b8, transparent),
+    radial-gradient(1.4px 1.4px at 70% 84%, #fff3d6, transparent), radial-gradient(1.2px 1.2px at 8% 88%, #ffe7b8, transparent),
+    radial-gradient(1.5px 1.5px at 38% 92%, #fff3d6, transparent), radial-gradient(1.1px 1.1px at 58% 8%, #ffe7b8, transparent); }
+.pg-lp .ondas { position: absolute; left: -10%; right: -10%; bottom: -2px; width: 120%; height: auto; pointer-events: none; opacity: .9; }
+.pg-lp .palco { aspect-ratio: 1080 / 900; max-width: 760px; background: none; }
+.pg-lp .palco img { margin-top: -10.6%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 84%, transparent 100%), linear-gradient(180deg, transparent 0, #000 12%, #000 84%, transparent 99%);
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 84%, transparent 100%), linear-gradient(180deg, transparent 0, #000 12%, #000 84%, transparent 99%);
+          mask-composite: intersect; }
+.pg-lp .palco::after { background: linear-gradient(180deg, transparent 80%, rgba(36, 21, 12, .0) 100%); }
+/* Nomes embaixo da foto (a foto tem o logo na base) */
+.pg-lp .nomes { position: static; display: grid; grid-template-columns: repeat(3, 1fr); max-width: 760px; margin: -6px auto 0; padding: 0 8%; position: relative; z-index: 2; }
+.pg-lp .nomes b { font: 600 clamp(10px, 1.4vw, 13px)/1.3 var(--logo); letter-spacing: .08em; text-transform: uppercase; color: var(--ouro-claro); text-shadow: none; }
+.pg-lp .hero-texto { position: relative; z-index: 2; margin-top: 4px; }
+.pg-lp .hero .data-evento { font: 600 13px/1.5 var(--logo); letter-spacing: .2em; text-transform: uppercase; color: var(--ouro-claro); margin: 0 0 16px; }
+.pg-lp .hero h1 { font-weight: 600; font-size: clamp(34px, 5.6vw, 58px); line-height: 1.06; color: #fbeed6; text-shadow: 0 2px 24px rgba(0, 0, 0, .25); }
+.pg-lp .hero h1 em { font-style: italic; }
+.pg-lp .hero .sub { font-size: clamp(18px, 2.1vw, 21px); color: #f3e6d2; }
+.pg-lp .assinatura { font: italic 600 22px/1.35 var(--titulo); }
+.pg-lp .assinatura, .pg-lp .total, .pg-lp .parcela, .pg-lp .garantia .sete { background: var(--ouro-texto); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pg-lp .contador-hero b { color: var(--ouro-claro); }
+
+/* Dores, Como funciona */
+.pg-lp .dores li { font-size: 19px; }
+.pg-lp .passos li::before { border-color: var(--ouro); color: var(--ouro-claro); font-family: var(--logo); }
+.pg-lp .fonte { font-size: 26px; }
+.pg-lp .vozes blockquote p { font-size: 21px; }
+.pg-lp .vozes blockquote { border-left-color: var(--ouro); }
+.pg-lp .midia-ao-vivo { border-radius: 10px; box-shadow: 0 0 0 1px rgba(236, 201, 142, .35), 0 24px 60px rgba(0, 0, 0, .35); }
+
+/* Palestrantes */
+.pg-lp .card { background: #fffaf2; border: 1px solid rgba(185, 132, 71, .35); border-radius: 12px; box-shadow: 0 12px 34px rgba(106, 68, 43, .12); }
+.pg-lp .rosto { box-shadow: 0 0 0 2px #fffaf2, 0 0 0 3px rgba(185, 132, 71, .7); }
+.pg-lp .card h3 { font-size: 27px; }
+.pg-lp .selos b { font-size: 30px; color: #8a5a2c; }
+.pg-lp .claro .card .frase { font-size: 21px; }
+
+/* Vídeos */
+.pg-lp .player { border-radius: 10px; box-shadow: 0 0 0 1px rgba(236, 201, 142, .35), 0 18px 40px rgba(0, 0, 0, .3); }
+.pg-lp .depo figcaption { font-size: 20px; font-weight: 600; }
+
+/* Âncora */
+.pg-lp .total { font-size: clamp(48px, 8vw, 78px); font-weight: 700; background: linear-gradient(180deg, #c9965a 0%, #8a5a2c 100%); -webkit-background-clip: text; background-clip: text; }
+
+/* Ingressos */
+.pg-lp .ingressos { position: relative; overflow: hidden; }
+.pg-lp .plano { background: linear-gradient(180deg, rgba(255, 236, 200, .07), rgba(0, 0, 0, .18)); border: 1px solid rgba(236, 201, 142, .28); border-radius: 14px; backdrop-filter: blur(2px); }
+.pg-lp .plano.vip { border-color: rgba(236, 201, 142, .9); box-shadow: 0 0 0 1px rgba(236, 201, 142, .5), 0 0 48px rgba(217, 172, 112, .28); }
+.pg-lp .plano h3 { font-size: 34px; }
+.pg-lp .parcela { font-size: 54px; font-weight: 700; }
+.pg-lp .selo { background: var(--ouro-metal); color: #2a1708; border-radius: 999px; padding: 7px 12px; }
+.pg-lp .selo.lote { background: #f3e6d2; font-family: var(--corpo); letter-spacing: .1em; }
+
+/* Agenda e garantia */
+.pg-lp .agenda time { font-size: 20px; color: #8a5a2c; }
+.pg-lp .garantia .caixa { border: 1px solid rgba(236, 201, 142, .4); border-radius: 14px; background: linear-gradient(180deg, rgba(255, 236, 200, .06), rgba(0, 0, 0, .12)); }
+.pg-lp .garantia .sete { font-size: 84px; font-weight: 700; }
+.pg-lp .garantia h3 { font-size: 28px; }
+
+/* FAQ e rodapé */
+.pg-lp summary { font-size: 18px; }
+.pg-lp footer { background: var(--fundo-escuro); border-top: 1px solid rgba(236, 201, 142, .25); }
+.pg-lp footer .marca-rodape { font: 600 14px/1.3 var(--logo); letter-spacing: .24em; margin: 0 0 8px; }
+.pg-lp footer .slogan { font: italic 500 19px/1.4 var(--titulo); color: var(--texto); max-width: 460px; margin: 4px auto 14px; }
+
+/* Barra fixa (celular) */
+.pg-lp .fixa { background: rgba(38, 22, 13, .97); border-top: 1px solid rgba(236, 201, 142, .4); }
+.pg-lp .fixa .btn { padding: 14px 18px; }
+
+@media (max-width: 759px) {
+  .pg-lp .barra-data { font-size: 10.5px; letter-spacing: .08em; padding: 9px 8px; }
+  .pg-lp .so-largo { display: none; }
+  .pg-lp .hero .data-evento { margin-top: 22px; font-size: 12px; }
+  .pg-lp .nomes { padding: 0 4%; }
+  .pg-lp .hero h1 { font-size: 33px; line-height: 1.08; }
+  .pg-lp .palco { aspect-ratio: 1080 / 920; }
+}
+@media (min-width: 1000px) {
+  .pg-lp .hero { background: radial-gradient(48% 70% at 27% 42%, #6b452c 0%, #5d3c26 40%, #3f2616 75%, #24150c 100%); }
+  .pg-lp .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center; gap: 8px; padding: 24px max(24px, calc((100vw - 1180px) / 2)) 96px; }
+  .pg-lp .palco { max-width: none; width: 100%; }
+  .pg-lp .hero > .nomes { grid-column: 1; grid-row: 2; max-width: none; padding: 0 12%; margin-top: -18px; }
+  .pg-lp .hero-texto { grid-column: 2; grid-row: 1 / span 2; }
+  .pg-lp .hero-texto { text-align: left; margin: 0; padding: 0 0 0 8px; }
+  .pg-lp .hero .sub { margin-left: 0; }
+}
+
+/* ============================================================
+   Quiz, página online e obrigado: mesmas cores, fontes e botão
+   ============================================================ */
+.pg-quiz, .pg-online { background: var(--fundo-claro) fixed; }
+.pg-quiz .rotulo, .pg-quiz .capa .data, .pg-quiz .topo .marca, .pg-online .faixa, .pg-obrigado .rotulo {
+  font-family: var(--logo); font-weight: 600; letter-spacing: .14em;
+}
+.pg-quiz h1 { font-size: clamp(32px, 7.4vw, 44px); line-height: 1.08; }
+.pg-quiz h2 { font-size: clamp(27px, 6.2vw, 36px); line-height: 1.12; }
+.pg-quiz .topo .marca { background: linear-gradient(180deg, #c9965a 0%, #8a5a2c 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pg-quiz .btn, .pg-online .btn { border-radius: 999px; }
+.pg-quiz .opcao.marcada { border-color: var(--ouro-escuro); box-shadow: 0 0 0 2px rgba(217, 172, 112, .45); }
+.pg-quiz .faces, .pg-online .oferta { box-shadow: 0 0 0 1px rgba(185, 132, 71, .35), 0 16px 40px rgba(106, 68, 43, .18); }
+.pg-quiz .faces { background: radial-gradient(70% 70% at 50% 30%, #8d5c38, #4a2d1b); }
+.pg-online h1 { font-size: clamp(32px, 8vw, 44px); line-height: 1.08; }
+.pg-online .oferta { border-color: rgba(185, 132, 71, .7); }
+.pg-online .parcela b { font-family: var(--titulo); font-weight: 700; background: linear-gradient(180deg, #c9965a, #8a5a2c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pg-obrigado { background: var(--fundo-escuro) #22140b; }
+@media (max-width: 480px) { .pg-obrigado .faixa { letter-spacing: .1em; font-size: 10.5px; } }
+.pg-obrigado .btn { border-radius: 999px; }
