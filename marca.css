@@ -156,7 +156,7 @@ body[class*="pg-"] [data-contador] { font-variant-numeric: tabular-nums lining-n
 @media (min-width: 1000px) {
   .pg-lp .hero { background: radial-gradient(50% 72% at 27% 34%, #765a3f 0%, #66503a 26%, #574029 48%, #432c1a 66%, #2e1c0f 84%, #24150c 100%); }
   .pg-lp .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center; gap: 8px; padding: 24px max(24px, calc((100vw - 1180px) / 2)) 96px; }
-  .pg-lp .palco { max-width: none; width: 100%; }
+  .pg-lp .palco { max-width: none; width: 100%; align-self: end; }
   .pg-lp .hero > .nomes { grid-column: 1; grid-row: 2; max-width: none; padding: 0 12%; margin-top: -18px; }
   .pg-lp .hero-texto { grid-column: 2; grid-row: 1 / span 2; }
   .pg-lp .hero-texto { text-align: left; margin: 0; padding: 0 0 0 8px; }
