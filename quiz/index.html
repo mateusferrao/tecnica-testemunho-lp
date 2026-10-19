@@ -178,6 +178,8 @@
   .outro p { margin: 0; font-size: 15px; color: var(--tinta); }
   .outro small { display: block; font-size: 13px; color: var(--tinta-suave); }
   .outro .btn { width: auto; min-height: 46px; padding: 10px 16px; font-size: 14px; }
+  .ingresso .alt { margin: 12px 0 0; text-align: center; font-size: 15px; color: var(--tinta-suave); }
+  .ingresso .alt a { color: var(--tinta); font-weight: 600; }
   .duvida { margin-top: 22px; text-align: center; font-size: 15px; }
 
   h1, h2, h3, .frase-pal p, .vozes blockquote p, .total, .preco .parcela, .sim h2 { font-variant-numeric: lining-nums; }
@@ -587,6 +589,7 @@
         <div class="preco"><small>Por 12x de</small><div class="parcela"><span class="rs">R$</span>${parcela(tipo)}</div><span class="vista">ou R$ ${fmt(ing.preco)},00 à vista</span></div>
         <p class="lote">${loteTxt}</p>
         <a class="btn" href="${linkCheckout(tipo)}" data-checkout="${tipo}" data-principal>Garantir ${ing.nome}</a>
+        ${tipo === "vip" ? `<p class="alt">Só o dia, sem os extras? <a href="${linkCheckout("profissional")}" data-checkout="profissional">Profissional por 12x de R$ ${parcela("profissional")}</a></p>` : ""}
         <p class="garantia">7 dias para pedir 100% do valor de volta, com o pedido até 48 horas antes do evento.</p>
         <p class="desc">${DESC[tipo]}</p>
         <ul class="itens">${ITENS[tipo].map(i => `<li>${i}</li>`).join("")}</ul>
