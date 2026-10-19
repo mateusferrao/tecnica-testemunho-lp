@@ -297,12 +297,13 @@
       return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
     } catch (e) { return ""; }
   };
-  const enviar = async etapa => {
+  // etapa: "lead" (deixou o WhatsApp), "resultado" ou "checkout" (clicou em comprar; o n8n troca a recuperação para a sequência do checkout)
+  const enviar = async (etapa, extra) => {
     if (!CONFIG.webhookLead || !E.whatsapp) return;
     const chave = etapa + ":" + E.whatsapp;
     if (E.enviado[chave]) return;
     E.enviado[chave] = 1; salva();
-    const final = etapa === "resultado";
+    const final = etapa === "resultado" || etapa === "checkout";
     const corpo = {
       etapa,
       whatsapp: E.whatsapp,
@@ -314,6 +315,7 @@
       url: location.href,
       respostas: E.r,
       indicado: final ? ING[indicado()].nome : "",
+      ingresso: (extra && extra.ingresso) || "",
       tags: tagsAtuais(final),
       utm: { source: params.get("utm_source") || "", medium: params.get("utm_medium") || "", campaign: params.get("utm_campaign") || "", content: params.get("utm_content") || "quiz", term: params.get("utm_term") || "" }
     };
@@ -737,6 +739,7 @@
       const tipo = ck.dataset.checkout;
       track("trackCustom", "CliqueCheckout", { ingresso: tipo, value: ING[tipo].preco, currency: "BRL", origem: "quiz" });
       TTA.evento("quiz_checkout", Object.assign({ ingresso: tipo, valor: ING[tipo].preco, indicado: ING[indicado()].nome }, E.r));
+      enviar("checkout", { ingresso: tipo });
       // Para o downsell (/online/) voltar ao resultado do quiz se a pessoa recusar
       try {
         localStorage.setItem("tt_volta", JSON.stringify({ url: location.href.split("#")[0], tipo, t: Date.now() }));
