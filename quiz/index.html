@@ -552,7 +552,10 @@
 
   /* ---------- Máscara do telefone ---------- */
   function mascara(v) {
-    const d = String(v || "").replace(/\D/g, "").slice(0, 11);
+    let d = String(v || "").replace(/\D/g, "");
+    // Quem digita ou cola com o 55 do país (+55 31 9…): tira o 55 para sobrar DDD + número
+    if (d.length >= 12 && d.startsWith("55")) d = d.slice(2);
+    d = d.slice(0, 11);
     if (d.length <= 2) return d ? `(${d}` : "";
     if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
     if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
@@ -755,7 +758,8 @@
     const nome = campoNome.value.replace(/\s+/g, " ").trim().slice(0, 40);
     const d = input.value.replace(/\D/g, "");
     const nomeOk = nome.replace(/[^\p{L}]/gu, "").length >= 2;
-    const telOk = d.length >= 10 && d.length <= 11 && !/^0/.test(d);
+    // 10 dígitos (fixo ou celular antigo) ou 11 com o 9 do celular logo depois do DDD
+    const telOk = !/^0/.test(d) && (d.length === 10 || (d.length === 11 && d[2] === "9"));
     campoNome.closest(".campo").classList.toggle("erro", !nomeOk);
     input.closest(".campo").classList.toggle("erro", !telOk);
     if (!nomeOk || !telOk) {
