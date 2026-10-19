@@ -41,7 +41,7 @@
         api_host: ph.host,
         defaults: "2026-05-30",
         person_profiles: "identified_only", // perfil só para quem passou do WhatsApp
-        autocapture: false,                 // só os eventos que mandamos
+        autocapture: { dom_event_allowlist: ["click"] }, // só toques (sem textos digitados), para ver onde a pessoa toca
         capture_pageview: true,
         capture_pageleave: true,
         session_recording: { maskAllInputs: true }, // grava a navegação com nome e telefone ocultos
