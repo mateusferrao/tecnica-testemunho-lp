@@ -11,7 +11,7 @@ const CONFIG = {
   // Valor de cada parcela em 12x (Ticto, juros do comprador), por preço à vista
   parcelas: {
     797: "82,42",
-    267: "27,61", 297: "30,71", 327: "33,82",
+    267: "27,61", 297: "30,71", 327: "33,81",
     197: "20,37", 217: "22,44", 237: "24,51",
     97: "10,03"
   },
