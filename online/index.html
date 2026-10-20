@@ -135,7 +135,7 @@
   document.querySelectorAll("[data-lote]").forEach(el => el.textContent = lote.nome);
   // Economia pequena (ex.: Estudante) não ajuda a vender: aí o destaque fica só no custo de viagem.
   const economia = presencial - CONFIG.online.preco;
-  document.querySelectorAll("[data-economia]").forEach(el => el.textContent = economia >= 200
+  document.querySelectorAll("[data-economia]").forEach(el => el.textContent = economia >= 150
     ? `R$ ${fmt(economia)} a menos e sem custo de viagem`
     : "Sem custo de viagem e de hotel");
   document.querySelectorAll("[data-preco]").forEach(el => el.textContent = fmt(CONFIG.online.preco));

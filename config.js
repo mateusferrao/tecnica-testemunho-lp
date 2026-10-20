@@ -10,14 +10,14 @@ const CONFIG = {
   webhookLead: "https://n8n.automato.pro/webhook/tt-quiz-lead",
   // Valor de cada parcela em 12x (Ticto, juros do comprador), por preço à vista
   parcelas: {
-    1297: "134,14",
-    497: "51,40", 597: "61,74", 697: "72,09",
-    397: "41,06", 477: "49,33", 557: "57,61",
-    297: "30,71"
+    797: "82,42",
+    267: "27,61", 297: "30,71", 327: "33,82",
+    197: "20,37", 217: "22,44", 237: "24,51",
+    97: "10,03"
   },
-  vip: { preco: 1297, checkout: "https://payment.ticto.app/O99FD1428" },
+  vip: { preco: 797, checkout: "https://payment.ticto.app/O99FD1428" },
   // Ingresso online (downsell em /online/, só via back redirect da Ticto). Obrigado em /obrigado/remoto/.
-  online: { preco: 297, checkout: "https://payment.ticto.app/OF85D6B95" },
+  online: { preco: 97, checkout: "https://payment.ticto.app/OF85D6B95" },
   // Análise do funil e gravação de sessão: PostHog (projeto nos EUA) e Microsoft Clarity (gravação e mapa de calor).
   // São chaves públicas, feitas para ficar na página. Vazias = desligado. Ver analise.js.
   posthog: { chave: "phc_nxxVkBV3MkaC88sL5c5NipHyrAx35wAdftYgs7fidXuV", host: "https://us.i.posthog.com" },
@@ -25,14 +25,14 @@ const CONFIG = {
   // Lote vira na data (23h59, horário de Brasília) ou ao esgotar.
   lotes: [
     { nome: "1º lote", fim: "2026-10-25T23:59:59-03:00", fimTexto: "25/10", vagas: 100,
-      profissional: { preco: 497, checkout: "https://payment.ticto.app/O29F8C641" },
-      estudante:    { preco: 397, checkout: "https://payment.ticto.app/O916934E8" } },
+      profissional: { preco: 267, checkout: "https://payment.ticto.app/O29F8C641" },
+      estudante:    { preco: 197, checkout: "https://payment.ticto.app/O916934E8" } },
     { nome: "2º lote", fim: "2026-11-04T23:59:59-03:00", fimTexto: "04/11", vagas: 110,
-      profissional: { preco: 597, checkout: "https://payment.ticto.app/O77A23151" },
-      estudante:    { preco: 477, checkout: "https://payment.ticto.app/OC5DF6A8A" } },
+      profissional: { preco: 297, checkout: "https://payment.ticto.app/O77A23151" },
+      estudante:    { preco: 217, checkout: "https://payment.ticto.app/OC5DF6A8A" } },
     { nome: "3º lote", fim: "2026-11-13T23:59:59-03:00", fimTexto: "13/11", vagas: 80,
-      profissional: { preco: 697, checkout: "https://payment.ticto.app/O8F7466D1" },
-      estudante:    { preco: 557, checkout: "https://payment.ticto.app/OA38F974B" } }
+      profissional: { preco: 327, checkout: "https://payment.ticto.app/O8F7466D1" },
+      estudante:    { preco: 237, checkout: "https://payment.ticto.app/OA38F974B" } }
   ],
   // Para virar o lote antes da data (esgotou), troque para 1 ou 2.
   loteForcado: null
