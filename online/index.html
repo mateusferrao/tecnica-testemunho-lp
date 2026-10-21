@@ -163,7 +163,11 @@
   document.querySelector("[data-nao]").href = voltar.toString();
 
   track("track", "ViewContent", { content_name: "Ingresso online", content_category: "Online", value: CONFIG.online.preco, currency: "BRL" });
-  TTA.evento("downsell_visto", { comparado_com: tipo });
+  // Downsell visto nesta sessão: a LP e o quiz não mandam de novo para cá (ver volta.js).
+  // origem: "voltar" (voltou do checkout sem preencher), "ticto" (back redirect da Ticto) ou "outro".
+  try { sessionStorage.setItem("tt_downsell_visto", "1"); } catch (e) {}
+  const origem = new URLSearchParams(location.search).get("origem") === "voltar" ? "voltar" : (/ticto/i.test(document.referrer) ? "ticto" : "outro");
+  TTA.evento("downsell_visto", { comparado_com: tipo, origem });
   document.addEventListener("click", ev => {
     if (ev.target.closest("[data-checkout]")) {
       track("trackCustom", "CliqueCheckout", { ingresso: "online", value: CONFIG.online.preco, currency: "BRL", origem: "downsell" });

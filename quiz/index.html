@@ -194,6 +194,7 @@
 <link rel="stylesheet" href="../marca.css">
 <script src="../config.js"></script>
 <script src="../analise.js"></script>
+<script src="../volta.js"></script>
 <!-- Utmify: guarda as UTMs do anúncio e repassa ao checkout da Ticto (script oficial, versão legível) -->
 <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
 </head>
@@ -748,6 +749,8 @@
         localStorage.setItem("tt_volta", JSON.stringify({ url: location.href.split("#")[0], tipo, t: Date.now() }));
         localStorage.setItem(CHAVE, JSON.stringify({ e: E, t: Date.now() }));
       } catch (e) {}
+      // Quem voltar do checkout sem comprar vai para o /online/ (uma vez por sessão, ver volta.js)
+      TTVolta.marcar(tipo);
     }
   });
 

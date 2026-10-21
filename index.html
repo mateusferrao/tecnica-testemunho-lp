@@ -553,6 +553,7 @@
 
 <script src="config.js"></script>
 <script src="analise.js"></script>
+<script src="volta.js"></script>
 <script>
 (function () {
   const agora = new Date();
@@ -677,6 +678,8 @@
       TTA.evento("lp_checkout", { ingresso: a.dataset.checkout, valor: ing.preco });
       // Para o downsell (/online/) saber para onde voltar se a pessoa recusar
       try { localStorage.setItem("tt_volta", JSON.stringify({ url: location.href.split("#")[0] + "#ingressos", tipo: a.dataset.checkout, t: Date.now() })); } catch (e) {}
+      // Quem voltar do checkout sem comprar vai para o /online/ (uma vez por sessão, ver volta.js)
+      TTVolta.marcar(a.dataset.checkout);
     });
   });
   document.querySelectorAll("[data-whatsapp]").forEach(a => {

@@ -165,6 +165,8 @@
   // Tira do endereço qualquer parâmetro que o checkout acrescente (pode ter dados do comprador)
   // antes de o Pixel, o PostHog e o Clarity lerem a URL.
   if (location.search) history.replaceState(null, "", location.pathname + location.hash);
+  // Quem comprou não cai no downsell se voltar pelo histórico (ver volta.js)
+  try { sessionStorage.setItem("tt_downsell_visto", "1"); } catch (e) {}
 </script>
 <script src="../../config.js"></script>
 <script src="../../analise.js"></script>
