@@ -15,6 +15,9 @@ const CONFIG = {
     197: "20,37", 217: "22,44", 237: "24,51",
     97: "10,03"
   },
+  // Ingresso gratuito dos alunos do Dr. Gabriel (/convite-gabriel/). A página pega nome, WhatsApp e e-mail,
+  // manda ao n8n "TT · Cortesia lead" e abre este checkout de R$ 0 já preenchido (name, email, phonenumber).
+  cortesia: { checkout: "https://payment.ticto.app/OBA6413B6", webhook: "https://n8n.automato.pro/webhook/tt-cortesia-lead" },
   vip: { preco: 797, checkout: "https://payment.ticto.app/O99FD1428" },
   // Ingresso online (downsell em /online/, só via back redirect da Ticto). Obrigado em /obrigado/remoto/.
   online: { preco: 97, checkout: "https://payment.ticto.app/OF85D6B95" },
