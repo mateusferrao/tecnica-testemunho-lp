@@ -18,6 +18,16 @@ const CONFIG = {
   // Ingresso gratuito dos alunos do Dr. Gabriel (/convite-gabriel/). A página pega nome, WhatsApp e e-mail,
   // manda ao n8n "TT · Cortesia lead" e abre este checkout de R$ 0 já preenchido (name, email, phonenumber).
   cortesia: { checkout: "https://payment.ticto.app/OBA6413B6", webhook: "https://n8n.automato.pro/webhook/tt-cortesia-lead" },
+  // Cortesia aberta (/convite/), para profissionais e estudantes que chegam pelos anúncios. Mesmo fluxo do convite do Gabriel,
+  // mas com produto próprio na Ticto (R$ 0, sem Pixel: não gera Purchase de R$ 0) e obrigado em /obrigado/convite/.
+  // esgotado: true fecha o formulário e mostra a lista de espera pelo WhatsApp.
+  // upgrade: oferta VIP só no obrigado da cortesia, "de R$ 797 por R$ 297" (12x de R$ 30,71). Esse produto tem Pixel.
+  convite: {
+    checkout: "https://payment.ticto.app/O4A0DC8EB",
+    webhook: "https://n8n.automato.pro/webhook/tt-convite-lead",
+    esgotado: false,
+    upgrade: { preco: 297, de: 797, checkout: "https://payment.ticto.app/O8B4162E0" }
+  },
   vip: { preco: 797, checkout: "https://payment.ticto.app/O99FD1428" },
   // Ingresso online (downsell em /online/, só via back redirect da Ticto). Obrigado em /obrigado/remoto/.
   online: { preco: 97, checkout: "https://payment.ticto.app/OF85D6B95" },
