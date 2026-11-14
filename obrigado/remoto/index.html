@@ -177,6 +177,16 @@
   fbq("track", "PageView");
   // PostHog: marca a chegada ao obrigado (aproximação da compra, sem dados pessoais) para fechar o funil
   if (window.TTA) TTA.evento("compra_obrigado", { tipo: "online" });
+  // Dia do evento: com o link da sala no config.js (CONFIG.online.transmissao), quem compra cai direto na transmissão.
+  // O pequeno atraso deixa o Pixel e o PostHog registrarem a chegada antes de sair da página.
+  (function () {
+    const link = typeof CONFIG !== "undefined" && CONFIG.online && CONFIG.online.transmissao;
+    if (typeof link !== "string" || !/^https:\/\//.test(link.trim())) return;
+    const h1 = document.querySelector(".topo h1"), sub = document.querySelector(".topo .sub");
+    if (h1) h1.textContent = "Inscrição confirmada. Abrindo a transmissão ao vivo…";
+    if (sub) sub.innerHTML = 'Se a sala não abrir sozinha, <a href="' + link.trim().replace(/"/g, "&quot;") + '">toque aqui para entrar</a>. O link também chega no seu WhatsApp.';
+    setTimeout(() => { location.replace(link.trim()); }, 1500);
+  })();
   document.querySelectorAll("[data-whatsapp]").forEach(a => {
     a.href = "https://wa.me/5531953491799?text=" + encodeURIComponent("Olá, comprei o ingresso online do Técnica & Testemunho e tenho uma dúvida.");
   });

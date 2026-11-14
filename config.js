@@ -30,7 +30,10 @@ const CONFIG = {
   },
   vip: { preco: 797, checkout: "https://payment.ticto.app/O99FD1428" },
   // Ingresso online (downsell em /online/, só via back redirect da Ticto). Obrigado em /obrigado/remoto/.
-  online: { preco: 97, checkout: "https://payment.ticto.app/OF85D6B95" },
+  // transmissao: link da sala ao vivo. Preenchido = o obrigado do online leva direto para a sala, e
+  // /transmissao-ao-vivo/ (botão do template "tt_link_sala_online" no WhatsApp) redireciona para ele.
+  // Vazio = /transmissao-ao-vivo/ mostra "a sala abre às 9h" e confere de novo sozinha a cada 20 s.
+  online: { preco: 97, checkout: "https://payment.ticto.app/OF85D6B95", transmissao: "" },
   // Análise do funil e gravação de sessão: PostHog (projeto nos EUA) e Microsoft Clarity (gravação e mapa de calor).
   // São chaves públicas, feitas para ficar na página. Vazias = desligado. Ver analise.js.
   posthog: { chave: "phc_nxxVkBV3MkaC88sL5c5NipHyrAx35wAdftYgs7fidXuV", host: "https://us.i.posthog.com" },
